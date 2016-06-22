@@ -18,9 +18,11 @@ public class Main extends Application {
         primaryStage.setFullScreen(true);
         primaryStage.show();
     }
+    //test
 
 
     public static void main(String[] args) {
         launch(args);
+        System.out.println("testcommit");
     }
 }
