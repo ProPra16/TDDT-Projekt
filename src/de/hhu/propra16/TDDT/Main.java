@@ -14,12 +14,11 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/TDDT" +
                 ".fxml"));
         primaryStage.setTitle("TDDT");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setFullScreen(true);
+        primaryStage.setScene(new Scene(root,700,600));
         primaryStage.show();
     }
-    //test
 
+    //testertest
 
     public static void main(String[] args) {
         launch(args);
