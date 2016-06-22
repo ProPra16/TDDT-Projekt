@@ -20,4 +20,20 @@ public class Controller {
         Compiler.compileAndRunTests();
         GREEN NextStep=new GREEN(Compiler);
     }
+    public void CheckGREEN(ActionEvent event) {
+        UserCode Test=new UserCode(Fenster.getText(), true);
+        CompilationUnit Klasse=new CompilationUnit("Bar",Test.getClassContent(), false);
+        CompilationUnit TestKlasse=new CompilationUnit("BarTest",Test.getTestContent(),true);
+        JavaStringCompiler Compiler=CompilerFactory.getCompiler(Klasse, TestKlasse);
+        Compiler.compileAndRunTests();
+        GREEN NextStep=new GREEN(Compiler);
+    }
+    public void CheckREFACTOR(ActionEvent event) {
+        UserCode Test=new UserCode(Fenster.getText(), true);
+        CompilationUnit Klasse=new CompilationUnit("Bar",Test.getClassContent(), false);
+        CompilationUnit TestKlasse=new CompilationUnit("BarTest",Test.getTestContent(),true);
+        JavaStringCompiler Compiler=CompilerFactory.getCompiler(Klasse, TestKlasse);
+        Compiler.compileAndRunTests();
+        GREEN NextStep=new GREEN(Compiler);
+    }
 }
