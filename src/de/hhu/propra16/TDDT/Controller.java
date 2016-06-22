@@ -1,17 +1,29 @@
 package de.hhu.propra16.TDDT;
 
 import com.sun.org.apache.regexp.internal.RE;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
-import junit.framework.Test;
 import vk.core.api.*;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
 
 public class Controller {
     private boolean ready;
+    private TDDT m = new TDDT();
     @FXML private TextArea Fenster;
     @FXML private Text Import1;
     @FXML private Text Import2;

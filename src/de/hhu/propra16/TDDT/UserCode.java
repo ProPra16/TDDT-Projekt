@@ -1,8 +1,5 @@
 package de.hhu.propra16.TDDT;
-import javafx.scene.control.TextArea;
-import junit.framework.Test;
 
-import java.sql.Ref;
 
 public class UserCode {
     private String KlassenName="Bar";
