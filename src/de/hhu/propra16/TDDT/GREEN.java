@@ -1,10 +1,12 @@
 package de.hhu.propra16.TDDT;
 
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import vk.core.api.CompilerResult;
 import vk.core.api.JavaStringCompiler;
@@ -12,10 +14,15 @@ import vk.core.api.TestResult;
 
 public class GREEN {
     private JavaStringCompiler compiler;
+    private UserCode UserTest;
     private boolean ready;
+    @FXML private Text Import1;
+    @FXML private Text Import2;
+    @FXML private Text Klassenname;
 
-    public GREEN(JavaStringCompiler compiler) {
+    public GREEN(UserCode UserTest, JavaStringCompiler compiler) {
         this.compiler = compiler;
+        this.UserTest=UserTest;
         checkifReady();
         isReady();
     }
@@ -40,10 +47,7 @@ public class GREEN {
                     "Bitte sorge dafür, dass mind. ein Test fehlschlägt.");
             alert.showAndWait();
         }
-        else {
-            Stage stage =new Stage();
-            stage.setScene(new Scene(new GridPane(),500,500));
-            stage.show();
-        }
     }
+
+    public boolean isready() {return ready;}
 }

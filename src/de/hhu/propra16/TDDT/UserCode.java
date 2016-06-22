@@ -2,6 +2,7 @@ package de.hhu.propra16.TDDT;
 
 
 public class UserCode {
+    private String KlassenName="Bar";
     private String TestContent="";
     private String ClassContent="public class Bar {}";
 
@@ -36,4 +37,12 @@ public class UserCode {
         return ClassContent;
     }
 
+    public String setHeaderKlasse() {return "public class "+KlassenName+" {";}
+
+    public String setHeaderTestKlasse() {
+        return "public class "+KlassenName+"Test"+" {";
+    }
+
+    public String getKlassenName() {return KlassenName; }
+    public String getTestName() {return KlassenName+"Test";}
 }
