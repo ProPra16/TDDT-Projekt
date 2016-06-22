@@ -1,0 +1,21 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+<?import java.net.URL?>
+
+<?import javafx.scene.control.TableView?>
+<GridPane fx:controller="de.hhu.propra16.TDDT.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="30" vgap="20">
+    <Button text="GREEN" onAction="#CheckGREEN" translateY="20"  translateX="100" minWidth="100"/>
+    <Button text="RED" onAction="#CheckRED" translateY="20"  translateX="225" minWidth="100"/>
+    <Button text="REFACTOR" onAction="#CheckREFACTOR" translateY="20"  translateX="350" minWidth="100"/>
+    <Text text="import static org.junit.Assert.*;" style="" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <Text text="public class BarTest {" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <TextArea fx:id="Fenster" prefHeight="300" prefWidth="500" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <Text text="}" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
+</GridPane>
