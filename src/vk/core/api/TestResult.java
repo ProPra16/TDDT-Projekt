@@ -28,4 +28,6 @@ public interface TestResult {
 	 * @return collection of all testing failures
 	 */
 	Collection<TestFailure> getTestFailures();
+
+
 }

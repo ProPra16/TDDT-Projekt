@@ -15,16 +15,15 @@ import vk.core.api.TestResult;
 public class GREEN {
     private JavaStringCompiler compiler;
     private UserCode UserTest;
+    private Warning Errors=new Warning();
     private boolean ready;
-    @FXML private Text Import1;
-    @FXML private Text Import2;
-    @FXML private Text Klassenname;
 
     public GREEN(UserCode UserTest, JavaStringCompiler compiler) {
         this.compiler = compiler;
         this.UserTest=UserTest;
         checkifReady();
-        isReady();
+        Errors.TestsWork(ready);
+        Errors.emptyField(UserTest.isEmpty());
     }
 
     public void checkifReady() {
@@ -36,16 +35,6 @@ public class GREEN {
             TestResult Tests = compiler.getTestResult();
             if (Tests.getNumberOfFailedTests() > 0)
                 ready = true;
-        }
-    }
-
-    public void isReady() {
-        if (ready == false) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Tests klappen!");
-            alert.setContentText("Deine Tests werden alle bestanden.\n" +
-                    "Bitte sorge dafür, dass mind. ein Test fehlschlägt.");
-            alert.showAndWait();
         }
     }
 

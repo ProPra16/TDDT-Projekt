@@ -11,8 +11,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        RED REDPhase= new RED(primaryStage,FXMLLoader.load(getClass().getResource("/TDDT" +
-                ".fxml")));
+        Parent root = FXMLLoader.load(getClass().getResource("/TDDT" +
+                ".fxml"));
+        primaryStage.setTitle("TDDT");
+        primaryStage.setScene(new Scene(root,700,600));
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
