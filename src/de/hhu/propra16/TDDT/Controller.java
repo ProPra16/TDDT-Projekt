@@ -1,15 +1,14 @@
 package de.hhu.propra16.TDDT;
 
+import com.sun.org.apache.regexp.internal.RE;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import org.junit.Test;
+import junit.framework.Test;
 import vk.core.api.*;
-import vk.core.internal.InternalCompiler;
 
 public class Controller {
     private boolean ready;
@@ -17,38 +16,124 @@ public class Controller {
     @FXML private Text Import1;
     @FXML private Text Import2;
     @FXML private Text Klassenname;
-    @FXML private Button CheckTests;
-    private UserCode Test;
+    @FXML private Label Hinweise;
+    @FXML private Button RED;
+    @FXML private Button GREEN;
+    @FXML private Button REFACTOR;
+    private UserCode UserInput=new UserCode();
     private CompilationUnit Klasse;
     private CompilationUnit TestKlasse;
     private JavaStringCompiler Compiler;
+    private ActionUnit Action=new ActionUnit(UserInput,Compiler);
     private Warning Errors= new Warning();
+    private SetStyles PhaseSetter=new SetStyles();
+    private char Phase='R';
 
-    public void CheckRED(ActionEvent event) {
-        Test=new UserCode(Fenster.getText(),true);
-        TestKlasse=new CompilationUnit(Test.getTestName(),Test.getTestContent(),true);
-        Klasse=new CompilationUnit(Test.getKlassenName(),Test.getClassContent(),false);
-        Compiler=CompilerFactory.getCompiler(Klasse, TestKlasse);
-        Compiler.compileAndRunTests();
-        GREEN green=new GREEN(Test,Compiler);
-        if (green.isready() && !Test.isEmpty()) {
-            readyForGreen();
+    public void RED() {
+        if (Phase=='F') {
+            isReadyForRED();
+        }
+        else {
+            Phase = 'R';
+            switchtoRED();
+            PhaseSetter.setRED(RED, GREEN, REFACTOR);
+            if (UserInput != null) {
+                Fenster.setText(UserInput.getTestCode());
+                UserInput.setTest(Fenster.getText());
+            }
+        }
+    }
+
+    private void isReadyForRED() {
+        UserInput.setClass(Fenster.getText());
+        Action.checkClasses(UserInput);
+        Compiler=Action.getCompiler();
+        CompilerResult Result=Action.getResult();
+        if (Result.hasCompileErrors()) {
+            Errors.showCompilerErrors(TestHelpers.getErrorMessages(Compiler,Result));
+        }
+        else {
+            TestResult PassedTests = Compiler.getTestResult();
+            boolean readyForRED=PassedTests.getNumberOfFailedTests()==0;
+            if (readyForRED) {
+                Fenster.clear();
+                Phase='R';
+                RED();
+                Errors.savedSettings();
+            }
+            else {
+                Errors.failedTests();
+            }
+        }
+    }
+
+    public void GREEN() {
+        if (Phase!='F') {
+            UserInput.setTest(Fenster.getText());
+            Action = new ActionUnit(UserInput, Compiler);
+            Action.newGREENStartup();
+            Compiler = Action.getCompiler();
+            GREEN green = new GREEN(UserInput, Compiler);
+            if (green.isready() && !UserInput.isEmpty()) {
+                readyForGreen();
+                Phase = 'G';
+                PhaseSetter.setGREEN(RED, GREEN, REFACTOR);
+            }
         }
     }
 
     public void readyForGreen() {
         Import1.setText("");
         Import2.setText("");
-        Klassenname.setText(Test.setHeaderKlasse());
+        Klassenname.setText(UserInput.setHeaderKlasse());
         Fenster.clear();
+        Fenster.setText(UserInput.getClassCode());
     }
 
-    public void checkTests() {
-        Test.editCode(Fenster);
-        Klasse = new CompilationUnit(Test.getKlassenName(), Test.getClassContent(), false);
-        Compiler = CompilerFactory.getCompiler(Klasse, TestKlasse);
-        Compiler.compileAndRunTests();
-        TestResult Checker = Compiler.getTestResult();
-        Errors.readyforRefactor(Checker.getNumberOfFailedTests() == 0);
+    public void checkUserClass() {
+        if (Phase!='R' && Phase!='F') {
+            UserInput.setClass(Fenster.getText());
+            Action.checkClass(UserInput);
+            Compiler = Action.getCompiler();
+            CompilerResult Result = Action.getResult();
+            if (Result.hasCompileErrors()) {
+                Errors.showCompilerErrors(TestHelpers.getErrorMessages(Compiler, Result));
+            } else {
+                checkUserTestCases();
+            }
+        }
+        else {
+            Errors.inRED();
+        }
+    }
+
+    public void checkUserTestCases() {
+        Action.checkClasses(UserInput);
+        Compiler=Action.getCompiler();
+        CompilerResult Result=Action.getResult();
+        if (Result.hasCompileErrors()) {
+            switchtoRED();
+            PhaseSetter.setRED(RED,GREEN,REFACTOR);
+            Errors.showCompilerErrors(TestHelpers.getErrorMessages(Compiler,Result));
+        }
+        else {
+            TestResult PassedTests = Compiler.getTestResult();
+            boolean readyForRefactor=PassedTests.getNumberOfFailedTests()==0;
+            if (readyForRefactor) {
+                Errors.readyforRefactor();
+                PhaseSetter.setREFACTOR(RED, GREEN, REFACTOR);
+                Phase = 'F';
+            }
+            else {
+                Errors.failedTests();
+            }
+        }
+    }
+
+    public void switchtoRED() {
+        Import1.setText("import static org.junit.Assert.*;");
+        Import2.setText("import org.junit.Test;");
+        Klassenname.setText("public class BarTest {");
+        Fenster.setText(UserInput.getTestCode());
     }
 }

@@ -15,9 +15,8 @@
     <Text fx:id="Import2" text="import org.junit.Test;" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
     <Text fx:id="Klassenname" text="public class BarTest {" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
     <Text text="}" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
-    <Button text="GREEN" translateY="20"  translateX="100" minWidth="100" onAction="#CheckRED"/>
-    <Button text="RED"  translateY="20"  translateX="200" minWidth="100"/>
-    <Button text="REFACTOR" translateY="20"  translateX="300" minWidth="100"/>
-    <Button text="CheckTests" translateY="20" translateX="0" minWidth="100" onAction="#checkTests"/>
+    <Button fx:id="GREEN" text="GREEN" translateY="20"  translateX="225" minWidth="100"  onAction="#GREEN"/>
+    <Button fx:id="RED" text="RED" translateY="20"  translateX="100" minWidth="100" style="-fx-background-color: #FF0000;" onAction="#RED"/>
+    <Button fx:id="REFACTOR" text="REFACTOR" translateY="20"  translateX="350" minWidth="100" onAction="#checkUserClass"/>
 </GridPane>
 

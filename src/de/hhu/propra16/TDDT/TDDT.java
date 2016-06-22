@@ -4,10 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import vk.core.api.*;
-import vk.core.internal.*;
 
-public class Main extends Application {
+public class TDDT extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{

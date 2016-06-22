@@ -17,12 +17,13 @@ public class GREEN {
     private UserCode UserTest;
     private Warning Errors=new Warning();
     private boolean ready;
+    private int Failures;
 
     public GREEN(UserCode UserTest, JavaStringCompiler compiler) {
         this.compiler = compiler;
         this.UserTest=UserTest;
         checkifReady();
-        Errors.TestsWork(ready);
+        Errors.TestsWork(ready, Failures);
         Errors.emptyField(UserTest.isEmpty());
     }
 
@@ -33,7 +34,8 @@ public class GREEN {
         }
         else {
             TestResult Tests = compiler.getTestResult();
-            if (Tests.getNumberOfFailedTests() > 0)
+             Failures= Tests.getNumberOfFailedTests();
+            if (Failures == 1)
                 ready = true;
         }
     }

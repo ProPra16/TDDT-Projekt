@@ -29,5 +29,4 @@ public interface TestResult {
 	 */
 	Collection<TestFailure> getTestFailures();
 
-
 }

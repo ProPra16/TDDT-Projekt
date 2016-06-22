@@ -2,6 +2,8 @@ package de.hhu.propra16.TDDT;
 import javafx.scene.control.TextArea;
 import junit.framework.Test;
 
+import java.sql.Ref;
+
 public class UserCode {
     private String KlassenName="Bar";
     private String TestContent="";
@@ -9,45 +11,27 @@ public class UserCode {
     private String ClassCode="";
     private String TestCode="";
 
-    public UserCode(String UserCode, boolean isTest) {
-        if (isTest) {
-            setTest(UserCode);
-        }
-        else {
-            setClass(UserCode);
-        }
-    }
-
     public void setTest(String UserInput) {
         TestCode=UserInput;
-        String Content="import static org.junit.Assert.*;\n"
+        TestContent="import static org.junit.Assert.*;\n"
                 + "import org.junit.Test;\n"
-                + "public class BarTest { \n";
-        Content += UserInput+"}";
-        TestContent=Content;
-    }
-
-    public void editCode(TextArea Code) {
-        ClassCode=Code.getText();
-        ClassContent="public class Bar { "+ClassCode+"}";
+                + "public class BarTest { \n"+TestCode+"\n}";
     }
 
     public void setClass(String UserInput) {
         ClassCode=UserInput;
-        String Content="public class Bar {";
-        Content+=UserInput+"}";
-        ClassContent=Content;
+        ClassContent="public class Bar { \n"+ ClassCode+ "\n}";
     }
 
     public String getTestContent() {
-        System.out.println(TestContent);
         return TestContent;
     }
 
     public String getClassContent() {
-        System.out.println(ClassContent);
         return ClassContent;
     }
+
+    public String getTestCode() {return TestCode;}
 
     public String setHeaderKlasse() {return "public class "+KlassenName+" {";}
 
@@ -60,5 +44,9 @@ public class UserCode {
 
     public boolean isEmpty() {
         return TestCode.equals("");
+    }
+
+    public String getClassCode() {
+        return ClassCode;
     }
 }
