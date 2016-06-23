@@ -13,7 +13,7 @@ import java.io.File;
 
 public class StartController {
     private boolean ready;
-    private Main m = new Main();
+    private TDDT m = new TDDT();
     private Übung neueÜbungen = new Übung();
     @FXML private Button button1 = new Button();
     @FXML private Button button2 = new Button();
