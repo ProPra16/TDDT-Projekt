@@ -15,11 +15,9 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
-    //test
 
 
     public static void main(String[] args) {
         launch(args);
-        System.out.println("testcommit");
     }
 }
