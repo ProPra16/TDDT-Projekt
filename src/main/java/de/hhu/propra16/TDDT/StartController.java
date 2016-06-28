@@ -101,11 +101,11 @@ public class StartController {
         System.out.println("Up");
     }
     public void iterateDown(ActionEvent event){
-    /*    final Node source = (Node) event.getSource();
+        final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
         m.startProg();
-    */
+
         System.out.println("Down");
     }
 }

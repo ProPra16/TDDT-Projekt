@@ -14,6 +14,7 @@ dependencies {
 }
 
 jar{
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest{
         attributes 'Main-Class': 'de.hhu.propra16.TDDT.TDDT'
     }
