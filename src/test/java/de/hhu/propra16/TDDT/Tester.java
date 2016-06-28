@@ -10,12 +10,12 @@ public class Tester {
     private JavaStringCompiler compiler;
     private String ActualGreenCode;
     private char Phase='R';
-
+/*
     @Test
     public void ultraTest(){
         assertEquals(true,false);
     }
-
+*/
     @Test
     public void testREDtoGREENShouldfail1() { //Kein fehlschlagender Test implementiert
         UserCode userCode=new UserCode();
