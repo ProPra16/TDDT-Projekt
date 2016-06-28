@@ -1,12 +1,16 @@
 package de.hhu.propra16.TDDT;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import vk.core.api.*;
 
-public class Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Controller implements Initializable{
     @FXML private TextArea Fenster;
     @FXML private Text Import1;
     @FXML private Text Import2;
@@ -135,5 +139,15 @@ public class Controller {
                 Reporter.failedTests(Action.getFailedTests());
             }
         }
+    }
+
+
+    public void setName(String cool){
+        System.out.print(cool);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

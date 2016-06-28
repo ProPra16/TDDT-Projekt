@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 public class TDDT extends Application {
 
     private Pane rooty = new Pane();
-    private Parent root;
     public Stage myStage = new Stage();
 
     public static void main(String[] args) {
@@ -20,7 +19,7 @@ public class TDDT extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        this.rooty.getChildren().add(FXMLLoader.load(getClass().getResource("/MainScreen" + ".fxml")));
+        this.rooty.getChildren().add(FXMLLoader.load(getClass().getResource("MainScreen" + ".fxml")));
         myStage.setTitle("TDDT");
         myStage.setScene(new Scene(rooty,700,600));
         myStage.setResizable(false);
@@ -32,9 +31,13 @@ public class TDDT extends Application {
         myStage.show();
     }
 
-    public void startProg(){
+    public void startProg(String dateiName){
         try{
-            this.rooty.getChildren().add(FXMLLoader.load(getClass().getResource("/TDDT" + ".fxml")));
+           // this.rooty.getChildren().add(FXMLLoader.load(getClass().getResource("/TDDT" + ".fxml")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TDDT" + ".fxml"));
+            this.rooty = loader.load();
+            Controller controller = loader.getController();
+            controller.setName(dateiName);
             this.myStage.setScene(new Scene(rooty,700,600));
             this.myStage.setResizable(false);
         }
