@@ -1,0 +1,17 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.text.Text?>
+
+<GridPane fx:controller="de.hhu.propra16.TDDT.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="30" vgap="20">
+
+    <TextArea fx:id="Fenster" prefHeight="300" prefWidth="500" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+    <Text fx:id="Import1" text="import static org.junit.Assert.*;" style="" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <Text fx:id="Import2" text="import org.junit.Test;" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+    <Text fx:id="Klassenname" text="public class BarTest {" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    <Text text="}" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+    <Button fx:id="GREEN" text="GREEN" translateY="20"  translateX="275" minWidth="100"  onAction="#GREEN"/>
+    <Button fx:id="RED" text="RED" translateY="20"  translateX="150" minWidth="100" style="-fx-background-color: #FF0000;" onAction="#RED"/>
+    <Button fx:id="REFACTOR" text="REFACTOR" translateY="20"  translateX="380" minWidth="100" onAction="#REFACTOR"/>
+</GridPane>
