@@ -94,14 +94,17 @@ public class StartController {
     }
 
     public void iterateUp(ActionEvent event){
-        File[] files = neueÜbungen.finder();
+    /*    File[] files = neueÜbungen.finder();
         String t = files[0].toString();
         System.out.print(t);
+    */
+        System.out.println("Up");
     }
     public void iterateDown(ActionEvent event){
         final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
         m.startProg();
+        System.out.println("Down");
     }
 }

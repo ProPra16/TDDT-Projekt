@@ -34,11 +34,13 @@ public class TDDT extends Application {
 
     public void startProg(){
         try{
-            this.rooty.getChildren().add(FXMLLoader.load(getClass().getResource("/TDDT.fxml")));
+            this.rooty.getChildren().add(FXMLLoader.load(getClass().getResource("/TDDT" + ".fxml")));
             this.myStage.setScene(new Scene(rooty,700,600));
             this.myStage.setResizable(false);
         }
-        catch (Exception e){}
+        catch (Exception e){
+            System.out.println("fxml problem");
+        }
         show();
     }
 }
