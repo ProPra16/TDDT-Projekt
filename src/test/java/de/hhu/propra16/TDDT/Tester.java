@@ -1,8 +1,6 @@
 package de.hhu.propra16.TDDT;
 
-
 import org.junit.Test;
-
 import vk.core.api.JavaStringCompiler;
 import static org.junit.Assert.assertEquals;
 
