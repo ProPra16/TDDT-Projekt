@@ -44,16 +44,6 @@ public class WarningUnit {
         Action.showAndWait();
     }
 
-    public void noTests(String Error) {
-        if (Error.equals("No runnable methods")) {
-            String Message="Du hast keine Tests implementiert !\n"+
-                    "Falls schon, dann denke bitte an das @Test !\n"+
-                    "Wechsle bitte jetzt nochmal zu RED";
-            Action.setHeaderText("Keine Tests !");
-            Action.setContentText(Message);
-        }
-    }
-
     public void showCompilerErrors(String Errors) {
         Action.setHeaderText("Kompilier Fehler");
         Action.setContentText("Dein Programm konnte nicht kompiliert werden:\n"+Errors+

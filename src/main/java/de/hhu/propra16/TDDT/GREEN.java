@@ -1,13 +1,5 @@
 package de.hhu.propra16.TDDT;
 
-import javafx.application.Platform;
-import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import vk.core.api.CompilerResult;
 import vk.core.api.JavaStringCompiler;
 import vk.core.api.TestFailure;
@@ -61,8 +53,6 @@ public class GREEN {
             wroteTests=true;
         }
     }
-
-    public TestResult getTests() {return Tests;}
 
     public String getError() {return Error;}
 

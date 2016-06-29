@@ -16,7 +16,7 @@ public class Ubung {
     private String codeTeil = "";
 
     public void filer(){
-        File filer = new File("build\\classes\\main\\New\\Übungen");
+        File filer = new File("build\\resources\\main\\New\\Übungen\\");
         for(File file:filer.listFiles()) {
             files.add(file.getName());
         }

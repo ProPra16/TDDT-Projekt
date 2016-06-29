@@ -15,7 +15,7 @@ public class Tester {
     public void testREDtoGREENShouldfail1() { //Kein fehlschlagender Test implementiert
         UserCode userCode=new UserCode("Foo");
         userCode.setTest("@Test public void test() {assertEquals(1,1);}");
-        ActionUnit newCompile=new ActionUnit(userCode, compiler);
+        ActionUnit newCompile=new ActionUnit(userCode);
         newCompile.checkGREEN();
         compiler=newCompile.getCompiler();
         GREEN NextPhase=new GREEN(compiler);
@@ -29,7 +29,7 @@ public class Tester {
     public void testREDtoGREENShouldFail2() { //Keine Tests implementiert
         UserCode userCode=new UserCode("Foo");
         userCode.setTest("private String Foo;");
-        ActionUnit newCompile=new ActionUnit(userCode, compiler);
+        ActionUnit newCompile=new ActionUnit(userCode);
         newCompile.checkGREEN();
         compiler=newCompile.getCompiler();
         GREEN NextPhase=new GREEN(compiler);
@@ -44,7 +44,7 @@ public class Tester {
         UserCode userCode=new UserCode("Foo");
         userCode.setTest("@Test " + "public void test1() {" + "assertEquals(1,2);" + "}"+
                 "@Test " + "public void test2() {" + "assertEquals(1,2);" +"}");
-        ActionUnit newCompile=new ActionUnit(userCode, compiler);
+        ActionUnit newCompile=new ActionUnit(userCode);
         newCompile.checkGREEN();
         compiler=newCompile.getCompiler();
         GREEN NextPhase=new GREEN(compiler);
@@ -58,7 +58,7 @@ public class Tester {
     public void testREDtoGREENShouldFail4() { //Genau ein Test schlägt fehl und kompiliert nicht
         UserCode userCode=new UserCode("Foo");
         userCode.setTest("@Test public void test() {assertEquals(4,Foo.f(1));}");
-        ActionUnit newCompile=new ActionUnit(userCode, compiler);
+        ActionUnit newCompile=new ActionUnit(userCode);
         newCompile.checkGREEN();
         compiler=newCompile.getCompiler();
         GREEN NextPhase=new GREEN(compiler);
@@ -72,7 +72,7 @@ public class Tester {
     public void testREDtoGREENShouldPass1() { //Test kompiliert nicht
         UserCode userCode=new UserCode("Foo");
         userCode.setTest("I am bad");
-        ActionUnit newCompile=new ActionUnit(userCode, compiler);
+        ActionUnit newCompile=new ActionUnit(userCode);
         newCompile.checkGREEN();
         compiler=newCompile.getCompiler();
         GREEN NextPhase=new GREEN(compiler);
@@ -86,7 +86,7 @@ public class Tester {
     public void testREDtoGREENShouldPass2() { //Genau ein Test schlägt fehl
         UserCode userCode=new UserCode("Foo");
         userCode.setTest("@Test public void test() {assertEquals(2,1);}");
-        ActionUnit newCompile=new ActionUnit(userCode, compiler);
+        ActionUnit newCompile=new ActionUnit(userCode);
         newCompile.checkGREEN();
         compiler=newCompile.getCompiler();
         GREEN NextPhase=new GREEN(compiler);
@@ -127,8 +127,9 @@ public class Tester {
         UserCode userCode=new UserCode("Foo");
         userCode.setClass("I am Bad");
         userCode.setTest("@Test public void test() {assertEquals(4,Foo.f(1));}");
-        ActionUnit newCompile=new ActionUnit(userCode,compiler);
-        if (!newCompile.hasErrors(userCode)) {
+        ActionUnit newCompile=new ActionUnit(userCode);
+        newCompile.compile();
+        if (!newCompile.compileErrors()) {
             Phase='F';
         }
         else {
@@ -142,8 +143,9 @@ public class Tester {
         UserCode userCode=new UserCode("Foo");
         userCode.setClass("public static int f(int N) {return 1;}");
         userCode.setTest("@Test public void test() {assertEquals(100,Foo.f(1));}");
-        ActionUnit newCompile=new ActionUnit(userCode,compiler);
-        assertEquals(false,newCompile.isallFine(userCode));
+        ActionUnit newCompile=new ActionUnit(userCode);
+        newCompile.compileAndTest();
+        assertEquals(false,newCompile.hasnoFailedTests());
     }
 
     @Test
@@ -151,8 +153,9 @@ public class Tester {
         UserCode userCode=new UserCode("Foo");
         userCode.setClass("public static int f(int N) {return 1;}");
         userCode.setTest("I am Bad");
-        ActionUnit newCompile=new ActionUnit(userCode,compiler);
-        assertEquals(false,newCompile.isallFine(userCode));
+        ActionUnit newCompile=new ActionUnit(userCode);
+        newCompile.compileAndTest();
+        assertEquals(true,newCompile.compileErrors());
     }
 
     @Test
@@ -160,8 +163,9 @@ public class Tester {
         UserCode userCode=new UserCode("Foo");
         userCode.setClass("public static int f(int N) {return 1;}");
         userCode.setTest("@Test public void test() {assertEquals(1,Foo.f(1));}");
-        ActionUnit newCompile=new ActionUnit(userCode,compiler);
-        assertEquals(true,newCompile.isallFine(userCode));
+        ActionUnit newCompile=new ActionUnit(userCode);
+        newCompile.compileAndTest();
+        assertEquals(true,newCompile.hasnoFailedTests());
     }
 
     @Test
@@ -172,8 +176,9 @@ public class Tester {
                 "@Test public void test2() {assertEquals(2,Foo.f(2));}"+
                 "@Test public void test3() {assertEquals(3,Foo.f(3));}"
         );
-        ActionUnit newCompile=new ActionUnit(userCode,compiler);
-        assertEquals(true,newCompile.isallFine(userCode));
+        ActionUnit newCompile=new ActionUnit(userCode);
+        newCompile.compileAndTest();
+        assertEquals(true,newCompile.hasnoFailedTests());
     }
 
 }

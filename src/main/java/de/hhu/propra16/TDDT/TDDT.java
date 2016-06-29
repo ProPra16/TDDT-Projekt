@@ -25,7 +25,7 @@ public class TDDT extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        this.rooty.getChildren().add(FXMLLoader.load(getClass().getResource("/MainScreen" + ".fxml")));
+        this.rooty.getChildren().add(FXMLLoader.load(getClass().getResource("/MainScreen.fxml")));
         myStage.setTitle("TDDT");
         myStage.setScene(new Scene(rooty,700,600));
         myStage.setResizable(false);
@@ -52,7 +52,7 @@ public class TDDT extends Application {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("/TDDT.fxml"));
             Parent root = loader.load();
             this.controller = loader.getController();
-            UserCode userCode = new UserCode("BlaBla",true,"0:10");
+            UserCode userCode = new UserCode("BlaBla",true,"10:10");
             controller.init(controller,userCode);
             this.myStage.setScene(new Scene(root,700,600));
             this.myStage.setResizable(false);

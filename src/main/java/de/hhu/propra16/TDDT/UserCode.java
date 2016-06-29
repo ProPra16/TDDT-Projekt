@@ -26,8 +26,8 @@ public class UserCode {
     public void setTest(String UserInput) {
         TestCode=UserInput;
         TestContent="import static org.junit.Assert.*;\n"
-                + "import org.junit.Test;\n"
-                + KlassenName + "Test { \n"+TestCode+"\n}";
+                + "import org.junit.Test;\n"+
+             "public class "  + KlassenName + "Test { \n"+TestCode+"\n}";
     }
 
     public void setClass(String UserInput) {
