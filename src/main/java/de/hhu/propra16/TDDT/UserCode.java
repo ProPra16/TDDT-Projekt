@@ -16,11 +16,18 @@ public class UserCode {
     }
 
     public UserCode(String KlassenName,boolean BabyStep, String Time) {
-        this.KlassenName=KlassenName;
-        this.BabyStep=BabyStep;
-        this.Time=Time;
+        this.KlassenName = KlassenName;
+        this.BabyStep = BabyStep;
+        this.Time = Time;
         setClass("");
         setTest("");
+    }
+
+    public void setTest(String UserInput) {
+        TestCode=UserInput;
+        TestContent="import static org.junit.Assert.*;\n"
+                + "import org.junit.Test;\n"
+                + KlassenName + "Test { \n"+TestCode+"\n}";
     }
 
     public void setClass(String UserInput) {
@@ -28,12 +35,6 @@ public class UserCode {
         ClassContent="public class "+KlassenName+" { \n"+ ClassCode+"\n}";
     }
 
-    public void setTest(String UserInput) {
-        TestCode=UserInput;
-        TestContent="import static org.junit.Assert.*;\n"
-                + "import org.junit.Test;\n"
-                + "public class "+getTestName()+ " { \n"+TestCode+"\n}";
-    }
 
     public String getTestContent() {
         return TestContent;

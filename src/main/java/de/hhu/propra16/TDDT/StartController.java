@@ -31,7 +31,7 @@ public class StartController {
         button2.setText(    buttons[1]. substring(0,buttons[1].length()-4)  );
         button3.setText(    buttons[2]. substring(0,buttons[2].length()-4)  );
         button4.setText(    buttons[3]. substring(0,buttons[3].length()-4)  );
-        switch(neueÜbungen.anzahlÜbungen()){
+        switch(neueÜbungen.anzahlUbungen()){
             case 0:
                 button1.setVisible(false);
                 button2.setVisible(false);
@@ -80,7 +80,7 @@ public class StartController {
         final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
         String s = event.getSource().toString();
-        String dateiName = "cool";
+        String dateiName = neueÜbungen.gibBeschr();
         s=s.substring(16,17);
         switch (Integer.parseInt(s)){
             case 1:
@@ -122,12 +122,4 @@ public class StartController {
         this.buttonTooltip.setText(neueÜbungen.gibBeschr());
         b.setTooltip(this.buttonTooltip);
     }
-    /*
-
-    //dieser Teil kommt in buttonAction
-        final Node source = (Node) event.getSource();
-        final Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
-        m.startProg();
-     */
 }

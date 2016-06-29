@@ -41,6 +41,10 @@ public class Controller {
             switchRED();
             Fenster.setText(UserInput.getTestCode());
             UserInput.setTest(Fenster.getText());
+            if (UserInput != null) {
+                Fenster.setText(UserInput.getTestCode());
+                UserInput.setTest(Fenster.getText());
+            }
         }
     }
 
@@ -50,6 +54,9 @@ public class Controller {
         Import2.setText("import org.junit.Test;");
         PhaseSetter.setRED(RED,GREEN,REFACTOR);
         Klassenname.setText("public class "+UserInput.getTestName()+" {");
+        PhaseSetter.setRED(RED, GREEN, REFACTOR);
+        Import1.setText("import static org.junit.Assert.*;");
+        Import2.setText("import org.junit.Test;");
         if (UserInput.isEmpty()) {
             UserInput.setTest("@Test\n"+"public void testsomething() {\n"+"\n}");
         }
@@ -162,17 +169,17 @@ public class Controller {
     public char switchPhase() {
         switch (Phase) {
             case 'R':
-                if(Action.isallFine(UserInput)) {
-                Phase='F';
-                PhaseSetter.setREFACTOR(RED,GREEN,REFACTOR);
-                Fenster.clear();
-                Fenster.setText(UserInput.getClassCode());
-            }
-                else {
+                if (Action.isallFine(UserInput)) {
+                    Phase = 'F';
+                    PhaseSetter.setREFACTOR(RED, GREEN, REFACTOR);
+                    Fenster.clear();
+                    Fenster.setText(UserInput.getClassCode());
+                } else {
+                    switchRED();
+                }
+            case 'G':
                 switchRED();
-            }
-            case 'G':switchRED();
         }
-    return Phase;
+        return Phase;
     }
 }
