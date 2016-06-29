@@ -29,7 +29,7 @@ public class Ubung {
         return buttons;
     }
 
-    public int anzahlÜbungen(){
+    public int anzahlUbungen(){
         return files.size();
     }
 

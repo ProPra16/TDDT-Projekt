@@ -2,9 +2,9 @@ package de.hhu.propra16.TDDT;
 
 
 public class UserCode {
-    private String KlassenName="Bar";
+    private String KlassenName="";
     private String TestContent="";
-    private String ClassContent="public class Bar {}";
+    private String ClassContent="public class {}";
     private String ClassCode="";
     private String TestCode="";
 
@@ -12,12 +12,12 @@ public class UserCode {
         TestCode=UserInput;
         TestContent="import static org.junit.Assert.*;\n"
                 + "import org.junit.Test;\n"
-                + "public class BarTest { \n"+TestCode+"\n}";
+                + KlassenName + "Test { \n"+TestCode+"\n}";
     }
 
     public void setClass(String UserInput) {
         ClassCode=UserInput;
-        ClassContent="public class Bar { \n"+ ClassCode+ "\n}";
+        ClassContent="public class das" + " { \n"+ ClassCode+ "\n}";
     }
 
     public String getTestContent() {

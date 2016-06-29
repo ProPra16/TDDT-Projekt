@@ -10,7 +10,7 @@ import vk.core.api.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable{
+public class Controller{
     @FXML private TextArea Fenster;
     @FXML private Text Import1;
     @FXML private Text Import2;
@@ -25,6 +25,7 @@ public class Controller implements Initializable{
     private SetStyles PhaseSetter=new SetStyles();
     private String ActualGREENCode;
     private char Phase='R';
+    private String klassenName = "";
 
     public void RED() {
         if (Phase=='F') {
@@ -32,9 +33,7 @@ public class Controller implements Initializable{
         }
         else {
             if (Phase=='G') {UserInput.setClass(ActualGREENCode);}
-            Phase = 'R';
             switchRED();
-            PhaseSetter.setRED(RED, GREEN, REFACTOR);
             if (UserInput != null) {
                 Fenster.setText(UserInput.getTestCode());
                 UserInput.setTest(Fenster.getText());
@@ -43,9 +42,11 @@ public class Controller implements Initializable{
     }
 
     public void switchRED() {
+        Phase = 'R';
+        PhaseSetter.setRED(RED, GREEN, REFACTOR);
         Import1.setText("import static org.junit.Assert.*;");
         Import2.setText("import org.junit.Test;");
-        Klassenname.setText("public class BarTest {");
+
         if (UserInput.isEmpty()) {
             UserInput.setTest("@Test\n"+"public void testsomething() {\n"+"\n}");
         }
@@ -143,11 +144,6 @@ public class Controller implements Initializable{
 
 
     public void setName(String cool){
-        System.out.print(cool);
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+        klassenName = cool;
     }
 }
