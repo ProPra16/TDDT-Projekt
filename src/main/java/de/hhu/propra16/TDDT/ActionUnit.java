@@ -13,7 +13,7 @@ public class ActionUnit {
     public ActionUnit(UserCode UserInput, JavaStringCompiler Compiler) {
         this.UserInput=UserInput;
         this.Klasse=new CompilationUnit(UserInput.getKlassenName(), UserInput.getClassContent(),false);
-        this.TestKlasse=TestKlasse=new CompilationUnit(UserInput.getTestName(), UserInput.getTestContent(),true);
+        this.TestKlasse=new CompilationUnit(UserInput.getTestName(), UserInput.getTestContent(),true);
         this.Compiler=Compiler;
     }
 
@@ -24,19 +24,25 @@ public class ActionUnit {
         Compiler.compileAndRunTests();
     }
 
-    public void checkClass(UserCode Foo) {
+    public boolean hasErrors(UserCode Foo) {
         Klasse=new CompilationUnit(Foo.getKlassenName(),Foo.getClassContent(),false);
         Compiler=CompilerFactory.getCompiler(Klasse);
         Compiler.compileAndRunTests();
         Result=Compiler.getCompilerResult();
+        return Result.hasCompileErrors();
     }
 
-    public void checkREFACTOR(UserCode Foo) {
+    public boolean isallFine(UserCode Foo) {
         Klasse=new CompilationUnit(Foo.getKlassenName(),Foo.getClassContent(),false);
         Compiler=CompilerFactory.getCompiler(Klasse, TestKlasse);
         Compiler.compileAndRunTests();
         Result=Compiler.getCompilerResult();
+        if (Result.hasCompileErrors())
+            return false;
         FailedTests=Compiler.getTestResult();
+        if (FailedTests.getNumberOfFailedTests()==0)
+            return true;
+        return false;
     }
 
     public CompilerResult getResult() {
@@ -52,9 +58,5 @@ public class ActionUnit {
 
     public boolean hasnoFailedTests() {
         return (FailedTests.getNumberOfFailedTests()==0);
-    }
-
-    public boolean isallFine() {
-        return !Result.hasCompileErrors();
     }
 }

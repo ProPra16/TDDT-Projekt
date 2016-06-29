@@ -16,7 +16,7 @@ public class Ubung {
     private String codeTeil = "";
 
     public void filer(){
-        File filer = new File("build/resources/main/Übungen");
+        File filer = new File("build\\classes\\main\\New\\Übungen");
         for(File file:filer.listFiles()) {
             files.add(file.getName());
         }
@@ -72,7 +72,8 @@ public class Ubung {
     }
 
     public void trenneTeile(String filename){
-        String path = "build/resources/main/Übungen/" + filename;
+        String path = "build\\resources\\main\\New\\Übungen\\" + filename;
+        File file=new File(path);
         try{
             List<String> list = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
             this.inhalt = list.toArray(new String[list.size()]);

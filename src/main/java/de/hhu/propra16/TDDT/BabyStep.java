@@ -16,10 +16,10 @@ public class BabyStep extends Thread  {
     private String Time;
     private Label Clock;
     private volatile boolean expired;
+    private char Phase;
     private Controller controller;
 
-    public BabyStep(boolean expired, Controller controller) {
-        this.expired=expired;
+    public BabyStep(Controller controller) {
         this.controller=controller;
     }
 
@@ -35,17 +35,9 @@ public class BabyStep extends Thread  {
                showTime();
                if (min == 0 && sec == 0) {
                    expired = true;
-                   controller.switchRED();
-                   BabyStep NextStep=new BabyStep(false,controller);
-                   NextStep.countDown(Clock,Time);
-                   System.out.println(Time);
+                   Phase=controller.switchPhase();
                }
            }
-    }
-
-    @Override
-    public void interrupt() {
-        expired=true;
     }
 
     public void ticktack() {
@@ -58,16 +50,18 @@ public class BabyStep extends Thread  {
 
     public void showTime() {
         Platform.runLater(() -> {
-            Clock.setText("");
-            Clock.setText(formatTime());
+            if (Phase!='F') {
+                Clock.setText("");
+                Clock.setText(formatTime());
+            }
         });
     }
 
     public String formatTime() {
-        if (sec<10) {
-            return min+":"+"0"+sec;
+        if (sec < 10) {
+            return min + ":" + "0" + sec;
         }
-        return min+":"+sec;
+        return min + ":" + sec;
     }
 
     public void countDown(Label Display,String Time) {
@@ -76,6 +70,12 @@ public class BabyStep extends Thread  {
         this.sec = Integer.parseInt(Time.substring(2)) + 1;
         this.Clock = Display;
         start();
+    }
+
+    public void restart(String Time) {
+        expired=false;
+        this.min = Integer.parseInt(Time.substring(0, 1));
+        this.sec = Integer.parseInt(Time.substring(2)) + 1;
     }
 }
 

@@ -12,6 +12,7 @@ public class TDDT extends Application {
 
     private Pane rooty = new Pane();
     public Stage myStage = new Stage();
+    private Controller controller;
 
     public static void main(String[] args) {
         launch(args);
@@ -19,7 +20,7 @@ public class TDDT extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        this.rooty.getChildren().add(FXMLLoader.load(getClass().getResource("MainScreen" + ".fxml")));
+        this.rooty.getChildren().add(FXMLLoader.load(getClass().getResource("/MainScreen.fxml")));
         myStage.setTitle("TDDT");
         myStage.setScene(new Scene(rooty,700,600));
         myStage.setResizable(false);
@@ -33,17 +34,22 @@ public class TDDT extends Application {
 
     public void startProg(String dateiName){
         try{
-           // this.rooty.getChildren().add(FXMLLoader.load(getClass().getResource("/TDDT" + ".fxml")));
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TDDT" + ".fxml"));
-            this.rooty = loader.load();
-            Controller controller = loader.getController();
-            controller.setName(dateiName);
-            this.myStage.setScene(new Scene(rooty,700,600));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/TDDT.fxml"));
+            Parent root = loader.load();
+            this.controller = loader.getController();
+            UserCode userCode = new UserCode("BlaBla",true,"0:10");
+            controller.init(controller,userCode);
+            this.myStage.setScene(new Scene(root,700,600));
             this.myStage.setResizable(false);
         }
         catch (Exception e){
             System.out.println("fxml problem");
         }
         show();
+    }
+
+    @Override
+    public void stop() {
+        System.exit(0);
     }
 }

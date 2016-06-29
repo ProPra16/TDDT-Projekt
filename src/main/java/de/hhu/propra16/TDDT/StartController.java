@@ -76,7 +76,7 @@ public class StartController {
         }
     }
 
-    public void buttonAction(ActionEvent event){
+    public void buttonAction(ActionEvent event) {
         final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
         String s = event.getSource().toString();
