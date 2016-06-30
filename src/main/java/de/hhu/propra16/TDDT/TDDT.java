@@ -12,32 +12,40 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class TDDT extends Application {
 
-    private Pane rooty = new Pane();
+    private Parent rooty = new Pane();
     public Stage myStage = new Stage();
     private Controller controller;
+    private ArrayList<String> files = new ArrayList<String>();
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        this.rooty.getChildren().add(FXMLLoader.load(getClass().getResource("/MainScreen.fxml")));
+    public void start(Stage primaryStage){
+        try {
+            this.rooty = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         myStage.setTitle("TDDT");
         myStage.setScene(new Scene(rooty,700,600));
         myStage.setResizable(false);
+
         try{
-        String path = "build/resources/main/musik.mp3";
-        Media media = new Media(new File(path).toURI().toString());
+        Media media = new Media(getClass().getResource("/musik.mp3").toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
         MediaView mediaView = new MediaView(mediaPlayer);
         }
+
         catch (Exception e){
-            System.out.print("Die musik bleibt!");
+
         }
         show();
     }
@@ -49,7 +57,7 @@ public class TDDT extends Application {
 
     public void startProg(String dateiName){
         try{
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("/TDDT.fxml"));
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("/TDDT.fxml"));
             Parent root = loader.load();
             this.controller = loader.getController();
             UserCode userCode = new UserCode("BlaBla",true,"10:10");
@@ -57,9 +65,7 @@ public class TDDT extends Application {
             this.myStage.setScene(new Scene(root,700,600));
             this.myStage.setResizable(false);
         }
-        catch (Exception e){
-            System.out.println("fxml problem");
-        }
+        catch (Exception e){System.out.println("fxml problem");}
         show();
     }
 

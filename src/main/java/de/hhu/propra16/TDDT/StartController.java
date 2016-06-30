@@ -22,35 +22,36 @@ public class StartController {
     @FXML private Button button3 = new Button();
     @FXML private Button button4 = new Button();
 
-
     @FXML
     private void initialize() {
-        neueÜbungen.filer();
-        buttons = neueÜbungen.fillArray();
-        button1.setText(    buttons[0]. substring(0,buttons[0].length()-4)  );
-        button2.setText(    buttons[1]. substring(0,buttons[1].length()-4)  );
-        button3.setText(    buttons[2]. substring(0,buttons[2].length()-4)  );
-        button4.setText(    buttons[3]. substring(0,buttons[3].length()-4)  );
-        switch(neueÜbungen.anzahlUbungen()){
-            case 0:
-                button1.setVisible(false);
-                button2.setVisible(false);
-                button3.setVisible(false);
-                button4.setVisible(false);
-                break;
-            case 1:
-                button2.setVisible(false);
-                button3.setVisible(false);
-                button4.setVisible(false);
-                break;
-            case 2:
-                button3.setVisible(false);
-                button4.setVisible(false);
-                break;
-            case 3:
-                button4.setVisible(false);
-                break;
-        }
+        try {
+            neueÜbungen.fileOut();
+            this.buttons = neueÜbungen.fillArray();
+            button1.setText(this.buttons[0].substring(0, buttons[0].length() - 4));
+            button2.setText(this.buttons[1].substring(0, buttons[1].length() - 4));
+            button3.setText(this.buttons[2].substring(0, buttons[2].length() - 4));
+            button4.setText(this.buttons[3].substring(0, buttons[3].length() - 4));
+            switch (neueÜbungen.anzahlUbungen()) {
+                case 0:
+                    button1.setVisible(false);
+                    button2.setVisible(false);
+                    button3.setVisible(false);
+                    button4.setVisible(false);
+                    break;
+                case 1:
+                    button2.setVisible(false);
+                    button3.setVisible(false);
+                    button4.setVisible(false);
+                    break;
+                case 2:
+                    button3.setVisible(false);
+                    button4.setVisible(false);
+                    break;
+                case 3:
+                    button4.setVisible(false);
+                    break;
+            }
+        }catch(Exception e){e.printStackTrace();}
     }
 
     public void buttonDescription(MouseEvent event){
@@ -103,23 +104,29 @@ public class StartController {
     }
 
     public void iterateUp(ActionEvent event){
+
         buttons = neueÜbungen.up(buttons);
         button1.setText(    buttons[0]. substring(0,buttons[0].length()-4)  );
         button2.setText(    buttons[1]. substring(0,buttons[1].length()-4)  );
         button3.setText(    buttons[2]. substring(0,buttons[2].length()-4)  );
         button4.setText(    buttons[3]. substring(0,buttons[3].length()-4)  );
+
     }
     public void iterateDown(ActionEvent event){
+
         buttons = neueÜbungen.down(buttons);
         button1.setText(    buttons[0]. substring(0,buttons[0].length()-4)  );
         button2.setText(    buttons[1]. substring(0,buttons[1].length()-4)  );
         button3.setText(    buttons[2]. substring(0,buttons[2].length()-4)  );
         button4.setText(    buttons[3]. substring(0,buttons[3].length()-4)  );
+
     }
 
     public void setzeBeschreibung(Button b){
+
         neueÜbungen.trenneTeile(b.getText()+".txt");
         this.buttonTooltip.setText(neueÜbungen.gibBeschr());
         b.setTooltip(this.buttonTooltip);
+
     }
 }
