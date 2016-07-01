@@ -1,9 +1,15 @@
 package de.hhu.propra16.TDDT;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceDialog;
 import vk.core.api.TestFailure;
 import vk.core.api.TestResult;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 
 public class WarningUnit {
@@ -68,4 +74,21 @@ public class WarningUnit {
         Action.showAndWait();
     }
 
+    public String askForBabySteps() {
+        List<String> Optionen=new ArrayList<>();
+        Optionen.add("Keine BabySteps aktivieren");
+        Optionen.add("1 Minute");
+        Optionen.add("2 Minuten");
+        Optionen.add("3 Minuten");
+        ChoiceDialog<String> dialog=new ChoiceDialog<>("Keine BabySteps aktivieren",Optionen);
+        dialog.setTitle("BabySteps");
+        dialog.setHeaderText("Möchtest du BabySteps aktivieren ?\n" +
+                "Bei BabySteps wird die Zeit zum Code Schreiben limitiert.");
+        dialog.setContentText("Bitte wähle deine gewünschte Zeit:");
+        Optional<String> Auswahl=dialog.showAndWait();
+        if (Auswahl.isPresent()) {
+            return Auswahl.get();
+        }
+        return "Keine BabySteps aktivieren";
+    }
 }

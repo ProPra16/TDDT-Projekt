@@ -33,6 +33,7 @@ public class BabyStep extends Thread {
                     ActualTime = 0;
                 }
                 Clock.setText("");
+                if (controller.getPhase()!='F')
                 Clock.setText(CountDowns.get(ActualTime));
             });
             ticktack();
@@ -57,7 +58,6 @@ public class BabyStep extends Thread {
             }
         });
     }
-
 
     public void countDown(Label Display) {
         this.Clock = Display;

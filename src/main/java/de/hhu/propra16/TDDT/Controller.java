@@ -189,4 +189,8 @@ public class Controller {
             Klassenname.setText("public class "+UserInput.getTestName()+" {");
         }
     }
+
+    public char getPhase()  {
+        return Phase;
+    }
 }

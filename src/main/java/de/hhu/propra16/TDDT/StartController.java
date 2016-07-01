@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -17,6 +18,7 @@ public class StartController {
     private Ubung neueÜbungen = new Ubung();
     private String [] buttons;
     private Tooltip buttonTooltip = new Tooltip("Button Tooltip");
+    private WarningUnit Reporter=new WarningUnit();
     @FXML private Button button1 = new Button();
     @FXML private Button button2 = new Button();
     @FXML private Button button3 = new Button();
@@ -80,27 +82,39 @@ public class StartController {
     public void buttonAction(ActionEvent event) {
         final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
-        String s = event.getSource().toString();
-        String dateiName = neueÜbungen.gibBeschr();
-        s=s.substring(16,17);
-        switch (Integer.parseInt(s)){
+        String UserChoice = event.getSource().toString();
+        String Klassenname=getKlassenName(UserChoice);
+        UserCode UserEinstellungen=null;
+        UserChoice=UserChoice.substring(16,17);
+        switch (Integer.parseInt(UserChoice)){
             case 1:
+                UserEinstellungen=getUserEinstellungen(Klassenname);
                 stage.close();
-                m.startProg(dateiName);
+                m.startProg(UserEinstellungen);
                 break;
             case 2:
+                UserEinstellungen=getUserEinstellungen(Klassenname);
                 stage.close();
-                m.startProg(dateiName);
+                m.startProg(UserEinstellungen);
                 break;
             case 3:
+                UserEinstellungen=getUserEinstellungen(Klassenname);
                 stage.close();
-                m.startProg(dateiName);
+                m.startProg(UserEinstellungen);
                 break;
             case 4:
+                UserEinstellungen=getUserEinstellungen(Klassenname);
                 stage.close();
-                m.startProg(dateiName);
+                m.startProg(UserEinstellungen);
                 break;
         }
+    }
+
+    public String getKlassenName(String UserChoice) {
+        String Klassenname=UserChoice.substring(37);
+        Klassenname=Klassenname.replace("'","");
+        Klassenname=Klassenname.replace(" ","");
+        return Klassenname;
     }
 
     public void iterateUp(ActionEvent event){
@@ -127,6 +141,17 @@ public class StartController {
         neueÜbungen.trenneTeile(b.getText()+".txt");
         this.buttonTooltip.setText(neueÜbungen.gibBeschr());
         b.setTooltip(this.buttonTooltip);
+    }
 
+    public UserCode getUserEinstellungen(String Klassenname) {
+        String BabyStepWahl=Reporter.askForBabySteps();
+        char Minuten=BabyStepWahl.charAt(0);
+        System.out.println(Minuten);
+        switch (Minuten) {
+            case '1':return new UserCode(Klassenname,"1:00");
+            case '2':return new UserCode(Klassenname,"2:00");
+            case '3':return new UserCode(Klassenname,"3:00");
+        }
+        return new UserCode(Klassenname);
     }
 }

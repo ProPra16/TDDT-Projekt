@@ -55,7 +55,7 @@ public class TDDT extends Application {
         myStage.show();
     }
 
-    public void startProg(String dateiName) {
+    public void startProg(UserCode UserEinstellungen) {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("/TDDT.fxml"));
         Parent root = null;
         try {
@@ -64,8 +64,7 @@ public class TDDT extends Application {
             e.printStackTrace();
         }
         this.controller = loader.getController();
-        UserCode userCode = new UserCode("BlaBla",true,"0:30");
-        controller.init(controller,userCode);
+        controller.init(controller,UserEinstellungen);
         this.myStage.setScene(new Scene(root,700,600));
         this.myStage.setResizable(false);
         show();

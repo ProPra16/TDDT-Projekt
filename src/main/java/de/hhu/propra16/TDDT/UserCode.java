@@ -6,7 +6,6 @@ public class UserCode {
     private String ClassContent="";
     private String ClassCode="";
     private String TestCode="";
-    private boolean BabyStep;
     private String Time;
 
     public UserCode(String KlassenName) {
@@ -15,9 +14,8 @@ public class UserCode {
         setTest("");
     }
 
-    public UserCode(String KlassenName,boolean BabyStep, String Time) {
+    public UserCode(String KlassenName, String Time) {
         this.KlassenName = KlassenName;
-        this.BabyStep = BabyStep;
         this.Time = Time;
         setClass("");
         setTest("");
@@ -59,7 +57,7 @@ public class UserCode {
     }
 
     public boolean hasBabySteps() {
-        return BabyStep;
+        return !(Time==null);
     }
 
     public String getTime() {return Time;}
