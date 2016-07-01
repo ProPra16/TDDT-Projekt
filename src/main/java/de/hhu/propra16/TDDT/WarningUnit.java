@@ -1,12 +1,8 @@
 package de.hhu.propra16.TDDT;
 
-import com.sun.org.apache.regexp.internal.RE;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
-import javafx.stage.Stage;
 import vk.core.api.TestFailure;
 import vk.core.api.TestResult;
-import vk.core.internal.InternalFailure;
 
 import java.util.Collection;
 

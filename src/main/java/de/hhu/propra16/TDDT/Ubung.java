@@ -17,7 +17,7 @@ public class Ubung {
     ArrayList <String> inhalt = new ArrayList<String>();
     private String beschrTeil = "";
     private String codeTeil = "";
-    private int jarVar=0;
+    private int jarVar = 0;
 
     public String gibtDatei(){
         return dateien.get(0);
@@ -38,6 +38,7 @@ public class Ubung {
                 }
             }
             this.jarVar = 1;
+            this.dateien.remove(0);
             jar.close();
         } else {
             final URL url = Launcher.class.getResource("/" + path);
@@ -57,8 +58,13 @@ public class Ubung {
 
 
     public String[] fillArray(){
-        for (int i=0; i<4; i++){
-            buttons[i]=dateien.get(i+this.jarVar);
+        for (int i=0; i<buttons.length; i++){
+            if(dateien.size() > i) {
+                buttons[i] = dateien.get(i);
+            }
+            else{
+                buttons[i]="";
+            }
         }
         return buttons;
     }
@@ -68,30 +74,33 @@ public class Ubung {
     }
 
     public String[] down(String [] buttons){
-        if(!(buttons[3].equals(dateien.get(dateien.size()-1)))){
-            int i=0;
-            boolean richtigeStelle=false;
-            while(i<dateien.size() && richtigeStelle == false){
-                if(buttons[0].equals(dateien.get(i+jarVar))){
-                    richtigeStelle=true;
+        if(buttons.length > 4) {
+            if (dateien.size() > 4 && !(buttons[3].equals(dateien.get(dateien.size() - 1)))) {
+                int i = 0;
+                boolean richtigeStelle = false;
+                while (i < dateien.size() && richtigeStelle == false) {
+                    if (buttons[0].equals(dateien.get(i))) {
+                        richtigeStelle = true;
+                    } else {
+                        i++;
+                    }
                 }
-                else {
-                    i++;
+                for (int j = i; j < i + buttons.length; j++) {
+                    buttons[j - i] = dateien.get(j + 1);
                 }
-            }
-            for(int j=i; j<i+4; j++){
-                buttons[j-i]=dateien.get(j+1+jarVar);
             }
         }
-        return buttons;
+            return buttons;
+
     }
 
     public String[] up(String [] buttons){
-        if(!(buttons[0].equals(dateien.get(0+jarVar)))){
+        if(buttons.length > 4 && dateien.size() > 4){
+        if(!(buttons[0].equals(dateien.get(0)))){
             int i=0;
             boolean richtigeStelle=false;
             while(i<dateien.size() && richtigeStelle == false){
-                if(buttons[0].equals(dateien.get(i+jarVar))){
+                if(buttons[0].equals(dateien.get(i))){
                     richtigeStelle=true;
                 }
                 else {
@@ -99,10 +108,12 @@ public class Ubung {
                 }
             }
             for(int j=i; j<i+4; j++){
-                buttons[j-i]=dateien.get(j-1+jarVar);
+                buttons[j-i]=dateien.get(j-1);
             }
+            return buttons;
         }
-        return buttons;
+        }
+        return null;
     }
 
     public void trenneTeile(String filename){

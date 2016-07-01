@@ -27,10 +27,6 @@ public class StartController {
         try {
             neueÜbungen.fileOut();
             this.buttons = neueÜbungen.fillArray();
-            button1.setText(this.buttons[0].substring(0, buttons[0].length() - 4));
-            button2.setText(this.buttons[1].substring(0, buttons[1].length() - 4));
-            button3.setText(this.buttons[2].substring(0, buttons[2].length() - 4));
-            button4.setText(this.buttons[3].substring(0, buttons[3].length() - 4));
             switch (neueÜbungen.anzahlUbungen()) {
                 case 0:
                     button1.setVisible(false);
@@ -39,16 +35,28 @@ public class StartController {
                     button4.setVisible(false);
                     break;
                 case 1:
+                    button1.setText(this.buttons[0].substring(0, buttons[0].length() - 4));
                     button2.setVisible(false);
                     button3.setVisible(false);
                     button4.setVisible(false);
                     break;
                 case 2:
+                    button1.setText(this.buttons[0].substring(0, buttons[0].length() - 4));
+                    button2.setText(this.buttons[1].substring(0, buttons[1].length() - 4));
                     button3.setVisible(false);
                     button4.setVisible(false);
                     break;
                 case 3:
+                    button1.setText(this.buttons[0].substring(0, buttons[0].length() - 4));
+                    button2.setText(this.buttons[1].substring(0, buttons[1].length() - 4));
+                    button3.setText(this.buttons[2].substring(0, buttons[2].length() - 4));
                     button4.setVisible(false);
+                    break;
+                default:
+                    button1.setText(this.buttons[0].substring(0, buttons[0].length() - 4));
+                    button2.setText(this.buttons[1].substring(0, buttons[1].length() - 4));
+                    button3.setText(this.buttons[2].substring(0, buttons[2].length() - 4));
+                    button4.setText(this.buttons[3].substring(0, buttons[3].length() - 4));
                     break;
             }
         }catch(Exception e){e.printStackTrace();}
@@ -105,21 +113,25 @@ public class StartController {
 
     public void iterateUp(ActionEvent event){
 
-        buttons = neueÜbungen.up(buttons);
-        button1.setText(    buttons[0]. substring(0,buttons[0].length()-4)  );
-        button2.setText(    buttons[1]. substring(0,buttons[1].length()-4)  );
-        button3.setText(    buttons[2]. substring(0,buttons[2].length()-4)  );
-        button4.setText(    buttons[3]. substring(0,buttons[3].length()-4)  );
-
+        String [] buttonsTemp = neueÜbungen.up(buttons);
+        if(buttonsTemp.length != 0) {
+            buttons = buttonsTemp;
+            button1.setText(buttons[0].substring(0, buttons[0].length() - 4));
+            button2.setText(buttons[1].substring(0, buttons[1].length() - 4));
+            button3.setText(buttons[2].substring(0, buttons[2].length() - 4));
+            button4.setText(buttons[3].substring(0, buttons[3].length() - 4));
+        }
     }
     public void iterateDown(ActionEvent event){
 
-        buttons = neueÜbungen.down(buttons);
-        button1.setText(    buttons[0]. substring(0,buttons[0].length()-4)  );
-        button2.setText(    buttons[1]. substring(0,buttons[1].length()-4)  );
-        button3.setText(    buttons[2]. substring(0,buttons[2].length()-4)  );
-        button4.setText(    buttons[3]. substring(0,buttons[3].length()-4)  );
-
+        String [] buttonsTemp = neueÜbungen.down(buttons);
+        if(buttonsTemp.length != 0) {
+            buttons = buttonsTemp;
+            button1.setText(buttons[0].substring(0, buttons[0].length() - 4));
+            button2.setText(buttons[1].substring(0, buttons[1].length() - 4));
+            button3.setText(buttons[2].substring(0, buttons[2].length() - 4));
+            button4.setText(buttons[3].substring(0, buttons[3].length() - 4));
+        }
     }
 
     public void setzeBeschreibung(Button b){
