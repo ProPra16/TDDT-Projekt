@@ -1,7 +1,5 @@
 package de.hhu.propra16.TDDT;
 
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceDialog;
 import vk.core.api.TestFailure;
@@ -21,14 +19,14 @@ public class WarningUnit {
     public void NotOnlyOneFailing(boolean Compiled, int Failures) {
         if (Compiled) {
             Action.setContentText("Es schlagen "+Failures+" Tests fehl !\n" +
-                    "Bitte sorge dafür, dass genau ein Test fehlschlägt.");
+                    "Bitte sorge dafuer, dass genau ein Test fehlschlaegt.");
             Action.showAndWait();
         }
     }
 
     public void readyforRefactor() {
         Alert Info = new Alert(Alert.AlertType.INFORMATION);
-        Info.setContentText("Ok, alle Tests wurden erfüllt !\n Du bist jetzt in Refactor !");
+        Info.setContentText("Ok, alle Tests wurden erfuellt !\n Du bist jetzt in Refactor !");
         Info.showAndWait();
     }
 
@@ -41,7 +39,7 @@ public class WarningUnit {
         }
         Action.setHeaderText("Tests schlagen fehl !");
         Action.setContentText("Nicht alle Tests sind erfolgreich ! \n" + Message + "\n" +
-                "Bitte sorge dafür, dass alle Tests laufen");
+                "Bitte sorge dafuer, dass alle Tests laufen");
         Action.showAndWait();
     }
 
@@ -56,7 +54,7 @@ public class WarningUnit {
     public void savedSettings() {
         Alert Info =new Alert(Alert.AlertType.INFORMATION);
         Info.setHeaderText("Alles OK!");
-        Info.setContentText("Deine Änderungen wurden gespeichert\n"+
+        Info.setContentText("Deine Aenderungen wurden gespeichert\n"+
                 "Alle Tests waren erfolgreich!"
         );
         Info.showAndWait();

@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import vk.core.api.*;
 
@@ -13,6 +12,7 @@ public class Controller {
     @FXML private Text Import1;
     @FXML private Text Import2;
     @FXML private Text Klassenname;
+    @FXML private Label Anzeige;
     @FXML private Button RED;
     @FXML private Button GREEN;
     @FXML private Button REFACTOR;
@@ -26,6 +26,8 @@ public class Controller {
     private BabyStep babyStep;
 
     public void RED() {
+        Anzeige.setTranslateX(25);
+        Anzeige.setText("Schreiben Sie nun mindestens einen fehlschlagenden Test");
         if (Phase=='F') {
             isReadyForRED();
         }
@@ -46,6 +48,7 @@ public class Controller {
         if (UserInput.isEmpty()) {
             UserInput.setTest("@Test\n"+"public void testsomething() {\n"+"\n}");
         }
+        Anzeige.setText("Schreiben Sie nun mindestens einen fehlschlagenden Test");
         Fenster.setText(UserInput.getTestCode());
        if (babyStep!=null) babyStep.restart();
     }
@@ -72,6 +75,11 @@ public class Controller {
     }
 
     public void GREEN() {
+
+        Anzeige.setTranslateX(100);
+        Anzeige.setText("Schreiben Sie nun funktionierende Tests");
+    //    Anzeige.setStyle("-fx-text-fill:green");
+
         if (Phase=='G') { Reporter.commonError("Falsche Phase !","Du bist schon in GREEN !");}
         else if (Phase=='F') {
             Reporter.commonError("Falsche Phase !","In REFACTOR sollst du nur den Code verbessern, die Tests laufen schon !");}
@@ -140,12 +148,14 @@ public class Controller {
         setPhase('F',false);
         Fenster.clear();
         Fenster.setText(UserInput.getClassCode());
+        Anzeige.setText("Sie koennen nun Ihre Tests verbessern");
         Clock.setText("");
       if (report) Reporter.readyforRefactor();
     }
 
     public void init(Controller controller,UserCode UserInput) {
         this.UserInput=UserInput;
+
         if (UserInput.hasBabySteps()) {
             Clock.setText(UserInput.getTime());
             babyStep=new BabyStep(UserInput.getTime(),controller);

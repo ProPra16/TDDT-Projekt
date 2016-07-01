@@ -4,15 +4,17 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="de.hhu.propra16.TDDT.Controller"
+
+<GridPane fx:id="Board" fx:controller="de.hhu.propra16.TDDT.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="30" vgap="20">
-    <TextArea fx:id="Fenster" prefHeight="300" prefWidth="400" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-    <Text fx:id="Import1" text="import static org.junit.Assert.*;" style="" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-    <Text fx:id="Import2" text="import org.junit.Test;" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-    <Text fx:id="Klassenname" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-    <Text text="}" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
-    <Label fx:id="Clock" translateX="300" translateY="150" stylesheets="styler.css"/>
-    <Button fx:id="RED" text="RED" translateY="20"  translateX="15" minWidth="100" stylesheets="styler.css" onAction="#RED"/>
-    <Button fx:id="GREEN" text="GREEN" translateY="20"  translateX="125" minWidth="100"  onAction="#GREEN"/>
-    <Button fx:id="REFACTOR" text="REFACTOR" translateY="20"  translateX="250" minWidth="100" onAction="#REFACTOR"/>
+    <TextArea fx:id="Fenster" prefHeight="400" prefWidth="550" translateX="0" translateY="50"/>
+    <Text fx:id="Import1" text="import static org.junit.Assert.*;" style="" translateX="0" translateY="-230"/>
+    <Text fx:id="Import2" text="import org.junit.Test;" translateX="0" translateY="-215"/>
+    <Text fx:id="Klassenname" translateX="0" translateY="-175"/>
+    <Text text="}" translateX="575" translateY="250"/>
+    <Label fx:id="Clock" translateX="400" translateY="-170" stylesheets="styler.css"/>
+    <Label fx:id="Anzeige" translateX="25" translateY="300" stylesheets="styler.css"/>
+    <Button fx:id="RED" text="RED" translateY="-300" translateX="0" minWidth="175" minHeight="40" style="-fx-background-color: #FF0000;" onAction="#RED"/>
+    <Button fx:id="GREEN" text="GREEN" translateY="-300"  translateX="200" minWidth="175"  minHeight="40" onAction="#GREEN"/>
+    <Button fx:id="REFACTOR" text="REFACTOR" translateY="-300"  translateX="400" minWidth="175" minHeight="40" onAction="#REFACTOR"/>
 </GridPane>

@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -29,10 +28,6 @@ public class StartController {
         try {
             neueÜbungen.fileOut();
             this.buttons = neueÜbungen.fillArray();
-            button1.setText(this.buttons[0].substring(0, buttons[0].length() - 4));
-            button2.setText(this.buttons[1].substring(0, buttons[1].length() - 4));
-            button3.setText(this.buttons[2].substring(0, buttons[2].length() - 4));
-            button4.setText(this.buttons[3].substring(0, buttons[3].length() - 4));
             switch (neueÜbungen.anzahlUbungen()) {
                 case 0:
                     button1.setVisible(false);
@@ -41,16 +36,28 @@ public class StartController {
                     button4.setVisible(false);
                     break;
                 case 1:
+                    button1.setText(this.buttons[0].substring(0, buttons[0].length() - 4));
                     button2.setVisible(false);
                     button3.setVisible(false);
                     button4.setVisible(false);
                     break;
                 case 2:
+                    button1.setText(this.buttons[0].substring(0, buttons[0].length() - 4));
+                    button2.setText(this.buttons[1].substring(0, buttons[1].length() - 4));
                     button3.setVisible(false);
                     button4.setVisible(false);
                     break;
                 case 3:
+                    button1.setText(this.buttons[0].substring(0, buttons[0].length() - 4));
+                    button2.setText(this.buttons[1].substring(0, buttons[1].length() - 4));
+                    button3.setText(this.buttons[2].substring(0, buttons[2].length() - 4));
                     button4.setVisible(false);
+                    break;
+                default:
+                    button1.setText(this.buttons[0].substring(0, buttons[0].length() - 4));
+                    button2.setText(this.buttons[1].substring(0, buttons[1].length() - 4));
+                    button3.setText(this.buttons[2].substring(0, buttons[2].length() - 4));
+                    button4.setText(this.buttons[3].substring(0, buttons[3].length() - 4));
                     break;
             }
         }catch(Exception e){e.printStackTrace();}
@@ -119,21 +126,24 @@ public class StartController {
 
     public void iterateUp(ActionEvent event){
 
-        buttons = neueÜbungen.up(buttons);
-        button1.setText(    buttons[0]. substring(0,buttons[0].length()-4)  );
-        button2.setText(    buttons[1]. substring(0,buttons[1].length()-4)  );
-        button3.setText(    buttons[2]. substring(0,buttons[2].length()-4)  );
-        button4.setText(    buttons[3]. substring(0,buttons[3].length()-4)  );
-
+        String [] buttonsTemp = neueÜbungen.up(buttons);
+        if(buttonsTemp != null) {
+            buttons = buttonsTemp;
+            button1.setText(buttons[0].substring(0, buttons[0].length() - 4));
+            button2.setText(buttons[1].substring(0, buttons[1].length() - 4));
+            button3.setText(buttons[2].substring(0, buttons[2].length() - 4));
+            button4.setText(buttons[3].substring(0, buttons[3].length() - 4));
+        }
     }
     public void iterateDown(ActionEvent event){
-
-        buttons = neueÜbungen.down(buttons);
-        button1.setText(    buttons[0]. substring(0,buttons[0].length()-4)  );
-        button2.setText(    buttons[1]. substring(0,buttons[1].length()-4)  );
-        button3.setText(    buttons[2]. substring(0,buttons[2].length()-4)  );
-        button4.setText(    buttons[3]. substring(0,buttons[3].length()-4)  );
-
+        String [] buttonsTemp = neueÜbungen.down(buttons);
+        if(buttonsTemp != null) {
+            buttons = buttonsTemp;
+            button1.setText(buttons[0].substring(0, buttons[0].length() - 4));
+            button2.setText(buttons[1].substring(0, buttons[1].length() - 4));
+            button3.setText(buttons[2].substring(0, buttons[2].length() - 4));
+            button4.setText(buttons[3].substring(0, buttons[3].length() - 4));
+        }
     }
 
     public void setzeBeschreibung(Button b){
@@ -146,7 +156,6 @@ public class StartController {
     public UserCode getUserEinstellungen(String Klassenname) {
         String BabyStepWahl=Reporter.askForBabySteps();
         char Minuten=BabyStepWahl.charAt(0);
-        System.out.println(Minuten);
         switch (Minuten) {
             case '1':return new UserCode(Klassenname,"1:00");
             case '2':return new UserCode(Klassenname,"2:00");
