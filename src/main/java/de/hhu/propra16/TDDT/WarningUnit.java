@@ -1,13 +1,8 @@
 package de.hhu.propra16.TDDT;
 
-import com.sun.org.apache.regexp.internal.RE;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
-import javafx.stage.Stage;
 import vk.core.api.TestFailure;
 import vk.core.api.TestResult;
-import vk.core.internal.InternalFailure;
-
 import java.util.Collection;
 
 
@@ -64,6 +59,12 @@ public class WarningUnit {
     public void commonError(String Header, String Content) {
         Action.setHeaderText(Header);
         Action.setContentText("\n"+Content);
+        Action.showAndWait();
+    }
+
+    public void noCode() {
+        Action.setHeaderText("Kein Code zum Refactoring da !");
+        Action.setContentText("Nach erflogreichem Abschluss von GREEN sollte das Refactoring durchgeführt werden.");
         Action.showAndWait();
     }
 

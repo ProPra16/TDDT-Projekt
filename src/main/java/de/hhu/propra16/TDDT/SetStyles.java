@@ -8,6 +8,14 @@ import javafx.scene.control.Label;
  */
 public class SetStyles {
 
+    public void setPhase(char Phase, Button RED, Button GREEN, Button REFACTOR) {
+        switch (Phase) {
+            case 'R':setRED(RED,GREEN,REFACTOR); break;
+            case 'G':setGREEN(RED,GREEN,REFACTOR); break;
+            case 'F':setREFACTOR(RED,GREEN,REFACTOR);break;
+        }
+    }
+
     public void setRED(Button RED, Button GREEN, Button REFACTOR) {
         RED.setStyle("-fx-background-color: #FF0000;");
         GREEN.setStyle("");

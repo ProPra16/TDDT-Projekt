@@ -8,36 +8,36 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class BabyStep extends Thread {
-    private int min;
-    private int sec;
     private String Time;
     private Label Clock;
     private volatile boolean expired;
     private Controller controller;
+    private ArrayList<String> CountDowns=new ArrayList<>();
+    private int ActualTime;
 
-    public BabyStep(Controller controller) {
+    public BabyStep(String Time, Controller controller) {
+        this.Time=Time;
         this.controller = controller;
+        fill();
     }
 
     @Override
     public void run() {
         while (!expired) {
-            Platform.runLater(() -> {
-                if (controller.getPhase() != 'F') {
-                    Clock.setText("");
-                    Clock.setText(formatTime());
+            Platform.runLater(()-> {
+                if (ActualTime == -1) {
+                    ActualTime = 0;
                 }
+                Clock.setText("");
+                Clock.setText(CountDowns.get(ActualTime));
             });
-            sec--;
-            if (sec == -1) {
-                sec = 59;
-                min--;
-            }
             ticktack();
-            isTicking();
+            ActualTime += 1;
+            isExpired();
         }
     }
 
@@ -49,34 +49,43 @@ public class BabyStep extends Thread {
         }
     }
 
-    public void isTicking() {
+    public void isExpired() {
         Platform.runLater(() -> {
-            if (min == 0 && sec == 0) {
+            if (ActualTime==CountDowns.size()) {
                 expired = true;
                 controller.switchPhase();
             }
         });
     }
 
-    public String formatTime() {
-        if (sec < 10) {
-            return min + ":" + "0" + sec;
-        }
-        return min + ":" + sec;
-    }
 
-    public void countDown(Label Display, String Time) {
-        this.Time = Time;
-        this.min = Integer.parseInt(Time.substring(0, 2));
-        this.sec = Integer.parseInt(Time.substring(3)) + 1;
+    public void countDown(Label Display) {
         this.Clock = Display;
         start();
     }
 
-    public void restart(String Time) {
+    public void restart() {
         expired = false;
-        this.min = Integer.parseInt(Time.substring(0, 2));
-        this.sec = Integer.parseInt(Time.substring(3)) + 1;
+        ActualTime=-1;
+    }
+
+    public void fill() {
+        int min=Integer.parseInt(Time.substring(0,1));
+        int sec=Integer.parseInt(Time.substring(2));
+        while (!(sec==0 && min==0)) {
+            if (sec < 10) {
+                CountDowns.add(min+":0"+sec);
+            }
+            else {
+                CountDowns.add(min+":"+sec);
+            }
+            sec--;
+            if (sec==-1) {
+                min--;
+                sec=59;
+            }
+        }
+        CountDowns.add("0:00");
     }
 }
 

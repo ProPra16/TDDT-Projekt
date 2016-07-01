@@ -55,17 +55,19 @@ public class TDDT extends Application {
         myStage.show();
     }
 
-    public void startProg(String dateiName){
-        try{
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("/TDDT.fxml"));
-            Parent root = loader.load();
-            this.controller = loader.getController();
-            UserCode userCode = new UserCode("BlaBla",true,"10:10");
-            controller.init(controller,userCode);
-            this.myStage.setScene(new Scene(root,700,600));
-            this.myStage.setResizable(false);
+    public void startProg(String dateiName) {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/TDDT.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch (Exception e){System.out.println("fxml problem");}
+        this.controller = loader.getController();
+        UserCode userCode = new UserCode("BlaBla",true,"0:30");
+        controller.init(controller,userCode);
+        this.myStage.setScene(new Scene(root,700,600));
+        this.myStage.setResizable(false);
         show();
     }
 

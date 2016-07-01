@@ -9,7 +9,6 @@ import javafx.scene.text.Text;
 import vk.core.api.*;
 
 public class Controller {
-    @FXML private GridPane Board;
     @FXML private TextArea Fenster;
     @FXML private Text Import1;
     @FXML private Text Import2;
@@ -17,6 +16,7 @@ public class Controller {
     @FXML private Button RED;
     @FXML private Button GREEN;
     @FXML private Button REFACTOR;
+    @FXML private Label Clock;
     private UserCode UserInput=new UserCode("");
     private ActionUnit Action=new ActionUnit(UserInput);
     private WarningUnit Reporter = new WarningUnit();
@@ -24,7 +24,6 @@ public class Controller {
     private String ActualGREENCode;
     private char Phase='R';
     private BabyStep babyStep;
-    private Label Clock=new Label("");
 
     public void RED() {
         if (Phase=='F') {
@@ -43,16 +42,12 @@ public class Controller {
     }
 
     public void switchRED() {
-        Phase = 'R';
-        Klassenname.setText("public class "+UserInput.getTestName()+" {");
-        PhaseSetter.setRED(RED, GREEN, REFACTOR);
-        Import1.setText("import static org.junit.Assert.*;");
-        Import2.setText("import org.junit.Test;");
+        setPhase('R',true);
         if (UserInput.isEmpty()) {
             UserInput.setTest("@Test\n"+"public void testsomething() {\n"+"\n}");
         }
         Fenster.setText(UserInput.getTestCode());
-       if (babyStep!=null) babyStep.restart(UserInput.getTime());
+       if (babyStep!=null) babyStep.restart();
     }
 
     public void isReadyForRED() {
@@ -100,31 +95,28 @@ public class Controller {
     }
 
     public void isreadyForGreen() {
-        Phase = 'G';
-        PhaseSetter.setGREEN(RED, GREEN, REFACTOR);
-        Import1.setText("");
-        Import2.setText("");
-        Klassenname.setText("public class "+UserInput.getKlassenName()+" {");
+        setPhase('G',false);
         ActualGREENCode=UserInput.getClassCode();
         Fenster.clear();
         Fenster.setText(UserInput.getClassCode());
-       if (babyStep!=null) babyStep.restart(UserInput.getTime());
+       if (babyStep!=null) babyStep.restart();
     }
 
     public void REFACTOR() {
-        if (Phase!='R' && Phase!='F') {
-            UserInput.setClass(Fenster.getText());
-            Action=new ActionUnit(UserInput);
-            Action.compile();
-            if (Action.compileErrors()) {
-              Reporter.showCompilerErrors(TestHelpers.getErrorMessages(Action.getCompiler(), Action.getResult()));
+        char Actual=Phase;
+            switch (Actual) {
+                case 'R':UserInput.setTest(Fenster.getText()); break;
+                case 'G':UserInput.setClass(Fenster.getText()); break;
+                case 'F':return;
             }
-            else {
-                checkUserTestCases();
-            }
+        if (UserInput.getClassCode().equals("")) {Reporter.noCode(); return;}
+        Action=new ActionUnit(UserInput);
+        Action.compile();
+        if (Action.compileErrors()) {
+            Reporter.showCompilerErrors(TestHelpers.getErrorMessages(Action.getCompiler(), Action.getResult()));
         }
         else {
-            Reporter.commonError("Falsche Phase !","Du kannst nur nach erfolgreichem Abschluss von GREEN nach REFACTOR wechseln !");
+            checkUserTestCases();
         }
     }
 
@@ -145,8 +137,7 @@ public class Controller {
     }
 
     public void isreadyforREFACTOR(boolean report) {
-        Phase = 'F';
-        PhaseSetter.setREFACTOR(RED, GREEN, REFACTOR);
+        setPhase('F',false);
         Fenster.clear();
         Fenster.setText(UserInput.getClassCode());
         Clock.setText("");
@@ -156,33 +147,28 @@ public class Controller {
     public void init(Controller controller,UserCode UserInput) {
         this.UserInput=UserInput;
         if (UserInput.hasBabySteps()) {
-            Clock=new Label(UserInput.getTime());
-            Board.getChildren().add(Clock);
-            Clock.setTranslateX(300);
-            Clock.setTranslateY(100);
-            babyStep=new BabyStep(controller);
+            Clock.setText(UserInput.getTime());
+            babyStep=new BabyStep(UserInput.getTime(),controller);
         }
-        UserInput.setTest("public void test() {assertEquals(1,BlaBla.f());}");
         switchRED();
         Klassenname.setText("public class "+UserInput.getTestName()+" {");
         if (babyStep!=null) {
-           babyStep.countDown(Clock,UserInput.getTime());
+           babyStep.countDown(Clock);
         }
     }
 
     public void switchPhase() {
         char Actual=Phase;
-        System.out.println(Phase);
         switch (Actual) {
             case 'R':checkSwitches();break;
             case 'G':switchRED();
-            case 'F':babyStep.restart(UserInput.getTime());
+            case 'F':babyStep.restart();
         }
     }
 
     public void checkSwitches() {
         if (!(UserInput.getClassCode().equals(""))) {
-            babyStep.restart(UserInput.getTime());
+            babyStep.restart();
             isreadyforREFACTOR(false);
         }
         else {
@@ -190,7 +176,17 @@ public class Controller {
         }
     }
 
-    public char getPhase() {
-        return Phase;
+    public void setPhase(char Actual, boolean isTest) {
+        Phase=Actual;
+        PhaseSetter.setPhase(Phase,RED, GREEN, REFACTOR);
+        if (!isTest) {
+        Import1.setText("");
+        Import2.setText("");
+        Klassenname.setText("public class "+UserInput.getKlassenName()+" {");}
+        else {
+            Import1.setText("import static org.junit.Assert.*;");
+            Import2.setText("import org.junit.Test;");
+            Klassenname.setText("public class "+UserInput.getTestName()+" {");
+        }
     }
 }
