@@ -1,0 +1,8 @@
+Bericht Woche 2:
+Wir hatten von Dienstag bis Freitag jeweils mehrstünduge Sitzungen, welche wir zum Austausch und zur Bearbeitung genutzt haben.
+Teilweise wurde danach zu Hause weiter gearbeitet.
+Zunächst wurden alle Probleme zur Installation und Gradle, welche an beiden Betriebssystemen auftraten(windows und OSX), behoben.
+Das Layout zur Auswahl der Übungsaufgaben inklusive Scroll-Buttons wurde von Henrik und Mustafa fertig gestellt.
+Weiterhin wurde von Asri und Louisa an Babysteps mit einem Timer, welcher durch eine manuelle Eingabe die Zeit individuell einstellt, gearbeitet. Dabei trat das Problem auf, dass der Timer nicht beendet wird. Doch dabei konnte uns Björn, unser Übungsgruppenleiter, weiterhelfen.
+Das arbeiten mit Gradle führte bei allen zu diversen Problemen, welche zeitaufwändig gelöst werden mussten.
+Ebenfalls wurde von Asri der RED-Button fertig gestellt. Währenddessen hat sich der Rest mit der Anwendung und Ausführung von Travis beschäftigt, sodass das Projekt insgesamt fast fertig ist, jedoch mit Gradle noch nicht ganz funktioniert. Mit der Fehlersuche dieses Problems haben wir uns den Rest der Zeit beschäftigt.
