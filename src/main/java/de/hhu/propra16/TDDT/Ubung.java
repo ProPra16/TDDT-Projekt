@@ -1,7 +1,5 @@
 package de.hhu.propra16.TDDT;
 
-import sun.misc.Launcher;
-
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -41,7 +39,7 @@ public class Ubung {
             this.dateien.remove(0);
             jar.close();
         } else {
-            final URL url = Launcher.class.getResource("/" + path);
+            final URL url = getClass().getResource("/" + path);
             if (url != null) {
                 try {
                     final File apps = new File(url.toURI());
