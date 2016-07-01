@@ -37,16 +37,7 @@ public class TDDT extends Application {
         myStage.setScene(new Scene(rooty,700,600));
         myStage.setResizable(false);
 
-        try{
-        Media media = new Media(getClass().getResource("/musik.mp3").toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
-        MediaView mediaView = new MediaView(mediaPlayer);
-        }
 
-        catch (Exception e){
-
-        }
         show();
     }
 
@@ -62,7 +53,7 @@ public class TDDT extends Application {
             this.controller = loader.getController();
             UserCode userCode = new UserCode("BlaBla",true,"10:10");
             controller.init(controller,userCode);
-            this.myStage.setScene(new Scene(root,700,600));
+            this.myStage.setScene(new Scene(root,800,675));
             this.myStage.setResizable(false);
         }
         catch (Exception e){System.out.println("fxml problem");}

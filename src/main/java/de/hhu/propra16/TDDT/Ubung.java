@@ -74,8 +74,8 @@ public class Ubung {
     }
 
     public String[] down(String [] buttons){
-        if(buttons.length > 4) {
-            if (dateien.size() > 4 && !(buttons[3].equals(dateien.get(dateien.size() - 1)))) {
+        if(dateien.size() > 4) {
+            if (!(buttons[3].equals(dateien.get(dateien.size() - 1)))) {
                 int i = 0;
                 boolean richtigeStelle = false;
                 while (i < dateien.size() && richtigeStelle == false) {
@@ -89,13 +89,13 @@ public class Ubung {
                     buttons[j - i] = dateien.get(j + 1);
                 }
             }
-        }
             return buttons;
-
+        }
+            return null;
     }
 
     public String[] up(String [] buttons){
-        if(buttons.length > 4 && dateien.size() > 4){
+        if(dateien.size() > 4){
         if(!(buttons[0].equals(dateien.get(0)))){
             int i=0;
             boolean richtigeStelle=false;

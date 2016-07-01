@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import jdk.internal.org.objectweb.asm.tree.analysis.Analyzer;
 import vk.core.api.*;
 
 public class Controller {
@@ -14,6 +15,7 @@ public class Controller {
     @FXML private Text Import1;
     @FXML private Text Import2;
     @FXML private Text Klassenname;
+    @FXML private Label Anzeige;
     @FXML private Button RED;
     @FXML private Button GREEN;
     @FXML private Button REFACTOR;
@@ -24,9 +26,11 @@ public class Controller {
     private String ActualGREENCode;
     private char Phase='R';
     private BabyStep babyStep;
-    private Label Clock=new Label("");
+    private Label Clock;
 
     public void RED() {
+        Anzeige.setTranslateX(25);
+        Anzeige.setText("Schreiben Sie nun mindestens einen fehlschlagenden Test");
         if (Phase=='F') {
             isReadyForRED();
         }
@@ -43,6 +47,7 @@ public class Controller {
     }
 
     public void switchRED() {
+        Anzeige.setTranslateX(25);
         Phase = 'R';
         Klassenname.setText("public class "+UserInput.getTestName()+" {");
         PhaseSetter.setRED(RED, GREEN, REFACTOR);
@@ -51,6 +56,7 @@ public class Controller {
         if (UserInput.isEmpty()) {
             UserInput.setTest("@Test\n"+"public void testsomething() {\n"+"\n}");
         }
+        Anzeige.setText("Schreiben Sie nun mindestens einen fehlschlagenden Test");
         Fenster.setText(UserInput.getTestCode());
        if (babyStep!=null) babyStep.restart(UserInput.getTime());
     }
@@ -77,6 +83,11 @@ public class Controller {
     }
 
     public void GREEN() {
+
+        Anzeige.setTranslateX(100);
+        Anzeige.setText("Schreiben Sie nun funktionierende Tests");
+    //    Anzeige.setStyle("-fx-text-fill:green");
+
         if (Phase=='G') { Reporter.commonError("Falsche Phase !","Du bist schon in GREEN !");}
         else if (Phase=='F') {
             Reporter.commonError("Falsche Phase !","In REFACTOR sollst du nur den Code verbessern, die Tests laufen schon !");}
@@ -102,8 +113,8 @@ public class Controller {
     public void isreadyForGreen() {
         Phase = 'G';
         PhaseSetter.setGREEN(RED, GREEN, REFACTOR);
-        Import1.setText("");
-        Import2.setText("");
+    //    Import1.setText("");
+    //    Import2.setText("");
         Klassenname.setText("public class "+UserInput.getKlassenName()+" {");
         ActualGREENCode=UserInput.getClassCode();
         Fenster.clear();
@@ -149,17 +160,20 @@ public class Controller {
         PhaseSetter.setREFACTOR(RED, GREEN, REFACTOR);
         Fenster.clear();
         Fenster.setText(UserInput.getClassCode());
+        Anzeige.setText("Sie koennen nun Ihre Tests verbessern");
         Clock.setText("");
       if (report) Reporter.readyforRefactor();
     }
 
     public void init(Controller controller,UserCode UserInput) {
         this.UserInput=UserInput;
+
         if (UserInput.hasBabySteps()) {
             Clock=new Label(UserInput.getTime());
             Board.getChildren().add(Clock);
-            Clock.setTranslateX(300);
-            Clock.setTranslateY(100);
+            Clock.setTranslateX(475);
+            Clock.setTranslateY(-200);
+            Clock.setStyle("-fx-font-size: 20pt");
             babyStep=new BabyStep(controller);
         }
         UserInput.setTest("public void test() {assertEquals(1,BlaBla.f());}");

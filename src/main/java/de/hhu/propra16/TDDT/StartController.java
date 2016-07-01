@@ -114,7 +114,7 @@ public class StartController {
     public void iterateUp(ActionEvent event){
 
         String [] buttonsTemp = neueÜbungen.up(buttons);
-        if(buttonsTemp.length != 0) {
+        if(buttonsTemp != null) {
             buttons = buttonsTemp;
             button1.setText(buttons[0].substring(0, buttons[0].length() - 4));
             button2.setText(buttons[1].substring(0, buttons[1].length() - 4));
@@ -123,9 +123,8 @@ public class StartController {
         }
     }
     public void iterateDown(ActionEvent event){
-
         String [] buttonsTemp = neueÜbungen.down(buttons);
-        if(buttonsTemp.length != 0) {
+        if(buttonsTemp != null) {
             buttons = buttonsTemp;
             button1.setText(buttons[0].substring(0, buttons[0].length() - 4));
             button2.setText(buttons[1].substring(0, buttons[1].length() - 4));

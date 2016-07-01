@@ -1,0 +1,5 @@
++++description
+prim numbers beschreibung
++++description
+public PrimNumbers
+halt deine Fresse Asri, dieser Code ist notwendig
