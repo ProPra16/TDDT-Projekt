@@ -13,9 +13,9 @@ lozac100
 mupek100
 
 ## Gradle
-Bauen des Programms: ´´´gradle build ´´´
+Bauen des Programms:  ```gradle build```
 
-Konfigurieren für Intellij: gradle idea
+Konfigurieren für Intellij: ```gradle idea```
 
 ## License
 
