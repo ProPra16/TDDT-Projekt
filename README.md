@@ -14,6 +14,7 @@ mupek100
 
 ## Gradle
 Bauen des Programms: gradle build
+
 Konfigurieren für Intellij: gradle idea
 
 ## License
