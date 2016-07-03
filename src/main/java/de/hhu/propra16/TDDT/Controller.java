@@ -1,10 +1,14 @@
 package de.hhu.propra16.TDDT;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import vk.core.api.*;
 
 public class Controller {
@@ -202,5 +206,16 @@ public class Controller {
 
     public char getPhase()  {
         return Phase;
+    }
+
+    public void backToMainScreen(ActionEvent event){
+        TDDT main = new TDDT();
+        final Node source = (Node) event.getSource();
+        final Stage stage = (Stage) source.getScene().getWindow();
+        String UserChoice = event.getSource().toString();
+        babyStep.stopTimer();
+        stage.close();
+        Thread.currentThread().interrupt();
+        main.starter();
     }
 }

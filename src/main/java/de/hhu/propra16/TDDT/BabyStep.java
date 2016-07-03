@@ -90,5 +90,9 @@ public class BabyStep extends Thread {
         }
         CountDowns.add("0:00");
     }
+
+    public void stopTimer(){
+        expired = true;
+    }
 }
 

@@ -28,6 +28,15 @@ public class TDDT extends Application {
 
     @Override
     public void start(Stage primaryStage){
+        starter();
+    }
+
+    public void show(){
+        myStage.setTitle("TDDT");
+        myStage.show();
+    }
+
+    public void starter() {
         try {
             this.rooty = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
         } catch (Exception e) {
@@ -36,14 +45,7 @@ public class TDDT extends Application {
         myStage.setTitle("TDDT");
         myStage.setScene(new Scene(rooty,700,600));
         myStage.setResizable(false);
-
-
         show();
-    }
-
-    public void show(){
-        myStage.setTitle("TDDT");
-        myStage.show();
     }
 
     public void startProg(UserCode UserEinstellungen) {
