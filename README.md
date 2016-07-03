@@ -1,4 +1,4 @@
-## TDDT - by Halt-Doch-Einfach-Mal-Dein-Maul
+## TDDT - by ```Halt-Doch-Einfach-Mal-Dein-Maul```
 
 [![Build Status](https://travis-ci.org/ProPra16/programmierpraktikum-abschlussprojekt-halt-doch-einfach-mal-dein-maul.svg?branch=gradle)](https://travis-ci.org/ProPra16/programmierpraktikum-abschlussprojekt-halt-doch-einfach-mal-dein-maul)
 
