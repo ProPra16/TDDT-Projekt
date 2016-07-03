@@ -5,9 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
 
 public class StartController {
     private TDDT m = new TDDT();
@@ -25,14 +23,9 @@ public class StartController {
     @FXML private Button button4 = new Button();
 
     @FXML
-    private void initialize() {
+    private void initialize(){
         try {
             neueUbungen.buttonNamer();
-        }catch (Exception e){
-            System.out.print("Hal");
-        }
-        try {
-           // neueUbungen.fileOut();
             this.buttons = neueUbungen.fillArray();
             switch (neueUbungen.anzahlUbungen()) {
                 case 0:
@@ -155,7 +148,8 @@ public class StartController {
     public void setzeBeschreibung(Button b){
 
         try {
-            neueUbungen.trenneTeile(b.getText()+".txt");
+            neueUbungen.readFile(b.getText()+".txt");
+            neueUbungen.trenneTeile();
         } catch (Exception e) {
             e.printStackTrace();
         }

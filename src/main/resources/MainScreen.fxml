@@ -14,7 +14,7 @@
         <Menu fx:id="tracker" text="Tracker"></Menu>
         <Menu fx:id="hilfe" text="Hilfe"></Menu>
     </MenuBar>
-   <Label text="Bitte wählen Sie eine der folgenden Übungen" translateX="150" translateY="40" Stylesheets="styler.css"/>
+   <Label text="Bitte wähle eine der folgenden Übungen" translateX="175" translateY="40" Stylesheets="styler.css"/>
     <Button fx:id="button1" alignment="CENTER" translateX="150" translateY="150" minWidth="400" minHeight="100" onMouseEntered="#buttonDescription" onAction="#buttonAction"/>
     <Button fx:id="button2" alignment="CENTER" translateX="150" translateY="250" minWidth="400" minHeight="100" onMouseEntered="#buttonDescription" onAction="#buttonAction"/>
     <Button fx:id="button3" alignment="CENTER" translateX="150" translateY="350" minWidth="400" minHeight="100" onMouseEntered="#buttonDescription" onAction="#buttonAction"/>

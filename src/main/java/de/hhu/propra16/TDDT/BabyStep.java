@@ -29,10 +29,8 @@ public class BabyStep extends Thread {
                 if (controller.getPhase()!='F')
                 Clock.setText(CountDowns.get(ActualTime));
                 String minuten = CountDowns.get(ActualTime).substring(0,1);
-                System.out.println(minuten);
                 String sekunden = CountDowns.get(ActualTime).substring(2,CountDowns.get(ActualTime).length());
-                System.out.println(sekunden);
-                if(sekunden.equals("09") == true){
+               if(sekunden.equals("09") == true){
                     Clock.setStyle("-fx-text-fill:red;-fx-font-size:30");
                 }
                 if(minuten.equals("0") == false){

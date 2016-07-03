@@ -3,9 +3,6 @@ package de.hhu.propra16.TDDT;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-/**
- * Created by Asri on 22.06.2016.
- */
 public class SetStyles {
 
     public void setPhase(char Phase, Button RED, Button GREEN, Button REFACTOR) {

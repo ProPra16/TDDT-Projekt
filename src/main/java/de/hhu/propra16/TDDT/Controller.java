@@ -31,7 +31,7 @@ public class Controller {
 
     public void RED() {
         Anzeige.setTranslateX(25);
-        Anzeige.setText("Schreiben Sie nun mindestens einen fehlschlagenden Test");
+        Anzeige.setText("Schreibe nun mindestens einen fehlschlagenden Test");
         if (Phase=='F') {
             isReadyForRED();
         }
@@ -52,7 +52,7 @@ public class Controller {
         if (UserInput.isEmpty()) {
             UserInput.setTest("@Test\n"+"public void testsomething() {\n"+"\n}");
         }
-        Anzeige.setText("Schreiben Sie nun mindestens einen fehlschlagenden Test");
+        Anzeige.setText("Schreibe nun mindestens einen fehlschlagenden Test");
         Fenster.setText(UserInput.getTestCode());
        if (babyStep!=null) babyStep.restart();
     }
@@ -81,7 +81,7 @@ public class Controller {
     public void GREEN() {
 
         Anzeige.setTranslateX(100);
-        Anzeige.setText("Schreiben Sie nun den zu testenden Code");
+        Anzeige.setText("Schreibe nun den zu testenden Code");
     //    Anzeige.setStyle("-fx-text-fill:green");
 
         if (Phase=='G') { Reporter.commonError("Falsche Phase !","Du bist schon in GREEN !");}
@@ -152,7 +152,7 @@ public class Controller {
         setPhase('F',false);
         Fenster.clear();
         Fenster.setText(UserInput.getClassCode());
-        Anzeige.setText("Sie koennen nun Ihre Tests verbessern");
+        Anzeige.setText("Nun kannst du deine Tests verbessern");
         Clock.setText("");
       if (report) Reporter.readyforRefactor();
     }
@@ -213,9 +213,10 @@ public class Controller {
         final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
         String UserChoice = event.getSource().toString();
-        babyStep.stopTimer();
+        if(babyStep != null) {
+            babyStep.stopTimer();
+        }
         stage.close();
-        Thread.currentThread().interrupt();
         main.starter();
     }
 }
