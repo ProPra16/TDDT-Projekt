@@ -33,6 +33,15 @@ public class UserCode {
         ClassContent="public class "+KlassenName+" { \n"+ ClassCode+"\n}";
     }
 
+    /*
+    ?????
+    Soll implementiert werden?
+
+    public void setClassContent(String KlassenInhalt){
+        ClassContent = KlassenInhalt;
+    }
+    ?????
+    */
 
     public String getTestContent() {
         return TestContent;

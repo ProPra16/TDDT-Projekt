@@ -21,6 +21,7 @@ public class Ubung {
         return dateien.get(0);
     }
 
+    /*
     public void fileOut()  throws Exception {
         final String path = "Ubungen";
         final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getFile());
@@ -53,7 +54,20 @@ public class Ubung {
             }
         }
     }
+    */
 
+    public void buttonNamer()throws Exception{
+        String path = null;
+        path = (new File(".").getCanonicalPath());
+        File file = new File(path + "/Ubungen");
+        File[] listOfFiles = file.listFiles();
+        for(File file4 : listOfFiles){
+            String pfad = file4.toString();
+            int pos = pfad.indexOf("Ubungen");
+            pfad = pfad.substring(pos+8,pfad.length());
+            dateien.add(pfad);
+        }
+    }
 
     public String[] fillArray(){
         for (int i=0; i<buttons.length; i++){
@@ -114,9 +128,16 @@ public class Ubung {
         return null;
     }
 
-    public void trenneTeile(String filename){
+    public void trenneTeile(String filename) throws Exception{
+
+        /*
         String path = (getClass().getResource("/Ubungen").getFile() + "/" + filename);
         File file=new File(path);
+        */
+        String path = null;
+        path = (new File(".").getCanonicalPath());
+        File file = new File(path + "/Ubungen/" + filename);
+
         BufferedReader br = null;
         try {
             if(jarVar==1){
@@ -148,9 +169,9 @@ public class Ubung {
             }
             else{
                 if(imBereich == true){
-                    this.beschrTeil += this.inhalt.get(i);
+                    this.beschrTeil += this.inhalt.get(i) + "\n";
                 } else{
-                    this.codeTeil += this.inhalt.get(i);
+                    this.codeTeil += this.inhalt.get(i) + "\n";
                 }
             }
         }

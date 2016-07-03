@@ -77,7 +77,7 @@ public class Controller {
     public void GREEN() {
 
         Anzeige.setTranslateX(100);
-        Anzeige.setText("Schreiben Sie nun funktionierende Tests");
+        Anzeige.setText("Schreiben Sie nun den zu testenden Code");
     //    Anzeige.setStyle("-fx-text-fill:green");
 
         if (Phase=='G') { Reporter.commonError("Falsche Phase !","Du bist schon in GREEN !");}

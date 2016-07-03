@@ -12,7 +12,7 @@
     <Text fx:id="Import2" text="import org.junit.Test;" translateX="0" translateY="-215"/>
     <Text fx:id="Klassenname" translateX="0" translateY="-175"/>
     <Text text="}" translateX="575" translateY="250"/>
-    <Label fx:id="Clock" translateX="400" translateY="-170" stylesheets="styler.css"/>
+    <Label fx:id="Clock" translateX="500" translateY="-200" style="-fx-text-fill:black; -fx-font-size:30"/>
     <Label fx:id="Anzeige" translateX="25" translateY="300" stylesheets="styler.css"/>
     <Button fx:id="RED" text="RED" translateY="-300" translateX="0" minWidth="175" minHeight="40" style="-fx-background-color: #FF0000;" onAction="#RED"/>
     <Button fx:id="GREEN" text="GREEN" translateY="-300"  translateX="200" minWidth="175"  minHeight="40" onAction="#GREEN"/>

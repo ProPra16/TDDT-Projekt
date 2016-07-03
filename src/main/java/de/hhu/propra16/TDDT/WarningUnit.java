@@ -68,7 +68,7 @@ public class WarningUnit {
 
     public void noCode() {
         Action.setHeaderText("Kein Code zum Refactoring da !");
-        Action.setContentText("Nach erflogreichem Abschluss von GREEN sollte das Refactoring durchgeführt werden.");
+        Action.setContentText("Nach erflogreichem Abschluss von GREEN sollte das Refactoring durchgefuehrt werden.");
         Action.showAndWait();
     }
 
@@ -80,9 +80,9 @@ public class WarningUnit {
         Optionen.add("3 Minuten");
         ChoiceDialog<String> dialog=new ChoiceDialog<>("Keine BabySteps aktivieren",Optionen);
         dialog.setTitle("BabySteps");
-        dialog.setHeaderText("Möchtest du BabySteps aktivieren ?\n" +
+        dialog.setHeaderText("Moechtest du BabySteps aktivieren ?\n" +
                 "Bei BabySteps wird die Zeit zum Code Schreiben limitiert.");
-        dialog.setContentText("Bitte wähle deine gewünschte Zeit:");
+        dialog.setContentText("Bitte waehle deine gewuenschte Zeit:");
         Optional<String> Auswahl=dialog.showAndWait();
         if (Auswahl.isPresent()) {
             return Auswahl.get();

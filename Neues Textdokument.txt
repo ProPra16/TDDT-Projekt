@@ -1,0 +1,8 @@
+Benutzerhandbuch:
+
+Starten des Programms:
+Zum Starten des Programms je nach Betriebssystem eine der folgenden Dateien ausführen
+Windows:
+Linux:
+MacOs:
+
