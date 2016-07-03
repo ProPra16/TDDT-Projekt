@@ -12,7 +12,10 @@
           xmlns:fx="http://javafx.com/fxml" hgap="30" vgap="20">
     <MenuBar fx:id="menuBar" translateX="0" translateY="-35" minWidth="800">
         <Menu fx:id="tracker" text="Tracker"></Menu>
-        <Menu fx:id="hilfe" text="Hilfe"></Menu>
+        <Menu fx:id="hilfe" text="Hilfe">
+            <MenuItem fx:id="handbuch" text="Benutzerhandbuch" onAction="#zeigHandbuch"/>
+            <MenuItem fx:id="info" text="Info"/>
+        </Menu>
     </MenuBar>
    <Label text="Bitte wähle eine der folgenden Übungen" translateX="175" translateY="40" Stylesheets="styler.css"/>
     <Button fx:id="button1" alignment="CENTER" translateX="150" translateY="150" minWidth="400" minHeight="100" onMouseEntered="#buttonDescription" onAction="#buttonAction"/>

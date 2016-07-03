@@ -5,7 +5,15 @@ import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 public class StartController {
     private TDDT m = new TDDT();
@@ -14,9 +22,10 @@ public class StartController {
     private Tooltip buttonTooltip = new Tooltip("Button Tooltip");
     private WarningUnit Reporter=new WarningUnit();
     @FXML private MenuBar menubar = new MenuBar();
-    @FXML private Menu name1 = new Menu();
-    @FXML private Menu name2 = new Menu();
-    @FXML private Menu name3 = new Menu();
+    @FXML private Menu tracker = new Menu();
+    @FXML private Menu hilfe = new Menu();
+    @FXML private MenuItem handbuch = new MenuItem();
+    @FXML private MenuItem info = new MenuItem();
     @FXML private Button button1 = new Button();
     @FXML private Button button2 = new Button();
     @FXML private Button button3 = new Button();
@@ -148,7 +157,7 @@ public class StartController {
     public void setzeBeschreibung(Button b){
 
         try {
-            neueUbungen.readFile(b.getText()+".txt");
+            neueUbungen.readFile(b.getText()+".txt" , true);
             neueUbungen.trenneTeile();
         } catch (Exception e) {
             e.printStackTrace();
@@ -166,5 +175,26 @@ public class StartController {
             case '3':return new UserCode(Klassenname,"3:00");
         }
         return new UserCode(Klassenname);
+    }
+
+    public void zeigHandbuch(ActionEvent event)throws Exception{
+        neueUbungen.clearAll();
+        neueUbungen.readFile("Handbuch.txt",false);
+        String handbuchInhalt = neueUbungen.gibInhalt();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Benutzerhandbuch");
+        alert.setHeaderText("Benutzerhandbuch");
+        TextArea textArea = new TextArea(handbuchInhalt);
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+        textArea.setMinWidth(500);
+        textArea.setMinHeight(350);
+        GridPane.setVgrow(textArea, Priority.ALWAYS);
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+        GridPane expContent = new GridPane();
+        expContent.setMaxWidth(150);
+        expContent.add(textArea, 0, 0);
+        alert.getDialogPane().setContent(expContent);
+        alert.showAndWait();
     }
 }

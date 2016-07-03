@@ -66,12 +66,16 @@ public class Ubung {
         return dateien.size();
     }
 
-    public void readFile(String filename) throws Exception {
+    public void readFile(String filename, boolean istInUbung) throws Exception {
+        String directory = "Ubungen/";
+        if(istInUbung == false){
+            directory = "";
+        }
         if (jarVar == 1) {
             path = (new File(".").getCanonicalPath());
-            file = new File(path + "/Ubungen/" + filename);
+            file = new File(path + "/" + directory + filename);
         } else {
-            path = (new File(".").getCanonicalPath() + "/build/libs/Ubungen/");
+            path = (new File(".").getCanonicalPath() + "/build/libs/" + directory);
             file = new File(path + filename);
         }
         br = new BufferedReader(new FileReader(file));
@@ -149,7 +153,13 @@ public class Ubung {
         this.codeTeil = "";
         this.beschrTeil = "";
     }
-
+    public String gibInhalt(){
+        String ausgabe = "";
+        for(String s : inhalt){
+            ausgabe = ausgabe +  s + "\n";
+        }
+        return ausgabe;
+    }
     public String gibCode(){
         return this.codeTeil;
     }

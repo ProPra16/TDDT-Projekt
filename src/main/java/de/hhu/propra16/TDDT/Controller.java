@@ -1,6 +1,5 @@
 package de.hhu.propra16.TDDT;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -52,7 +51,6 @@ public class Controller {
         if (UserInput.isEmpty()) {
             UserInput.setTest("@Test\n"+"public void testsomething() {\n"+"\n}");
         }
-        Anzeige.setText("Schreibe nun mindestens einen fehlschlagenden Test");
         Fenster.setText(UserInput.getTestCode());
        if (babyStep!=null) babyStep.restart();
     }
@@ -80,10 +78,6 @@ public class Controller {
 
     public void GREEN() {
 
-        Anzeige.setTranslateX(100);
-        Anzeige.setText("Schreibe nun den zu testenden Code");
-    //    Anzeige.setStyle("-fx-text-fill:green");
-
         if (Phase=='G') { Reporter.commonError("Falsche Phase !","Du bist schon in GREEN !");}
         else if (Phase=='F') {
             Reporter.commonError("Falsche Phase !","In REFACTOR sollst du nur den Code verbessern, die Tests laufen schon !");}
@@ -101,6 +95,8 @@ public class Controller {
                 Reporter.NotOnlyOneFailing(green.isCompiled(),green.getFailures());
             }
             else {
+                Anzeige.setTranslateX(100);
+                Anzeige.setText("Schreibe nun den zu testenden Code");
                 isreadyForGreen();
             }
         }
@@ -117,9 +113,11 @@ public class Controller {
     public void REFACTOR() {
         char Actual=Phase;
             switch (Actual) {
-                case 'R':UserInput.setTest(Fenster.getText()); break;
-                case 'G':UserInput.setClass(Fenster.getText()); break;
-                case 'F':return;
+                case 'R':   UserInput.setTest(Fenster.getText());
+                            break;
+                case 'G':   UserInput.setClass(Fenster.getText());
+                            break;
+                case 'F':   return;
             }
         if (UserInput.getClassCode().equals("")) {Reporter.noCode(); return;}
         Action=new ActionUnit(UserInput);
@@ -149,10 +147,11 @@ public class Controller {
     }
 
     public void isreadyforREFACTOR(boolean report) {
+        Anzeige.setTranslateX(100);
+        Anzeige.setText("Nun kannst du deinen Code verbessern");
         setPhase('F',false);
         Fenster.clear();
         Fenster.setText(UserInput.getClassCode());
-        Anzeige.setText("Nun kannst du deine Tests verbessern");
         Clock.setText("");
       if (report) Reporter.readyforRefactor();
     }
@@ -174,9 +173,12 @@ public class Controller {
     public void switchPhase() {
         char Actual=Phase;
         switch (Actual) {
-            case 'R':checkSwitches();break;
-            case 'G':switchRED();
-            case 'F':babyStep.restart();
+            case 'R':   checkSwitches();
+                        break;
+            case 'G':   switchRED();
+                        break;
+            case 'F':   babyStep.restart();
+                        break;
         }
     }
 
