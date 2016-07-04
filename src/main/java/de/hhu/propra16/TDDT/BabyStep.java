@@ -28,6 +28,14 @@ public class BabyStep extends Thread {
                 Clock.setText("");
                 if (controller.getPhase()!='F')
                 Clock.setText(CountDowns.get(ActualTime));
+                String minuten = CountDowns.get(ActualTime).substring(0,1);
+                String sekunden = CountDowns.get(ActualTime).substring(2,CountDowns.get(ActualTime).length());
+               if(sekunden.equals("09") == true){
+                    Clock.setStyle("-fx-text-fill:red;-fx-font-size:30");
+                }
+                if(minuten.equals("0") == false){
+                    Clock.setStyle("-fx-text-fill:black;-fx-font-size:30");
+                }
             });
             ticktack();
             ActualTime += 1;
@@ -79,6 +87,10 @@ public class BabyStep extends Thread {
             }
         }
         CountDowns.add("0:00");
+    }
+
+    public void stopTimer(){
+        expired = true;
     }
 }
 

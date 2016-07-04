@@ -3,7 +3,6 @@ package de.hhu.propra16.TDDT;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-
 public class SetStyles {
 
     public void setPhase(char Phase, Button RED, Button GREEN, Button REFACTOR, Label Anzeige) {
@@ -38,5 +37,21 @@ public class SetStyles {
         REFACTOR.setStyle("-fx-text-fill:white; -fx-background-color: #000000;");
         Anzeige.setText("Du kannst nun den Code verbessern");
         Anzeige.setStyle("");
+
+    }
+
+    public void setREDInfos(Label Anzeige) {
+        Anzeige.setText("");
+        Anzeige.setText("Du bist jetzt in der RED Phase.\n" +
+                "Du sollst jetzt genau einen fehlschlagenden Test schreiben.\n" +
+                "Wenn du meinst, du hast dies erf" + "\u00FC" + "llt, dann wechsle zur GREEN Phase");
+    }
+
+    public void setGREENInfos(Label Anzeige) {
+        Anzeige.setText("");
+        Anzeige.setText("Du bist jetzt in der GREEN Phase.\n" +
+                "Du sollst nun den vorhin fehlschlagenden Test zum Laufen bringen.\n" +
+                "Wenn du meinst, du hast dues erf" + "\u00FC" + "llt, dann wechsle zur REFACTORING Phase.\n"+
+                "Andernfalls kannst du nochmal zu RED wechseln, bedenke hierbei, dass" + "\u00C4" + "nderungen verloren gehen.");
     }
 }

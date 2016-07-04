@@ -1,10 +1,13 @@
 package de.hhu.propra16.TDDT;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import vk.core.api.*;
 
 public class Controller {
@@ -89,6 +92,8 @@ public class Controller {
                 Reporter.NotOnlyOneFailing(green.isCompiled(),green.getFailures());
             }
             else {
+                Anzeige.setTranslateX(100);
+                Anzeige.setText("Schreibe nun den zu testenden Code");
                 isreadyForGreen();
             }
         }
@@ -105,9 +110,11 @@ public class Controller {
     public void REFACTOR() {
         char Actual=Phase;
             switch (Actual) {
-                case 'R':UserInput.setTest(Fenster.getText()); break;
-                case 'G':UserInput.setClass(Fenster.getText()); break;
-                case 'F':return;
+                case 'R':   UserInput.setTest(Fenster.getText());
+                            break;
+                case 'G':   UserInput.setClass(Fenster.getText());
+                            break;
+                case 'F':   return;
             }
         if (UserInput.getClassCode().equals("")) {Reporter.noCode(); return;}
         Action=new ActionUnit(UserInput);
@@ -137,9 +144,12 @@ public class Controller {
     }
 
     public void isreadyforREFACTOR(boolean report) {
+        Anzeige.setTranslateX(100);
+        Anzeige.setText("Nun kannst du deinen Code verbessern");
         setPhase('F',false);
         Fenster.clear();
         Fenster.setText(UserInput.getClassCode());
+        Clock.setText("");
       if (report) Reporter.readyforRefactor();
     }
 
@@ -159,9 +169,12 @@ public class Controller {
     public void switchPhase() {
         char Actual=Phase;
         switch (Actual) {
-            case 'R':checkSwitches();break;
-            case 'G':switchRED();
-            case 'F':babyStep.restart();
+            case 'R':   checkSwitches();
+                        break;
+            case 'G':   switchRED();
+                        break;
+            case 'F':   babyStep.restart();
+                        break;
         }
     }
 
@@ -191,5 +204,17 @@ public class Controller {
 
     public char getPhase()  {
         return Phase;
+    }
+
+    public void backToMainScreen(ActionEvent event){
+        TDDT main = new TDDT();
+        final Node source = (Node) event.getSource();
+        final Stage stage = (Stage) source.getScene().getWindow();
+        String UserChoice = event.getSource().toString();
+        if(babyStep != null) {
+            babyStep.stopTimer();
+        }
+        stage.close();
+        main.starter();
     }
 }

@@ -3,33 +3,41 @@ package de.hhu.propra16.TDDT;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-import java.io.File;
-
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 public class StartController {
-    private boolean ready;
     private TDDT m = new TDDT();
-    private Ubung neueÜbungen = new Ubung();
+    private Ubung neueUbungen = new Ubung();
     private String [] buttons;
     private Tooltip buttonTooltip = new Tooltip("Button Tooltip");
     private WarningUnit Reporter=new WarningUnit();
     private UserCode UserEinstellung;
+    @FXML private MenuBar menubar = new MenuBar();
+    @FXML private Menu tracker = new Menu();
+    @FXML private Menu hilfe = new Menu();
+    @FXML private MenuItem handbuch = new MenuItem();
+    @FXML private MenuItem info = new MenuItem();
     @FXML private Button button1 = new Button();
     @FXML private Button button2 = new Button();
     @FXML private Button button3 = new Button();
     @FXML private Button button4 = new Button();
 
     @FXML
-    private void initialize() {
+    private void initialize(){
         try {
-            neueÜbungen.fileOut();
-            this.buttons = neueÜbungen.fillArray();
-            switch (neueÜbungen.anzahlUbungen()) {
+            neueUbungen.buttonNamer();
+            this.buttons = neueUbungen.fillArray();
+            switch (neueUbungen.anzahlUbungen()) {
                 case 0:
                     button1.setVisible(false);
                     button2.setVisible(false);
@@ -69,19 +77,19 @@ public class StartController {
         s=s.substring(16,17);
         switch (Integer.parseInt(s)){
             case 1:
-                neueÜbungen.clearAll();
+                neueUbungen.clearAll();
                 setzeBeschreibung(button1);
                 break;
             case 2:
-                neueÜbungen.clearAll();
+                neueUbungen.clearAll();
                 setzeBeschreibung(button2);
                 break;
             case 3:
-                neueÜbungen.clearAll();
+                neueUbungen.clearAll();
                 setzeBeschreibung(button3);
                 break;
             case 4:
-                neueÜbungen.clearAll();
+                neueUbungen.clearAll();
                 setzeBeschreibung(button4);
                 break;
         }
@@ -118,7 +126,7 @@ public class StartController {
 
     public void iterateUp(ActionEvent event){
 
-        String [] buttonsTemp = neueÜbungen.up(buttons);
+        String [] buttonsTemp = neueUbungen.up(buttons);
         if(buttonsTemp != null) {
             buttons = buttonsTemp;
             button1.setText(buttons[0].substring(0, buttons[0].length() - 4));
@@ -128,7 +136,7 @@ public class StartController {
         }
     }
     public void iterateDown(ActionEvent event){
-        String [] buttonsTemp = neueÜbungen.down(buttons);
+        String [] buttonsTemp = neueUbungen.down(buttons);
         if(buttonsTemp != null) {
             buttons = buttonsTemp;
             button1.setText(buttons[0].substring(0, buttons[0].length() - 4));
@@ -140,8 +148,13 @@ public class StartController {
 
     public void setzeBeschreibung(Button b){
 
-        neueÜbungen.trenneTeile(b.getText()+".txt");
-        this.buttonTooltip.setText(neueÜbungen.gibBeschr());
+        try {
+            neueUbungen.readFile(b.getText()+".txt" , true);
+            neueUbungen.trenneTeile();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.buttonTooltip.setText(neueUbungen.gibBeschr());
         b.setTooltip(this.buttonTooltip);
     }
 
@@ -152,5 +165,27 @@ public class StartController {
         UserEinstellung=new UserCode(Klassenname,Time);
         stage.close();
         m.startProg(UserEinstellung);
+    }
+
+    public void zeigHandbuch(ActionEvent event)throws Exception{
+        neueUbungen.clearAll();
+        neueUbungen.readFile("Handbuch.txt",false);
+        String handbuchInhalt = neueUbungen.gibInhalt();
+        handbuchInhalt = neueUbungen.replacer(handbuchInhalt);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Benutzerhandbuch");
+        alert.setHeaderText("Benutzerhandbuch");
+        TextArea textArea = new TextArea(handbuchInhalt);
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+        textArea.setMinWidth(500);
+        textArea.setMinHeight(350);
+        GridPane.setVgrow(textArea, Priority.ALWAYS);
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+        GridPane expContent = new GridPane();
+        expContent.setMaxWidth(150);
+        expContent.add(textArea, 0, 0);
+        alert.getDialogPane().setContent(expContent);
+        alert.showAndWait();
     }
 }
