@@ -30,7 +30,7 @@ public class Controller {
 
     public void RED() {
         Anzeige.setTranslateX(25);
-        Anzeige.setText("Schreibe nun mindestens einen fehlschlagenden Test");
+        Anzeige.setText("Schreibe nun genau einen fehlschlagenden Test");
         if (Phase=='F') {
             isReadyForRED();
         }

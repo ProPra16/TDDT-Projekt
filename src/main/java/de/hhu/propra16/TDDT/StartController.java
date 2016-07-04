@@ -181,6 +181,7 @@ public class StartController {
         neueUbungen.clearAll();
         neueUbungen.readFile("Handbuch.txt",false);
         String handbuchInhalt = neueUbungen.gibInhalt();
+        handbuchInhalt = neueUbungen.replacer(handbuchInhalt);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Benutzerhandbuch");
         alert.setHeaderText("Benutzerhandbuch");

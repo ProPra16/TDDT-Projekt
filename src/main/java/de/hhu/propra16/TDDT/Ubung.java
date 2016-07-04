@@ -160,6 +160,11 @@ public class Ubung {
         }
         return ausgabe;
     }
+
+    public String replacer(String s){
+        return s.replace("ae","\u00E4").replace("Ae","\u00C4").replace("ue","\u00FC").replace("Ue","\u00D4").replace("oe","\u00F6").replace("Oe","\u00D6");
+    }
+
     public String gibCode(){
         return this.codeTeil;
     }

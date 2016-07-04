@@ -19,14 +19,14 @@ public class WarningUnit {
     public void NotOnlyOneFailing(boolean Compiled, int Failures) {
         if (Compiled) {
             Action.setContentText("Es schlagen "+Failures+" Tests fehl !\n" +
-                    "Bitte sorge dafuer, dass genau ein Test fehlschlaegt.");
+                    "Bitte sorge daf" +  "\u00FC" + "r, dass genau ein Test fehlschl" +  "\u00E4" + "gt.");
             Action.showAndWait();
         }
     }
 
     public void readyforRefactor() {
         Alert Info = new Alert(Alert.AlertType.INFORMATION);
-        Info.setContentText("Ok, alle Tests wurden erfuellt !\n Du bist jetzt in Refactor !");
+        Info.setContentText("Ok, alle Tests wurden erf" + "\u00FC" + "llt !\n Du bist jetzt in Refactor !");
         Info.showAndWait();
     }
 
@@ -39,7 +39,7 @@ public class WarningUnit {
         }
         Action.setHeaderText("Tests schlagen fehl !");
         Action.setContentText("Nicht alle Tests sind erfolgreich ! \n" + Message + "\n" +
-                "Bitte sorge dafuer, dass alle Tests laufen");
+                "Bitte sorge daf" + "\u00FC" + "r, dass alle Tests laufen");
         Action.showAndWait();
     }
 
@@ -54,7 +54,7 @@ public class WarningUnit {
     public void savedSettings() {
         Alert Info =new Alert(Alert.AlertType.INFORMATION);
         Info.setHeaderText("Alles OK!");
-        Info.setContentText("Deine Aenderungen wurden gespeichert\n"+
+        Info.setContentText("Deine " + "\u00C4" +  "nderungen wurden gespeichert\n"+
                 "Alle Tests waren erfolgreich!"
         );
         Info.showAndWait();
@@ -68,7 +68,7 @@ public class WarningUnit {
 
     public void noCode() {
         Action.setHeaderText("Kein Code zum Refactoring da !");
-        Action.setContentText("Nach erflogreichem Abschluss von GREEN sollte das Refactoring durchgefuehrt werden.");
+        Action.setContentText("Nach erflogreichem Abschluss von GREEN sollte das Refactoring durchgef" + "\u00FC" + "hrt werden.");
         Action.showAndWait();
     }
 
@@ -80,9 +80,9 @@ public class WarningUnit {
         Optionen.add("3 Minuten");
         ChoiceDialog<String> dialog=new ChoiceDialog<>("Keine BabySteps aktivieren",Optionen);
         dialog.setTitle("BabySteps");
-        dialog.setHeaderText("Moechtest du BabySteps aktivieren ?\n" +
+        dialog.setHeaderText("M"  + "\u00F6" + "chtest du BabySteps aktivieren ?\n" +
                 "Bei BabySteps wird die Zeit zum Code Schreiben limitiert.");
-        dialog.setContentText("Bitte waehle deine gewuenschte Zeit:");
+        dialog.setContentText("Bitte w" +  "\u00E4" + "hle deine gew"  + "\u00FC" + "nschte Zeit:");
         Optional<String> Auswahl=dialog.showAndWait();
         if (Auswahl.isPresent()) {
             return Auswahl.get();
