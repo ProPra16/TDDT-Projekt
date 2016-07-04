@@ -18,6 +18,7 @@ public class StartController {
     private String [] buttons;
     private Tooltip buttonTooltip = new Tooltip("Button Tooltip");
     private WarningUnit Reporter=new WarningUnit();
+    private UserCode UserEinstellung;
     @FXML private Button button1 = new Button();
     @FXML private Button button2 = new Button();
     @FXML private Button button3 = new Button();
@@ -91,28 +92,19 @@ public class StartController {
         final Stage stage = (Stage) source.getScene().getWindow();
         String UserChoice = event.getSource().toString();
         String Klassenname=getKlassenName(UserChoice);
-        UserCode UserEinstellungen=null;
         UserChoice=UserChoice.substring(16,17);
         switch (Integer.parseInt(UserChoice)){
             case 1:
-                UserEinstellungen=getUserEinstellungen(Klassenname);
-                stage.close();
-                m.startProg(UserEinstellungen);
+                startTDDT(stage,Klassenname);
                 break;
             case 2:
-                UserEinstellungen=getUserEinstellungen(Klassenname);
-                stage.close();
-                m.startProg(UserEinstellungen);
+                startTDDT(stage,Klassenname);
                 break;
             case 3:
-                UserEinstellungen=getUserEinstellungen(Klassenname);
-                stage.close();
-                m.startProg(UserEinstellungen);
+                startTDDT(stage,Klassenname);
                 break;
             case 4:
-                UserEinstellungen=getUserEinstellungen(Klassenname);
-                stage.close();
-                m.startProg(UserEinstellungen);
+                startTDDT(stage,Klassenname);
                 break;
         }
     }
@@ -153,14 +145,12 @@ public class StartController {
         b.setTooltip(this.buttonTooltip);
     }
 
-    public UserCode getUserEinstellungen(String Klassenname) {
+    public void startTDDT(Stage stage, String Klassenname) {
         String BabyStepWahl=Reporter.askForBabySteps();
-        char Minuten=BabyStepWahl.charAt(0);
-        switch (Minuten) {
-            case '1':return new UserCode(Klassenname,"1:00");
-            case '2':return new UserCode(Klassenname,"2:00");
-            case '3':return new UserCode(Klassenname,"3:00");
-        }
-        return new UserCode(Klassenname);
+        if (BabyStepWahl.equals("")) {return;}
+        String Time =BabyStepWahl.substring(0,4);
+        UserEinstellung=new UserCode(Klassenname,Time);
+        stage.close();
+        m.startProg(UserEinstellung);
     }
 }

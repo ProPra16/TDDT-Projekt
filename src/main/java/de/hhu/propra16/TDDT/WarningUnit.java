@@ -13,11 +13,13 @@ import java.util.Optional;
 public class WarningUnit {
 
     private Alert Action=new Alert(Alert.AlertType.ERROR);
+    private String BabyStepsChoice="";
 
     public WarningUnit() {}
 
     public void NotOnlyOneFailing(boolean Compiled, int Failures) {
         if (Compiled) {
+            Action.setHeaderText("Falsche Tests !");
             Action.setContentText("Es schlagen "+Failures+" Tests fehl !\n" +
                     "Bitte sorge dafuer, dass genau ein Test fehlschlaegt.");
             Action.showAndWait();
@@ -75,9 +77,11 @@ public class WarningUnit {
     public String askForBabySteps() {
         List<String> Optionen=new ArrayList<>();
         Optionen.add("Keine BabySteps aktivieren");
-        Optionen.add("1 Minute");
-        Optionen.add("2 Minuten");
-        Optionen.add("3 Minuten");
+        Optionen.add("1:00 Minuten");
+        Optionen.add("2:00 Minuten");
+        Optionen.add("2:30 Minuten");
+        Optionen.add("3:00 Minuten");
+        Optionen.add("4:00 Minuten");
         ChoiceDialog<String> dialog=new ChoiceDialog<>("Keine BabySteps aktivieren",Optionen);
         dialog.setTitle("BabySteps");
         dialog.setHeaderText("Möchtest du BabySteps aktivieren ?\n" +
@@ -87,6 +91,6 @@ public class WarningUnit {
         if (Auswahl.isPresent()) {
             return Auswahl.get();
         }
-        return "Keine BabySteps aktivieren";
+        return "";
     }
 }

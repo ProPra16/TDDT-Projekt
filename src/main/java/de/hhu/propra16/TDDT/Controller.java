@@ -26,8 +26,6 @@ public class Controller {
     private BabyStep babyStep;
 
     public void RED() {
-        Anzeige.setTranslateX(25);
-        Anzeige.setText("Schreiben Sie nun mindestens einen fehlschlagenden Test");
         if (Phase=='F') {
             isReadyForRED();
         }
@@ -48,7 +46,6 @@ public class Controller {
         if (UserInput.isEmpty()) {
             UserInput.setTest("@Test\n"+"public void testsomething() {\n"+"\n}");
         }
-        Anzeige.setText("Schreiben Sie nun mindestens einen fehlschlagenden Test");
         Fenster.setText(UserInput.getTestCode());
        if (babyStep!=null) babyStep.restart();
     }
@@ -75,12 +72,7 @@ public class Controller {
     }
 
     public void GREEN() {
-
-        Anzeige.setTranslateX(100);
-        Anzeige.setText("Schreiben Sie nun funktionierende Tests");
-    //    Anzeige.setStyle("-fx-text-fill:green");
-
-        if (Phase=='G') { Reporter.commonError("Falsche Phase !","Du bist schon in GREEN !");}
+        if (Phase=='G') { return;}
         else if (Phase=='F') {
             Reporter.commonError("Falsche Phase !","In REFACTOR sollst du nur den Code verbessern, die Tests laufen schon !");}
         else{
@@ -148,14 +140,11 @@ public class Controller {
         setPhase('F',false);
         Fenster.clear();
         Fenster.setText(UserInput.getClassCode());
-        Anzeige.setText("Sie koennen nun Ihre Tests verbessern");
-        Clock.setText("");
       if (report) Reporter.readyforRefactor();
     }
 
     public void init(Controller controller,UserCode UserInput) {
         this.UserInput=UserInput;
-
         if (UserInput.hasBabySteps()) {
             Clock.setText(UserInput.getTime());
             babyStep=new BabyStep(UserInput.getTime(),controller);
@@ -188,7 +177,7 @@ public class Controller {
 
     public void setPhase(char Actual, boolean isTest) {
         Phase=Actual;
-        PhaseSetter.setPhase(Phase,RED, GREEN, REFACTOR);
+        PhaseSetter.setPhase(Phase, RED, GREEN, REFACTOR, Anzeige);
         if (!isTest) {
         Import1.setText("");
         Import2.setText("");
