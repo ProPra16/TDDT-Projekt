@@ -9,3 +9,14 @@
     -fx-text-fill: #FF0000;
     -fx-font-family: Impact
 }
+.data0.chart-pie { -fx-pie-color: red; }
+.data1.chart-pie { -fx-pie-color: green; }
+.data2.chart-pie { -fx-pie-color: black; }
+
+#TrackingData
+    {
+        -fx-text-fill: black;
+        -fx-font: 14px "Courier New";
+        -fx-font-family: "Courier New";
+        -fx-font-weight: bold;
+    }

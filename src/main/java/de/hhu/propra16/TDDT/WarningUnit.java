@@ -13,12 +13,18 @@ import java.util.Optional;
 public class WarningUnit {
 
     private Alert Action=new Alert(Alert.AlertType.ERROR);
-    private String BabyStepsChoice="";
+    private Alert Info=new Alert(Alert.AlertType.INFORMATION);
+    private TrackingUnit Tracker;
 
     public WarningUnit() {}
 
+    public WarningUnit(TrackingUnit Tracker) {
+        this.Tracker=Tracker;
+    }
+
     public void NotOnlyOneFailing(boolean Compiled, int Failures) {
         if (Compiled) {
+            Tracker.addEvent("Nicht genau ein fehlschlagender Test");
             Action.setHeaderText("Falsche Tests !");
             Action.setContentText("Es schlagen "+Failures+" Tests fehl !\n" +
                     "Bitte sorge daf" +  "\u00FC" + "r, dass genau ein Test fehlschl" +  "\u00E4" + "gt.");
@@ -27,12 +33,13 @@ public class WarningUnit {
     }
 
     public void readyforRefactor() {
-        Alert Info = new Alert(Alert.AlertType.INFORMATION);
+        Tracker.addEvent("Alle Tests erfolgreich, Refactor erreicht");
         Info.setContentText("Ok, alle Tests wurden erf" + "\u00FC" + "llt !\n Du bist jetzt in Refactor !");
         Info.showAndWait();
     }
 
     public void failedTests(TestResult Result) {
+        Tracker.addEvent("Nicht bestandene Tests");
         String Message="";
         Collection<TestFailure> failures=Result.getTestFailures();
         for (TestFailure F:failures) {
@@ -45,7 +52,8 @@ public class WarningUnit {
         Action.showAndWait();
     }
 
-    public void showCompilerErrors(String Errors) {
+    public void showCompilerErrors(String Errors,String Event) {
+        Tracker.addEvent(Event);
         Action.setHeaderText("Kompilier Fehler");
         Action.setContentText("Dein Programm konnte nicht kompiliert werden:\n"+Errors+
                 "\nBitte behebe die Fehler !"
@@ -54,7 +62,7 @@ public class WarningUnit {
     }
 
     public void savedSettings() {
-        Alert Info =new Alert(Alert.AlertType.INFORMATION);
+        Tracker.addEvent("Refactoring verlassen, Code verbessert");
         Info.setHeaderText("Alles OK!");
         Info.setContentText("Deine " + "\u00C4" +  "nderungen wurden gespeichert\n"+
                 "Alle Tests waren erfolgreich!"
@@ -64,7 +72,7 @@ public class WarningUnit {
 
     public void commonError(String Header, String Content) {
         Action.setHeaderText(Header);
-        Action.setContentText("\n"+Content);
+        Action.setContentText(Content);
         Action.showAndWait();
     }
 
@@ -75,19 +83,19 @@ public class WarningUnit {
     }
 
     public String askForBabySteps() {
-        List<String> Optionen=new ArrayList<>();
+        List<String> Optionen = new ArrayList<>();
         Optionen.add("Keine BabySteps aktivieren");
         Optionen.add("1:00 Minuten");
         Optionen.add("2:00 Minuten");
         Optionen.add("2:30 Minuten");
         Optionen.add("3:00 Minuten");
         Optionen.add("4:00 Minuten");
-        ChoiceDialog<String> dialog=new ChoiceDialog<>("Keine BabySteps aktivieren",Optionen);
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("Keine BabySteps aktivieren", Optionen);
         dialog.setTitle("BabySteps");
-        dialog.setHeaderText("M"  + "\u00F6" + "chtest du BabySteps aktivieren ?\n" +
+        dialog.setHeaderText("M" + "\u00F6" + "chtest du BabySteps aktivieren ?\n" +
                 "Bei BabySteps wird die Zeit zum Code Schreiben limitiert.");
-        dialog.setContentText("Bitte w" +  "\u00E4" + "hle deine gew"  + "\u00FC" + "nschte Zeit:");
-        Optional<String> Auswahl=dialog.showAndWait();
+        dialog.setContentText("Bitte w" + "\u00E4" + "hle deine gew" + "\u00FC" + "nschte Zeit:");
+        Optional<String> Auswahl = dialog.showAndWait();
         if (Auswahl.isPresent()) {
             return Auswahl.get();
         }

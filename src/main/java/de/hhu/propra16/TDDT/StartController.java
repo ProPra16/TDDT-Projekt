@@ -147,7 +147,6 @@ public class StartController {
     }
 
     public void setzeBeschreibung(Button b){
-
         try {
             neueUbungen.readFile(b.getText()+".txt" , true);
             neueUbungen.trenneTeile();

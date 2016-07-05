@@ -33,16 +33,6 @@ public class UserCode {
         ClassContent="public class "+KlassenName+" { \n"+ ClassCode+"\n}";
     }
 
-    /*
-    ?????
-    Soll implementiert werden?
-
-    public void setClassContent(String KlassenInhalt){
-        ClassContent = KlassenInhalt;
-    }
-    ?????
-    */
-
     public String getTestContent() {
         return TestContent;
     }
@@ -66,7 +56,7 @@ public class UserCode {
     }
 
     public boolean hasBabySteps() {
-        return !(Time==null);
+        return !(Time.equals("Kein"));
     }
 
     public String getTime() {return Time;}

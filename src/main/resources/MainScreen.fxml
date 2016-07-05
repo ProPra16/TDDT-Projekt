@@ -11,7 +11,6 @@
 <GridPane fx:id="pane" fx:controller="de.hhu.propra16.TDDT.StartController"
           xmlns:fx="http://javafx.com/fxml" hgap="30" vgap="20">
     <MenuBar fx:id="menuBar" translateX="0" translateY="-35" minWidth="800">
-        <Menu fx:id="tracker" text="Tracker"></Menu>
         <Menu fx:id="hilfe" text="Hilfe">
             <MenuItem fx:id="handbuch" text="Benutzerhandbuch" onAction="#zeigHandbuch"/>
             <MenuItem fx:id="info" text="Info"/>
