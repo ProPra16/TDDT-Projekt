@@ -1,7 +1,7 @@
 package de.hhu.propra16.TDDT;
 
-import com.sun.org.apache.xerces.internal.util.FeatureState;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -9,7 +9,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -33,14 +32,19 @@ public class Controller {
     private SetStyles PhaseSetter=new SetStyles();
     private String ActualGREENCode;
     private char Phase='R';
+    private String UserInputTime;
     private BabyStep babyStep;
     private TrackingUnit Tracker;
-    private Stage stage = new Stage();
+    private Stage myStage;
+
+    public void setStage(Stage stage) {
+        myStage = stage;
+    }
 
     public void init(Controller controller,UserCode UserInput) {
-        this.stage.toBack();
         this.UserInput=UserInput;
         if (UserInput.hasBabySteps()) {
+            UserInputTime = UserInput.getTime();
             Clock.setText(UserInput.getTime());
             babyStep=new BabyStep(UserInput.getTime(),controller);
         }
@@ -50,6 +54,14 @@ public class Controller {
         Klassenname.setText("public class "+UserInput.getTestName()+" {");
         if (babyStep!=null) {
             babyStep.countDown(Clock);
+
+            /* kommt hier nie rein
+            if(babyStep.timeOver() == true){
+                System.out.println("CLock if");
+                babyStep.setUnvisible();
+                Reporter.babyStepMsg();
+            }
+            */
         }
     }
     public void RED() {
@@ -131,7 +143,12 @@ public class Controller {
         ActualGREENCode=UserInput.getClassCode();
         Fenster.clear();
         Fenster.setText(UserInput.getClassCode());
-       if (babyStep!=null) babyStep.restart();
+       if (babyStep!=null)
+           babyStep.restart();
+        if(babyStep.timeOver() == true){
+            babyStep.setUnvisible();
+            Reporter.babyStepMsg();
+        }
     }
 
     public void REFACTOR() {
@@ -174,7 +191,7 @@ public class Controller {
                 Reporter.failedTests(Action.getFailedTests());
             }
         }
-    }
+}
 
     public void isreadyforREFACTOR(boolean report) {
         Tracker.stopTime(Phase);
@@ -250,7 +267,9 @@ public class Controller {
         TrackingData.setEditable(false);
         TrackingData.setPrefWidth(500);
         Stage stage=setTrackingScene(TrackingData);
+        myStage.hide();
         stage.showAndWait();
+        myStage.show();
         if (babyStep!=null) {
             while (stage.isShowing()) {
                 TimeUnit.SECONDS.sleep(1);
@@ -260,11 +279,23 @@ public class Controller {
     }
 
     public Stage setTrackingScene(TextArea TrackingData) {
-        stage =new Stage();
+        Stage stage =new Stage();
         Scene scene = new Scene(new GridPane());
         scene.getStylesheets().add("styler.css");
+        Button backbutton = new Button();
+        backbutton.minWidth(100);
+        backbutton.setTranslateX(-40);
+        backbutton.setTranslateY(30);
+        backbutton.setText("Zuruck zu TDDT");
+        backbutton.minHeight(50);
+        backbutton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                stage.close();
+            }
+        });
         ((GridPane) scene.getRoot()).add(chart,0,0);
         ((GridPane) scene.getRoot()).add(TrackingData,1,0);
+        ((GridPane) scene.getRoot()).add(backbutton,1,2);
         stage.setTitle("Deine Trackingstatistiken");
         stage.setWidth(1100);
         stage.setHeight(500);

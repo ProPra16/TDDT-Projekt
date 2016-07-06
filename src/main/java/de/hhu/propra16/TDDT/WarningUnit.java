@@ -85,7 +85,7 @@ public class WarningUnit {
     public String askForBabySteps() {
         List<String> Optionen = new ArrayList<>();
         Optionen.add("Keine BabySteps aktivieren");
-        Optionen.add("1:00 Minuten");
+        Optionen.add("0:10 Minuten");
         Optionen.add("2:00 Minuten");
         Optionen.add("2:30 Minuten");
         Optionen.add("3:00 Minuten");
@@ -100,5 +100,10 @@ public class WarningUnit {
             return Auswahl.get();
         }
         return "";
+    }
+    public void babyStepMsg(){
+        Alert Warning=new Alert(Alert.AlertType.WARNING);
+        Warning.setHeaderText("BabyStep Warning");
+        Warning.setContentText("Die Zeit ist um!\n Der Timer startet in Kürze neu.");
     }
 }

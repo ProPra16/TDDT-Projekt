@@ -39,19 +39,4 @@ public class SetStyles {
         Anzeige.setStyle("");
 
     }
-
-    public void setREDInfos(Label Anzeige) {
-        Anzeige.setText("");
-        Anzeige.setText("Du bist jetzt in der RED Phase.\n" +
-                "Du sollst jetzt genau einen fehlschlagenden Test schreiben.\n" +
-                "Wenn du meinst, du hast dies erf" + "\u00FC" + "llt, dann wechsle zur GREEN Phase");
-    }
-
-    public void setGREENInfos(Label Anzeige) {
-        Anzeige.setText("");
-        Anzeige.setText("Du bist jetzt in der GREEN Phase.\n" +
-                "Du sollst nun den vorhin fehlschlagenden Test zum Laufen bringen.\n" +
-                "Wenn du meinst, du hast dues erf" + "\u00FC" + "llt, dann wechsle zur REFACTORING Phase.\n"+
-                "Andernfalls kannst du nochmal zu RED wechseln, bedenke hierbei, dass" + "\u00C4" + "nderungen verloren gehen.");
-    }
 }

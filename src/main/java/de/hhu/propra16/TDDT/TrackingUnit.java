@@ -3,8 +3,6 @@ package de.hhu.propra16.TDDT;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
-
-import java.util.concurrent.Phaser;
 import java.util.concurrent.TimeUnit;
 
 public class TrackingUnit {

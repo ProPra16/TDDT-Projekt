@@ -7,13 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 public class StartController {
     private TDDT m = new TDDT();
@@ -22,11 +16,6 @@ public class StartController {
     private Tooltip buttonTooltip = new Tooltip("Button Tooltip");
     private WarningUnit Reporter=new WarningUnit();
     private UserCode UserEinstellung;
-    @FXML private MenuBar menubar = new MenuBar();
-    @FXML private Menu tracker = new Menu();
-    @FXML private Menu hilfe = new Menu();
-    @FXML private MenuItem handbuch = new MenuItem();
-    @FXML private MenuItem info = new MenuItem();
     @FXML private Button button1 = new Button();
     @FXML private Button button2 = new Button();
     @FXML private Button button3 = new Button();

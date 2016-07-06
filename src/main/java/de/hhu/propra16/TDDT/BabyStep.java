@@ -67,9 +67,18 @@ public class BabyStep extends Thread {
        });
     }
 
-    public void countDown(Label Display) {
+    public boolean countDown(Label Display) {
         this.Clock = Display;
+        System.out.println("Clock");
         start();
+        if(timeOver() == true) {
+            System.out.println(ActualTime);
+        }
+        return timeOver();
+    }
+
+    public boolean timeOver(){
+        return expired;
     }
 
     public void restart() {
