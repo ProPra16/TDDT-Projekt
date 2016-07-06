@@ -1,17 +1,14 @@
 package de.hhu.propra16.TDDT;
-import com.sun.org.apache.regexp.internal.RE;
+
 import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class BabyStep extends Thread {
     private String Time;
     private Label Clock;
+    private WarningUnit TimeUpInfo=new WarningUnit();
     private volatile boolean expired;
     private Controller controller;
     private ArrayList<String> CountDowns=new ArrayList<>();
@@ -31,15 +28,15 @@ public class BabyStep extends Thread {
                 if (ActualTime == -1) {
                     ActualTime = 0;
                 }
-             if (visible)  { Clock.setText(""); }
+             if (visible) {Clock.setText(""); }
                 if (controller.getPhase()!='F') {
                    if (visible) { Clock.setText(CountDowns.get(ActualTime));}
                     String minuten = CountDowns.get(ActualTime).substring(0, 1);
                     String sekunden = CountDowns.get(ActualTime).substring(2, CountDowns.get(ActualTime).length());
-                    if (sekunden.equals("09") == true) {
+                    if (!sekunden.equals("09")) {
                         Clock.setStyle("-fx-text-fill:red;-fx-font-size:30");
                     }
-                    if (minuten.equals("0") == false) {
+                    if (!minuten.equals("0")) {
                         Clock.setStyle("-fx-text-fill:black;-fx-font-size:30");
                     }
                 }
@@ -62,9 +59,23 @@ public class BabyStep extends Thread {
        Platform.runLater(()-> {
            if (ActualTime==CountDowns.size()) {
                expired = true;
+               showInfo();
                controller.switchPhase();
            }
        });
+    }
+
+    public void showInfo() {
+        if (controller.getPhase()!='F' && !TimeUpInfo.TimeUpisShowing()) {
+            restart(-1);
+            setUnvisible();
+            TimeUpInfo.timeUp();
+            while (TimeUpInfo.TimeUpisShowing()) {
+                try {
+                    TimeUnit.SECONDS.sleep(1000);
+                } catch (InterruptedException ignored) {}
+            }
+        }
     }
 
     public void countDown(Label Display) {
@@ -73,12 +84,13 @@ public class BabyStep extends Thread {
     }
 
     public void restart() {
+        visible=!TimeUpInfo.TimeUpisShowing();
         expired=false;
         ActualTime=-1;
     }
 
     public void restart(int Pos) {
-        expired = false;
+        expired=false;
         visible=true;
         ActualTime=Pos;
     }

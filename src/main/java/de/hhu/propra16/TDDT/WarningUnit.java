@@ -1,6 +1,7 @@
 package de.hhu.propra16.TDDT;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import vk.core.api.TestFailure;
 import vk.core.api.TestResult;
@@ -14,6 +15,7 @@ public class WarningUnit {
 
     private Alert Action=new Alert(Alert.AlertType.ERROR);
     private Alert Info=new Alert(Alert.AlertType.INFORMATION);
+    private boolean TimeUpShowing;
     private TrackingUnit Tracker;
 
     public WarningUnit() {}
@@ -85,7 +87,7 @@ public class WarningUnit {
     public String askForBabySteps() {
         List<String> Optionen = new ArrayList<>();
         Optionen.add("Keine BabySteps aktivieren");
-        Optionen.add("1:00 Minuten");
+        Optionen.add("0:05 Minuten");
         Optionen.add("2:00 Minuten");
         Optionen.add("2:30 Minuten");
         Optionen.add("3:00 Minuten");
@@ -100,5 +102,16 @@ public class WarningUnit {
             return Auswahl.get();
         }
         return "";
+    }
+
+    public void timeUp() {
+        Info.setTitle("Zeit ist um !");
+        Info.setContentText("Deine Zeit fürs Programmieren ist leider abgelaufen\n"+
+                "Du bist jetzt wieder in der vorherigen Phase");
+        Info.showAndWait();
+    }
+
+    public boolean TimeUpisShowing() {
+        return Info.isShowing();
     }
 }
