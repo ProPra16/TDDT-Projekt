@@ -166,25 +166,37 @@ public class StartController {
         m.startProg(UserEinstellung);
     }
 
-    public void zeigHandbuch(ActionEvent event)throws Exception{
+    public void zeigHandbuch(ActionEvent event)throws Exception {
         neueUbungen.clearAll();
-        neueUbungen.readFile("Handbuch.txt",false);
-        String handbuchInhalt = neueUbungen.gibInhalt();
-        handbuchInhalt = neueUbungen.replacer(handbuchInhalt);
+        neueUbungen.readFile("Handbuch.txt", false);
+        if (!(neueUbungen.gibInhalt().equals(""))) {
+            {
+                String handbuchInhalt = neueUbungen.gibInhalt();
+                handbuchInhalt = neueUbungen.replacer(handbuchInhalt);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Benutzerhandbuch");
+                alert.setHeaderText("Benutzerhandbuch");
+                TextArea textArea = new TextArea(handbuchInhalt);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+                textArea.setMinWidth(500);
+                textArea.setMinHeight(350);
+                GridPane.setVgrow(textArea, Priority.ALWAYS);
+                GridPane.setHgrow(textArea, Priority.ALWAYS);
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(150);
+                expContent.add(textArea, 0, 0);
+                alert.getDialogPane().setContent(expContent);
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void zeigInfo(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Benutzerhandbuch");
-        alert.setHeaderText("Benutzerhandbuch");
-        TextArea textArea = new TextArea(handbuchInhalt);
-        textArea.setEditable(false);
-        textArea.setWrapText(true);
-        textArea.setMinWidth(500);
-        textArea.setMinHeight(350);
-        GridPane.setVgrow(textArea, Priority.ALWAYS);
-        GridPane.setHgrow(textArea, Priority.ALWAYS);
-        GridPane expContent = new GridPane();
-        expContent.setMaxWidth(150);
-        expContent.add(textArea, 0, 0);
-        alert.getDialogPane().setContent(expContent);
+        alert.setTitle("Info");
+        alert.setHeaderText("TDDT - Test Driven Development Tester");
+        alert.setContentText("\u00A9" + "ProPra 2016\n" + "Team: Halt-Doch-Einfach-Mal-Dein-Maul");
         alert.showAndWait();
     }
 }

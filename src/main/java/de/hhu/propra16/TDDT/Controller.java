@@ -1,5 +1,6 @@
 package de.hhu.propra16.TDDT;
 
+import com.sun.org.apache.xerces.internal.util.FeatureState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -34,7 +35,23 @@ public class Controller {
     private char Phase='R';
     private BabyStep babyStep;
     private TrackingUnit Tracker;
+    private Stage stage = new Stage();
 
+    public void init(Controller controller,UserCode UserInput) {
+        this.stage.toBack();
+        this.UserInput=UserInput;
+        if (UserInput.hasBabySteps()) {
+            Clock.setText(UserInput.getTime());
+            babyStep=new BabyStep(UserInput.getTime(),controller);
+        }
+        Tracker=new TrackingUnit();
+        Reporter=new WarningUnit(Tracker);
+        switchRED();
+        Klassenname.setText("public class "+UserInput.getTestName()+" {");
+        if (babyStep!=null) {
+            babyStep.countDown(Clock);
+        }
+    }
     public void RED() {
         if (Phase=='F') {
             isReadyForRED();
@@ -91,7 +108,7 @@ public class Controller {
         else{
             String Input=Fenster.getText();
             if (Input==null) {Input="";}
-            if (!Input.equals(UserInput.getTestCode())) {Tracker.addEvent("Tests geändert");}
+            if (!Input.equals(UserInput.getTestCode())) {Tracker.addEvent("Tests ge" + "\u00E4"+ "ndert");}
             UserInput.setTest(Input);
             Action = new ActionUnit(UserInput);
             Action.checkGREEN();
@@ -121,11 +138,11 @@ public class Controller {
         char Actual=Phase;
             switch (Actual) {
                 case 'R':   if (!Fenster.getText().equals(UserInput.getTestCode())) {
-                            Tracker.addEvent("Tests geändert");}
+                            Tracker.addEvent("Tests ge" + "\u00E4"+ "ndert");}
                             UserInput.setTest(Fenster.getText());
                             break;
                 case 'G':   if (!Fenster.getText().equals(UserInput.getClassCode())) {
-                            Tracker.addEvent("Code bei GREEN geändert");}
+                            Tracker.addEvent("Code bei GREEN ge" + "\u00E4"+ "ndert");}
                             UserInput.setClass(Fenster.getText());
                             break;
                 case 'F':   return;
@@ -166,21 +183,6 @@ public class Controller {
         Fenster.setText(UserInput.getClassCode());
         Clock.setText("");
       if (report) Reporter.readyforRefactor();
-    }
-
-    public void init(Controller controller,UserCode UserInput) {
-        this.UserInput=UserInput;
-        if (UserInput.hasBabySteps()) {
-            Clock.setText(UserInput.getTime());
-            babyStep=new BabyStep(UserInput.getTime(),controller);
-        }
-        Tracker=new TrackingUnit();
-        Reporter=new WarningUnit(Tracker);
-        switchRED();
-        Klassenname.setText("public class "+UserInput.getTestName()+" {");
-        if (babyStep!=null) {
-           babyStep.countDown(Clock);
-        }
     }
 
     public void switchPhase() {
@@ -244,6 +246,7 @@ public class Controller {
         }
         TextArea TrackingData= new TextArea(Tracker.getChartInfos(chart,Phase));
         TrackingData.setId("TrackingData");
+        TrackingData.setMouseTransparent(true);
         TrackingData.setEditable(false);
         TrackingData.setPrefWidth(500);
         Stage stage=setTrackingScene(TrackingData);
@@ -257,7 +260,7 @@ public class Controller {
     }
 
     public Stage setTrackingScene(TextArea TrackingData) {
-        Stage stage=new Stage();
+        stage =new Stage();
         Scene scene = new Scene(new GridPane());
         scene.getStylesheets().add("styler.css");
         ((GridPane) scene.getRoot()).add(chart,0,0);
