@@ -7,13 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 public class StartController {
     private TDDT m = new TDDT();
@@ -22,11 +16,6 @@ public class StartController {
     private Tooltip buttonTooltip = new Tooltip("Button Tooltip");
     private WarningUnit Reporter=new WarningUnit();
     private UserCode UserEinstellung;
-    @FXML private MenuBar menubar = new MenuBar();
-    @FXML private Menu tracker = new Menu();
-    @FXML private Menu hilfe = new Menu();
-    @FXML private MenuItem handbuch = new MenuItem();
-    @FXML private MenuItem info = new MenuItem();
     @FXML private Button button1 = new Button();
     @FXML private Button button2 = new Button();
     @FXML private Button button3 = new Button();
@@ -166,25 +155,37 @@ public class StartController {
         m.startProg(UserEinstellung);
     }
 
-    public void zeigHandbuch(ActionEvent event)throws Exception{
+    public void zeigHandbuch(ActionEvent event)throws Exception {
         neueUbungen.clearAll();
-        neueUbungen.readFile("Handbuch.txt",false);
-        String handbuchInhalt = neueUbungen.gibInhalt();
-        handbuchInhalt = neueUbungen.replacer(handbuchInhalt);
+        neueUbungen.readFile("Handbuch.txt", false);
+        if (!(neueUbungen.gibInhalt().equals(""))) {
+            {
+                String handbuchInhalt = neueUbungen.gibInhalt();
+                handbuchInhalt = neueUbungen.replacer(handbuchInhalt);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Benutzerhandbuch");
+                alert.setHeaderText("Benutzerhandbuch");
+                TextArea textArea = new TextArea(handbuchInhalt);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+                textArea.setMinWidth(500);
+                textArea.setMinHeight(350);
+                GridPane.setVgrow(textArea, Priority.ALWAYS);
+                GridPane.setHgrow(textArea, Priority.ALWAYS);
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(150);
+                expContent.add(textArea, 0, 0);
+                alert.getDialogPane().setContent(expContent);
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void zeigInfo(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Benutzerhandbuch");
-        alert.setHeaderText("Benutzerhandbuch");
-        TextArea textArea = new TextArea(handbuchInhalt);
-        textArea.setEditable(false);
-        textArea.setWrapText(true);
-        textArea.setMinWidth(500);
-        textArea.setMinHeight(350);
-        GridPane.setVgrow(textArea, Priority.ALWAYS);
-        GridPane.setHgrow(textArea, Priority.ALWAYS);
-        GridPane expContent = new GridPane();
-        expContent.setMaxWidth(150);
-        expContent.add(textArea, 0, 0);
-        alert.getDialogPane().setContent(expContent);
+        alert.setTitle("Info");
+        alert.setHeaderText("TDDT - Test Driven Development Tester");
+        alert.setContentText("\u00A9" + "ProPra 2016\n" + "Team: Halt-Doch-Einfach-Mal-Dein-Maul");
         alert.showAndWait();
     }
 }

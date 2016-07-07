@@ -6,14 +6,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class TDDT extends Application {
 
     private Parent rooty = new Pane();
     public Stage myStage = new Stage();
     private Controller controller;
-    private ArrayList<String> files = new ArrayList<String>();
 
     public static void main(String[] args) {
         launch(args);
@@ -50,6 +48,7 @@ public class TDDT extends Application {
             e.printStackTrace();
         }
         this.controller = loader.getController();
+        controller.setStage(myStage);
         controller.init(controller,UserEinstellungen);
         this.myStage.setScene(new Scene(root,850,700));
         this.myStage.setResizable(false);

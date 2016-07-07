@@ -14,6 +14,7 @@ public class BabyStep extends Thread {
     private ArrayList<String> CountDowns=new ArrayList<>();
     private int ActualTime;
     private boolean visible=true;
+    private boolean lastSeconds;
 
     public BabyStep(String Time, Controller controller) {
         this.Time=Time;
@@ -30,17 +31,9 @@ public class BabyStep extends Thread {
                 }
              if (visible) {Clock.setText(""); }
                 if (controller.getPhase()!='F') {
-                   if (visible) { Clock.setText(CountDowns.get(ActualTime));}
-                    String minuten = CountDowns.get(ActualTime).substring(0, 1);
-                    String sekunden = CountDowns.get(ActualTime).substring(2, CountDowns.get(ActualTime).length());
-                    if (!sekunden.equals("09")) {
-                        Clock.setStyle("-fx-text-fill:red;-fx-font-size:30");
-                    }
-                    if (!minuten.equals("0")) {
-                        Clock.setStyle("-fx-text-fill:black;-fx-font-size:30");
-                    }
-                }
-            });
+                   if (visible) {Clock.setText(CountDowns.get(ActualTime));}
+                    setStyle();
+                }});
             ActualTime+=1;
             ticktack();
             isExpired();
@@ -50,9 +43,7 @@ public class BabyStep extends Thread {
     public void ticktack() {
         try {
             TimeUnit.MILLISECONDS.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        } catch (InterruptedException ignored) {}
     }
 
     public void isExpired() {
@@ -63,6 +54,16 @@ public class BabyStep extends Thread {
                controller.switchPhase();
            }
        });
+    }
+
+    public void setStyle() {
+        if (CountDowns.get(ActualTime).equals("0:10")) {
+            Clock.setStyle("-fx-text-fill:red;-fx-font-size:30");
+            lastSeconds=true;
+        }
+        if (!lastSeconds) {
+            Clock.setStyle("-fx-text-fill:black;-fx-font-size:30");
+        }
     }
 
     public void showInfo() {
@@ -86,11 +87,13 @@ public class BabyStep extends Thread {
     public void restart() {
         visible=!TimeUpInfo.TimeUpisShowing();
         expired=false;
+        lastSeconds=false;
         ActualTime=-1;
     }
 
     public void restart(int Pos) {
         expired=false;
+        lastSeconds=false;
         visible=true;
         ActualTime=Pos;
     }

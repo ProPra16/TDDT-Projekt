@@ -87,7 +87,7 @@ public class WarningUnit {
     public String askForBabySteps() {
         List<String> Optionen = new ArrayList<>();
         Optionen.add("Keine BabySteps aktivieren");
-        Optionen.add("0:05 Minuten");
+        Optionen.add("1:00 Minuten");
         Optionen.add("2:00 Minuten");
         Optionen.add("2:30 Minuten");
         Optionen.add("3:00 Minuten");

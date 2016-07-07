@@ -66,25 +66,35 @@ public class Ubung {
         return dateien.size();
     }
 
-    public void readFile(String filename, boolean istInUbung) throws Exception {
+    public void readFile(String filename, boolean istInUbung) {
         String directory = "Ubungen/";
         if(istInUbung == false){
             directory = "";
         }
-        if (jarVar == 1) {
-            path = (new File(".").getCanonicalPath());
-            file = new File(path + "/" + directory + filename);
-        } else {
-            path = (new File(".").getCanonicalPath() + "/build/libs/" + directory);
-            file = new File(path + filename);
-        }
-        br = new BufferedReader(new FileReader(file));
         try {
-            String line;
-            while ((line = br.readLine()) != null) {
-                inhalt.add(line);
+            if (jarVar == 1) {
+                path = (new File(".").getCanonicalPath());
+                file = new File(path + "/" + directory + filename);
+            } else {
+                path = (new File(".").getCanonicalPath() + "/build/libs/" + directory);
+                file = new File(path + filename);
             }
-        } catch (Exception e) {}
+            br = new BufferedReader(new FileReader(file));
+        }
+        catch (Exception e){
+            br = null;
+            path = null;
+            file = null;
+        }
+        if(br != null) {
+            try {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    inhalt.add(line);
+                }
+            } catch (Exception e) {
+            }
+        }
     }
 
     public void trenneTeile() {
@@ -154,11 +164,15 @@ public class Ubung {
         this.beschrTeil = "";
     }
     public String gibInhalt(){
-        String ausgabe = "";
-        for(String s : inhalt){
-            ausgabe = ausgabe +  s + "\n";
+        try {
+            String ausgabe = "";
+            for (String s : inhalt) {
+                ausgabe = ausgabe + s + "\n";
+            }
+            return ausgabe;
         }
-        return ausgabe;
+        catch (Exception e){}
+        return "";
     }
 
     public String replacer(String s){

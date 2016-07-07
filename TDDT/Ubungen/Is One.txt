@@ -1,0 +1,4 @@
++++description
+Wenn das Ergebnis der Methode 1 ist wird true zurückgegeben
++++description
+public IsOne

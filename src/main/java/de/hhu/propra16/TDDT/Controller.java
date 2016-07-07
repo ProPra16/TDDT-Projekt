@@ -1,6 +1,7 @@
 package de.hhu.propra16.TDDT;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -8,7 +9,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -34,7 +34,26 @@ public class Controller {
     private char Phase='R';
     private BabyStep babyStep;
     private TrackingUnit Tracker;
+    private Stage myStage;
 
+    public void setStage(Stage stage) {
+        myStage = stage;
+    }
+
+    public void init(Controller controller,UserCode UserInput) {
+        this.UserInput=UserInput;
+        if (UserInput.hasBabySteps()) {
+            Clock.setText(UserInput.getTime());
+            babyStep=new BabyStep(UserInput.getTime(),controller);
+        }
+        Tracker=new TrackingUnit();
+        Reporter=new WarningUnit(Tracker);
+        switchRED();
+        Klassenname.setText("public class "+UserInput.getTestName()+" {");
+        if (babyStep!=null) {
+            babyStep.countDown(Clock);
+        }
+    }
     public void RED() {
         if (Phase=='F') {
             isReadyForRED();
@@ -91,7 +110,7 @@ public class Controller {
         else{
             String Input=Fenster.getText();
             if (Input==null) {Input="";}
-            if (!Input.equals(UserInput.getTestCode())) {Tracker.addEvent("Tests geändert");}
+            if (!Input.equals(UserInput.getTestCode())) {Tracker.addEvent("Tests ge" + "\u00E4"+ "ndert");}
             UserInput.setTest(Input);
             Action = new ActionUnit(UserInput);
             Action.checkGREEN();
@@ -114,18 +133,19 @@ public class Controller {
         ActualGREENCode=UserInput.getClassCode();
         Fenster.clear();
         Fenster.setText(UserInput.getClassCode());
-       if (babyStep!=null) babyStep.restart();
+       if (babyStep!=null)
+           babyStep.restart();
     }
 
     public void REFACTOR() {
         char Actual=Phase;
             switch (Actual) {
                 case 'R':   if (!Fenster.getText().equals(UserInput.getTestCode())) {
-                            Tracker.addEvent("Tests geändert");}
+                            Tracker.addEvent("Tests ge" + "\u00E4"+ "ndert");}
                             UserInput.setTest(Fenster.getText());
                             break;
                 case 'G':   if (!Fenster.getText().equals(UserInput.getClassCode())) {
-                            Tracker.addEvent("Code bei GREEN geändert");}
+                            Tracker.addEvent("Code bei GREEN ge" + "\u00E4"+ "ndert");}
                             UserInput.setClass(Fenster.getText());
                             break;
                 case 'F':   return;
@@ -157,7 +177,7 @@ public class Controller {
                 Reporter.failedTests(Action.getFailedTests());
             }
         }
-    }
+}
 
     public void isreadyforREFACTOR(boolean report) {
         Tracker.stopTime(Phase);
@@ -166,21 +186,6 @@ public class Controller {
         Fenster.setText(UserInput.getClassCode());
         Clock.setText("");
       if (report) Reporter.readyforRefactor();
-    }
-
-    public void init(Controller controller,UserCode UserInput) {
-        this.UserInput=UserInput;
-        if (UserInput.hasBabySteps()) {
-            Clock.setText(UserInput.getTime());
-            babyStep=new BabyStep(UserInput.getTime(),controller);
-        }
-        Tracker=new TrackingUnit();
-        Reporter=new WarningUnit(Tracker);
-        switchRED();
-        Klassenname.setText("public class "+UserInput.getTestName()+" {");
-        if (babyStep!=null) {
-           babyStep.countDown(Clock);
-        }
     }
 
     public void switchPhase() {
@@ -228,7 +233,6 @@ public class Controller {
         TDDT main = new TDDT();
         final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
-        String UserChoice = event.getSource().toString();
         if(babyStep != null) {
             babyStep.stopTimer();
         }
@@ -244,10 +248,13 @@ public class Controller {
         }
         TextArea TrackingData= new TextArea(Tracker.getChartInfos(chart,Phase));
         TrackingData.setId("TrackingData");
+        TrackingData.setMouseTransparent(true);
         TrackingData.setEditable(false);
         TrackingData.setPrefWidth(500);
         Stage stage=setTrackingScene(TrackingData);
+        myStage.hide();
         stage.showAndWait();
+        myStage.show();
         if (babyStep!=null) {
             while (stage.isShowing()) {
                 TimeUnit.SECONDS.sleep(1);
@@ -257,11 +264,19 @@ public class Controller {
     }
 
     public Stage setTrackingScene(TextArea TrackingData) {
-        Stage stage=new Stage();
+        Stage stage =new Stage();
         Scene scene = new Scene(new GridPane());
         scene.getStylesheets().add("styler.css");
+        Button backbutton = new Button();
+        backbutton.minWidth(100);
+        backbutton.setTranslateX(-40);
+        backbutton.setTranslateY(30);
+        backbutton.setText("Zuruck zu TDDT");
+        backbutton.minHeight(50);
+        backbutton.setOnAction(e -> stage.close());
         ((GridPane) scene.getRoot()).add(chart,0,0);
         ((GridPane) scene.getRoot()).add(TrackingData,1,0);
+        ((GridPane) scene.getRoot()).add(backbutton,1,2);
         stage.setTitle("Deine Trackingstatistiken");
         stage.setWidth(1100);
         stage.setHeight(500);
