@@ -24,6 +24,7 @@ public class StartController {
     @FXML
     private void initialize(){
         try {
+            this.buttonTooltip.setText("");
             neueUbungen.buttonNamer();
             this.buttons = neueUbungen.fillArray();
             switch (neueUbungen.anzahlUbungen()) {
@@ -88,21 +89,30 @@ public class StartController {
         final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
         String UserChoice = event.getSource().toString();
-        String Klassenname=getKlassenName(UserChoice);
-        UserChoice=UserChoice.substring(16,17);
-        switch (Integer.parseInt(UserChoice)){
-            case 1:
-                startTDDT(stage,Klassenname);
-                break;
-            case 2:
-                startTDDT(stage,Klassenname);
-                break;
-            case 3:
-                startTDDT(stage,Klassenname);
-                break;
-            case 4:
-                startTDDT(stage,Klassenname);
-                break;
+        String KlassenName = getKlassenName(UserChoice);
+        neueUbungen.readFile(UserChoice + ".txt",true);
+        String KlassenInhalt = neueUbungen.gibCode();
+        String TestInhalt = neueUbungen.gibTestCode();
+        String [] Inhalte = {KlassenInhalt,TestInhalt};
+        if(KlassenName.equals("Test")){
+            Reporter.fileError();
+        }
+        else {
+            UserChoice = UserChoice.substring(16, 17);
+            switch (Integer.parseInt(UserChoice)) {
+                case 1:
+                    startTDDT(stage, KlassenName, Inhalte);
+                    break;
+                case 2:
+                    startTDDT(stage, KlassenName, Inhalte);
+                    break;
+                case 3:
+                    startTDDT(stage, KlassenName, Inhalte);
+                    break;
+                case 4:
+                    startTDDT(stage, KlassenName, Inhalte);
+                    break;
+            }
         }
     }
 
@@ -142,15 +152,20 @@ public class StartController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.buttonTooltip.setText(neueUbungen.gibBeschr());
-        b.setTooltip(this.buttonTooltip);
+        if(!(neueUbungen.gibBeschr().equals(""))) {
+            this.buttonTooltip.setText(neueUbungen.gibBeschr());
+            b.setTooltip(this.buttonTooltip);
+        }
+        else{
+            b.setTooltip(null);
+        }
     }
 
-    public void startTDDT(Stage stage, String Klassenname) {
+    public void startTDDT(Stage stage, String Klassencode, String[] Inhalte) {
         String BabyStepWahl=Reporter.askForBabySteps();
         if (BabyStepWahl.equals("")) {return;}
         String Time =BabyStepWahl.substring(0,4);
-        UserEinstellung=new UserCode(Klassenname,Time);
+        UserEinstellung=new UserCode(Klassencode,Inhalte,Time);
         stage.close();
         m.startProg(UserEinstellung);
     }
@@ -168,7 +183,7 @@ public class StartController {
                 TextArea textArea = new TextArea(handbuchInhalt);
                 textArea.setEditable(false);
                 textArea.setWrapText(true);
-                textArea.setMinWidth(500);
+                textArea.setMinWidth(550);
                 textArea.setMinHeight(350);
                 GridPane.setVgrow(textArea, Priority.ALWAYS);
                 GridPane.setHgrow(textArea, Priority.ALWAYS);

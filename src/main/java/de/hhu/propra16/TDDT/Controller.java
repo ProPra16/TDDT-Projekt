@@ -1,7 +1,6 @@
 package de.hhu.propra16.TDDT;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -26,7 +25,8 @@ public class Controller {
     @FXML private Label Clock;
     @FXML private Label Anzeige;
     @FXML private PieChart chart;
-    private UserCode UserInput=new UserCode("");
+    private String [] Inhalte = {"",""};
+    private UserCode UserInput=new UserCode("", Inhalte);
     private ActionUnit Action=new ActionUnit(UserInput);
     private WarningUnit Reporter;
     private SetStyles PhaseSetter=new SetStyles();
@@ -35,6 +35,7 @@ public class Controller {
     private BabyStep babyStep;
     private TrackingUnit Tracker;
     private Stage myStage;
+    private long trackerStart;
 
     public void setStage(Stage stage) {
         myStage = stage;
@@ -77,7 +78,7 @@ public class Controller {
             UserInput.setTest("@Test\n"+"public void testsomething() {\n"+"\n}");
         }
         Fenster.setText(UserInput.getTestCode());
-       if (babyStep!=null) babyStep.restart();
+        if (babyStep!=null) babyStep.restart();
     }
 
     public void isReadyForRED() {
@@ -133,23 +134,23 @@ public class Controller {
         ActualGREENCode=UserInput.getClassCode();
         Fenster.clear();
         Fenster.setText(UserInput.getClassCode());
-       if (babyStep!=null)
-           babyStep.restart();
+        if (babyStep!=null)
+            babyStep.restart();
     }
 
     public void REFACTOR() {
         char Actual=Phase;
-            switch (Actual) {
-                case 'R':   if (!Fenster.getText().equals(UserInput.getTestCode())) {
-                            Tracker.addEvent("Tests ge" + "\u00E4"+ "ndert");}
-                            UserInput.setTest(Fenster.getText());
-                            break;
-                case 'G':   if (!Fenster.getText().equals(UserInput.getClassCode())) {
-                            Tracker.addEvent("Code bei GREEN ge" + "\u00E4"+ "ndert");}
-                            UserInput.setClass(Fenster.getText());
-                            break;
-                case 'F':   return;
-            }
+        switch (Actual) {
+            case 'R':   if (!Fenster.getText().equals(UserInput.getTestCode())) {
+                Tracker.addEvent("Tests ge" + "\u00E4"+ "ndert");}
+                UserInput.setTest(Fenster.getText());
+                break;
+            case 'G':   if (!Fenster.getText().equals(UserInput.getClassCode())) {
+                Tracker.addEvent("Code bei GREEN ge" + "\u00E4"+ "ndert");}
+                UserInput.setClass(Fenster.getText());
+                break;
+            case 'F':   return;
+        }
         if (UserInput.getClassCode().equals("")) {Reporter.noCode(); return;}
         Action=new ActionUnit(UserInput);
         Action.compile();
@@ -177,7 +178,7 @@ public class Controller {
                 Reporter.failedTests(Action.getFailedTests());
             }
         }
-}
+    }
 
     public void isreadyforREFACTOR(boolean report) {
         Tracker.stopTime(Phase);
@@ -185,7 +186,7 @@ public class Controller {
         Fenster.clear();
         Fenster.setText(UserInput.getClassCode());
         Clock.setText("");
-      if (report) Reporter.readyforRefactor();
+        if (report) Reporter.readyforRefactor();
     }
 
     public void switchPhase() {
@@ -193,18 +194,18 @@ public class Controller {
         char Actual=Phase;
         switch (Actual) {
             case 'R':   checkSwitches();
-                        break;
+                break;
             case 'G':   switchRED();
-                        break;
+                break;
             case 'F':   babyStep.restart();
-                        break;
+                break;
         }
     }
 
     public void checkSwitches() {
         if (!(UserInput.getClassCode().equals(""))) {
+            REFACTOR();
             babyStep.restart(-1);
-            isreadyforREFACTOR(false);
         }
         else {
             switchRED();
@@ -215,9 +216,9 @@ public class Controller {
         Phase=Actual;
         PhaseSetter.setPhase(Phase, RED, GREEN, REFACTOR, Anzeige);
         if (!isTest) {
-        Import1.setText("");
-        Import2.setText("");
-        Klassenname.setText("public class "+UserInput.getKlassenName()+" {");}
+            Import1.setText("");
+            Import2.setText("");
+            Klassenname.setText("public class "+UserInput.getKlassenName()+" {");}
         else {
             Import1.setText("import static org.junit.Assert.*;");
             Import2.setText("import org.junit.Test;");
@@ -241,12 +242,14 @@ public class Controller {
     }
 
     public void show() throws InterruptedException {
+        trackerStart = System.currentTimeMillis();
         int ActualTime=0;
         if (babyStep!=null) {
             ActualTime = babyStep.getTime();
             babyStep.setUnvisible();
         }
         TextArea TrackingData= new TextArea(Tracker.getChartInfos(chart,Phase));
+        char currentPhase = Tracker.getActualPhase();
         TrackingData.setId("TrackingData");
         TrackingData.setMouseTransparent(true);
         TrackingData.setEditable(false);
@@ -254,6 +257,7 @@ public class Controller {
         Stage stage=setTrackingScene(TrackingData);
         myStage.hide();
         stage.showAndWait();
+        Tracker.setCorrection(trackerStart,currentPhase);
         myStage.show();
         if (babyStep!=null) {
             while (stage.isShowing()) {

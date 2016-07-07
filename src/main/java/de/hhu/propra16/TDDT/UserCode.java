@@ -7,25 +7,40 @@ public class UserCode {
     private String ClassCode="";
     private String TestCode="";
     private String Time;
+    private String [] Inhalte = {"",""};
 
-    public UserCode(String KlassenName) {
+    public UserCode(String KlassenName, String [] Inhalte) {
         this.KlassenName=KlassenName;
+        this.Inhalte = Inhalte;
         setClass("");
         setTest("");
+        if(!(this.Inhalte[0].equals(""))) {
+            setClass(Inhalte[0]);
+        }
+        if(!(this.Inhalte[1].equals(""))) {
+            setTest(Inhalte[1]);
+        }
     }
 
-    public UserCode(String KlassenName, String Time) {
+    public UserCode(String KlassenName, String [] Inhalte, String Time) {
         this.KlassenName = KlassenName;
         this.Time = Time;
+        this.Inhalte = Inhalte;
         setClass("");
         setTest("");
+        if(!(this.Inhalte[0].equals(""))) {
+            setClass(this.Inhalte[0]);
+        }
+        if(!(this.Inhalte[1].equals(""))) {
+            setTest(this.Inhalte[1]);
+        }
     }
 
     public void setTest(String UserInput) {
         TestCode=UserInput;
         TestContent="import static org.junit.Assert.*;\n"
                 + "import org.junit.Test;\n"+
-             "public class "  + KlassenName + "Test { \n"+TestCode+"\n}";
+                "public class "  + KlassenName + "Test { \n"+TestCode+"\n}";
     }
 
     public void setClass(String UserInput) {

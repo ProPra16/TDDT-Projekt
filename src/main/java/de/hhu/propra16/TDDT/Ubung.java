@@ -9,12 +9,13 @@ public class Ubung {
     private String[] buttons = new String[4];
     ArrayList<String> inhalt = new ArrayList<String>();
     private String beschrTeil = "";
+    private String testTeil = "";
     private String codeTeil = "";
     private File file = new File("");
     private String path = null;
     private BufferedReader br = null;
     private int jarVar = 0;
-
+    private WarningUnit error = new WarningUnit();
 
     public void buttonNamer() throws Exception {
         if (getClass().getProtectionDomain().getCodeSource().getLocation().getFile().contains("jar")) {
@@ -30,24 +31,34 @@ public class Ubung {
     public void buttonNamerForJar() throws Exception {
         path = (new File(".").getCanonicalPath());
         file = new File(path + "/Ubungen");
-        File[] listOfFiles = file.listFiles();
-        for (File file4 : listOfFiles) {
-            String pfad = file4.toString();
-            int pos = pfad.indexOf("Ubungen");
-            pfad = pfad.substring(pos + 8, pfad.length());
-            dateien.add(pfad);
+        if(!file.exists()){
+            error.folderError();
+        }
+        else {
+            File[] listOfFiles = file.listFiles();
+            for (File file4 : listOfFiles) {
+                String pfad = file4.toString();
+                int pos = pfad.indexOf("Ubungen");
+                pfad = pfad.substring(pos + 8, pfad.length());
+                dateien.add(pfad);
+            }
         }
     }
 
     public void buttonNamerForJava() throws Exception {
         path = (new File(".").getCanonicalPath() + "/build/libs/Ubungen");
         file = new File(path);
-        File[] listOfFiles = file.listFiles();
-        for (File file4 : listOfFiles) {
-            String pfad = file4.toString();
-            int pos = pfad.indexOf("Ubungen");
-            pfad = pfad.substring(pos + 8, pfad.length());
-            dateien.add(pfad);
+        if(!file.exists()){
+            error.folderError();
+        }
+        else{
+            File[] listOfFiles = file.listFiles();
+            for (File file4 : listOfFiles) {
+                String pfad = file4.toString();
+                int pos = pfad.indexOf("Ubungen");
+                pfad = pfad.substring(pos + 8, pfad.length());
+                dateien.add(pfad);
+            }
         }
     }
 
@@ -98,18 +109,35 @@ public class Ubung {
     }
 
     public void trenneTeile() {
-        boolean imBereich = false;
+        boolean imBeschreibungsBereich = false;
+        boolean imTestBereich = false;
+        boolean imCodeBereich = false;
         for (int i = 0; i < this.inhalt.size(); i++) {
-            if (this.inhalt.get(i).contains("+++description")) {
-                if (imBereich == true) {
-                    imBereich = false;
-                } else {
-                    imBereich = true;
+            if(this.inhalt.get(i).length()> 3 && this.inhalt.get(i).substring(0,3).equals("+++")) {
+                if (this.inhalt.get(i).contains("+++description")) {
+                    imBeschreibungsBereich = true;
+                    imTestBereich = false;
+                    imCodeBereich = false;
                 }
-            } else {
-                if (imBereich == true) {
+                if (this.inhalt.get(i).contains("+++code")) {
+                    imCodeBereich = true;
+                    imTestBereich = false;
+                    imBeschreibungsBereich = false;
+                }
+                if (this.inhalt.get(i).contains("+++test")) {
+                    imTestBereich = true;
+                    imBeschreibungsBereich = false;
+                    imCodeBereich = false;
+                }
+            }
+            else{
+                if(imBeschreibungsBereich == true) {
                     this.beschrTeil += this.inhalt.get(i) + "\n";
-                } else {
+                }
+                if(imTestBereich == true) {
+                    this.testTeil += this.inhalt.get(i) + "\n";
+                }
+                if(imCodeBereich == true) {
                     this.codeTeil += this.inhalt.get(i) + "\n";
                 }
             }
@@ -160,8 +188,9 @@ public class Ubung {
 
     public void clearAll(){
         this.inhalt = new ArrayList<String>();
-        this.codeTeil = "";
         this.beschrTeil = "";
+        this.testTeil = "";
+        this.codeTeil = "";
     }
     public String gibInhalt(){
         try {
@@ -176,14 +205,13 @@ public class Ubung {
     }
 
     public String replacer(String s){
-        return s.replace("ae","\u00E4").replace("Ae","\u00C4").replace("ue","\u00FC").replace("Ue","\u00D4").replace("oe","\u00F6").replace("Oe","\u00D6");
+        return s.replace("ae","\u00E4").replace("ue","\u00FC").replace("'Ue","\u00DC").replace("Oe","\u00D6");
     }
 
-    public String gibCode(){
-        return this.codeTeil;
-    }
-    public String gibBeschr(){
-        return this.beschrTeil;
-    }
+    public String gibBeschr(){return this.beschrTeil;}
+
+    public String gibTestCode(){return this.testTeil;}
+
+    public String gibCode(){return this.codeTeil;}
 
 }

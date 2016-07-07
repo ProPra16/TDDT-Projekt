@@ -17,6 +17,8 @@ public class TrackingUnit {
     private double RefactorTimeInPreCent;
     private TrackingTable TrackingStats=new TrackingTable();
     private String ExtraInfo="";
+    private char actualPhase;
+    private long trackerTime = 0;
 
     public TrackingUnit() {
         StartTime=System.currentTimeMillis();
@@ -46,8 +48,9 @@ public class TrackingUnit {
     }
 
     public String getChartInfos(PieChart chart, char Phase) {
+        actualPhase = Phase;
         stopTime(Phase);
-        elapsedTimed=System.currentTimeMillis()-StartTime;
+        elapsedTimed=System.currentTimeMillis()-(StartTime+trackerTime);
         RedTimeInPreCent = Math.round(((double) RedTime/elapsedTimed)*100);
         GreenTimeInPreCent = Math.round(((double) GreenTime/elapsedTimed)*100);
         RefactorTimeInPreCent = Math.round(((double) RefactorTime/elapsedTimed)*100);
@@ -78,5 +81,20 @@ public class TrackingUnit {
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(Time)));
     }
 
+    public char getActualPhase(){return actualPhase;}
+
+    public void setCorrection(long pretime, char Phase){
+        long currentTime = System.currentTimeMillis();
+        long diff = currentTime - pretime;
+        switch (actualPhase){
+            case 'R': RedTime -= diff;
+                break;
+            case 'G': GreenTime -= diff;
+                break;
+            case 'F': RefactorTime -= diff;
+                break;
+        }
+       trackerTime += diff;
+    }
 
 }

@@ -15,7 +15,7 @@
     <Text text="}" translateX="575" translateY="250"/>
     <Label fx:id="Clock" translateX="500" translateY="-200" style="-fx-text-fill:black; -fx-font-size:30"/>
     <Label fx:id="Anzeige" translateX="25" translateY="300" stylesheets="styler.css"/>
-    <PieChart fx:id="chart" stylesheets="styler.css"/>
+    <PieChart fx:id="chart" stylesheets="styler.css" mouseTransparent="true"/>
     <Button text="Back" translateY="0" translateX="-125" minWidth="50" minHeight="50" onAction="#backToMainScreen">
         <graphic>
             <ImageView>

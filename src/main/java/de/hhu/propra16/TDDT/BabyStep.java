@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BabyStep extends Thread {
     private String Time;
-    private Label Clock;
+    private Label Clock = new Label();
     private WarningUnit TimeUpInfo=new WarningUnit();
     private volatile boolean expired;
     private Controller controller;
@@ -29,9 +29,12 @@ public class BabyStep extends Thread {
                 if (ActualTime == -1) {
                     ActualTime = 0;
                 }
-             if (visible) {Clock.setText(""); }
+                if (visible) {Clock.setText(""); }
                 if (controller.getPhase()!='F') {
-                   if (visible) {Clock.setText(CountDowns.get(ActualTime));}
+                    if (visible) {Clock.setText(CountDowns.get(ActualTime));}
+                    if(!Clock.getText().equals("0:00")){
+                        Clock.setVisible(true);
+                    }
                     setStyle();
                 }});
             ActualTime+=1;
@@ -47,13 +50,13 @@ public class BabyStep extends Thread {
     }
 
     public void isExpired() {
-       Platform.runLater(()-> {
-           if (ActualTime==CountDowns.size()) {
-               expired = true;
-               showInfo();
-               controller.switchPhase();
-           }
-       });
+        Platform.runLater(()-> {
+            if (ActualTime==CountDowns.size()) {
+                expired = true;
+                showInfo();
+                controller.switchPhase();
+            }
+        });
     }
 
     public void setStyle() {
@@ -70,6 +73,7 @@ public class BabyStep extends Thread {
         if (controller.getPhase()!='F' && !TimeUpInfo.TimeUpisShowing()) {
             restart(-1);
             setUnvisible();
+            Clock.setVisible(false);
             TimeUpInfo.timeUp();
             while (TimeUpInfo.TimeUpisShowing()) {
                 try {
@@ -129,4 +133,3 @@ public class BabyStep extends Thread {
         visible=false;
     }
 }
-

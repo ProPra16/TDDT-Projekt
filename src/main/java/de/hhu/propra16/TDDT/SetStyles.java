@@ -34,6 +34,7 @@ public class SetStyles {
     public void setREFACTOR(Button RED, Button GREEN, Button REFACTOR, Label Anzeige) {
         RED.setStyle("");
         GREEN.setStyle("");
+        Anzeige.setTranslateX(125);
         REFACTOR.setStyle("-fx-text-fill:white; -fx-background-color: #000000;");
         Anzeige.setText("Du kannst nun den Code verbessern");
         Anzeige.setStyle("");

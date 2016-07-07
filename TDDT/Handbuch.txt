@@ -1,25 +1,16 @@
 ----	Starten des Programms	----
 
 
-Zum Starten des Programms je nach Betriebssystem eine der folgenden Dateien ausfuehren
-
-Windows: run.bat
-Linux: run.sh
-MacOs: run.sh
-
-Eventuell muessen fuer die run.sh Dateien noch weitere Konfigurationen gemacht werden
-Ansonsten kann das Programm auch in der Kommandozeile mit: " java -jar TDDT.jar " gestartet werden
-
+Zum Starten des Programms in der Kommandozeile: " java -jar TDDT.jar " eingeben
 
 
 ----	notwendige Vorbereitungen vor Programmstart	----
 
 
-Vor Programmstart muessen die uebungsdateien in den Ordner "Ubungen" kopiert werden.
-Die Form der uebungsdateien kann in den beigefuegten Beispieldateien ersehen werden.
+Vor Programmstart muessen die 'Uebungsdateien in den Ordner "Ubungen" kopiert werden.
+Die Form der 'Uebungsdateien kann in den beigefuegten Beispieldateien ersehen werden.
 
-!!! Achtung: Es darf keine uebungdatei "Test.txt" genannt werden !!!
-
+!!! Achtung: Es darf keine 'Uebungdatei "Test.txt" genannt werden !!!
  
 
 ----	Programmfunktionen	----
@@ -29,13 +20,13 @@ Eine kurze Zusammenfassung der Funktionen von den einzelnen Bestandteilen des Pr
 
 Tracking	->
  
-Hilfe		->	Benutzerhandbuch	->	oeffnet diese Datei
+Hilfe		->	Benutzerhandbuch	->	Oeffnet diese Datei
 		->	Info 			->	Zeigt Informationen zum Programm an
 
-Next-Button	->	Iteriert in der Liste der uebungsdateien nach unten
-Previous-Button	->	Iteriert in der Liste der uebungsdateien nach oben
+Next-Button	->	Iteriert in der Liste der 'Uebungsdateien nach unten
+Previous-Button	->	Iteriert in der Liste der 'Uebungsdateien nach oben
 
-Button mit uebungsdatei-Name	->	Startet das Hauptprogramm
+Button mit 'Uebungsdatei-Name	->	Startet das Hauptprogramm
 
 
 Nun eine etwas ausfuehrlichere Erklaerung zum Hauptprogramm:

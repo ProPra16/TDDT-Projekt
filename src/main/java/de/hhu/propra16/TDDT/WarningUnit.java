@@ -1,7 +1,6 @@
 package de.hhu.propra16.TDDT;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import vk.core.api.TestFailure;
 import vk.core.api.TestResult;
@@ -15,7 +14,6 @@ public class WarningUnit {
 
     private Alert Action=new Alert(Alert.AlertType.ERROR);
     private Alert Info=new Alert(Alert.AlertType.INFORMATION);
-    private boolean TimeUpShowing;
     private TrackingUnit Tracker;
 
     public WarningUnit() {}
@@ -87,7 +85,7 @@ public class WarningUnit {
     public String askForBabySteps() {
         List<String> Optionen = new ArrayList<>();
         Optionen.add("Keine BabySteps aktivieren");
-        Optionen.add("1:00 Minuten");
+        Optionen.add("0:12 Minuten");
         Optionen.add("2:00 Minuten");
         Optionen.add("2:30 Minuten");
         Optionen.add("3:00 Minuten");
@@ -102,6 +100,17 @@ public class WarningUnit {
             return Auswahl.get();
         }
         return "";
+    }
+
+    public void folderError(){
+        Action.setHeaderText("Ordner \"Ubungen\" fehlt!");
+        Action.setContentText("Bitte erstellen Sie einen Ordner \"Ubungen\" mit entsprechenden \u00DCbungsdateien");
+        Action.showAndWait();
+    }
+    public void fileError(){
+        Action.setHeaderText("Bitte anderen Dateinamen ausw\u00E4hlen!");
+        Action.setContentText("Bitte achte darauf, dass die \u00DCbungsdatei nicht \"Test\" hei\u00DFt.");
+        Action.showAndWait();
     }
 
     public void timeUp() {

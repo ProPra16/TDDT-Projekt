@@ -1,0 +1,34 @@
+Der Beschreibungsteil sieht wie folgt aus:
+
++++description
+hier kommt die Beschreibung hin
+
+Der Codeteil sieht wie folgt aus:
+
++++code
+hier kommt der Code hin 
+
+Der Testteil sieht wie folgt aus:
+
++++test
+hier kommt der Test hin 
+
+
+Beispiel:
+
++++description
+Dies ist die Beschreibung zu diesem Beispiel
+man kann sogar mehrzeilige Beschreibungen schreiben
++++code
+public static int gebeEtwas(){
+
+}
++++test
+@Test
+public void test(){
+assertEquals(Beispiel.gebeEtwas(),0);
+}
+
+!Achtung!
+
+Der Klassenname und der TestKlassenname soll weggelassen werden.
