@@ -5,13 +5,13 @@
 
 by
 
-asfer100
+```asfer100```
 
-hegro105
+```hegro105```
 
-lozac100
+```lozac100```
 
-mupek100
+```mupek100```
 
 ## Gradle
 Bauen des Programms:  ```gradle build```
@@ -19,7 +19,7 @@ Bauen des Programms:  ```gradle build```
 Konfigurieren für Intellij: ```gradle idea```
 
 ## Ausführen des Programms
-Die Zip laden und Windows-Run.bat ausführen oder in der Konsole mit ```jar -java TDDT.java```
+Die Zip runterladen, entpacken und Windows-Run.bat ausführen oder in der Konsole mit ```jar -java TDDT.java``` starten
 
 ## License
 
