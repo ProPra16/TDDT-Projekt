@@ -1,0 +1,38 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.chart.BubbleChart?>
+<?import javafx.scene.control.MenuItem?>
+<GridPane fx:id="pane" fx:controller="de.hhu.propra16.TDDT.StartController"
+          xmlns:fx="http://javafx.com/fxml" hgap="30" vgap="20">
+    <MenuBar fx:id="menuBar" translateX="0" translateY="-35" minWidth="800">
+        <Menu fx:id="hilfe" text="Hilfe">
+            <MenuItem fx:id="handbuch" text="Benutzerhandbuch" onAction="#zeigHandbuch"/>
+            <MenuItem fx:id="info" text="Info" onAction="#zeigInfo"/>
+        </Menu>
+    </MenuBar>
+   <Label text="Bitte wähle eine der folgenden Übungen" translateX="175" translateY="40" Stylesheets="styler.css"/>
+    <Button fx:id="button1" alignment="CENTER" translateX="150" translateY="150" minWidth="400" minHeight="100" onMouseEntered="#buttonDescription" onAction="#buttonAction"/>
+    <Button fx:id="button2" alignment="CENTER" translateX="150" translateY="250" minWidth="400" minHeight="100" onMouseEntered="#buttonDescription" onAction="#buttonAction"/>
+    <Button fx:id="button3" alignment="CENTER" translateX="150" translateY="350" minWidth="400" minHeight="100" onMouseEntered="#buttonDescription" onAction="#buttonAction"/>
+    <Button fx:id="button4" alignment="CENTER" translateX="150" translateY="450" minWidth="400" minHeight="100" onMouseEntered="#buttonDescription" onAction="#buttonAction"/>
+    <Button text="Previous" translateY="65" translateX="600" minWidth="100" onAction="#iterateUp">
+        <graphic>
+            <ImageView>
+                <Image url="@/up-arrow.png" requestedWidth="20" requestedHeight="20"/>
+            </ImageView>
+        </graphic>
+    </Button>
+    <Button text="Next" translateY="535" translateX="600" minWidth="100" onAction="#iterateDown">
+        <graphic>
+            <ImageView>
+                <Image url="@/down-arrow.png" requestedWidth="20" requestedHeight="20"/>
+            </ImageView>
+        </graphic>
+    </Button>
+</GridPane>

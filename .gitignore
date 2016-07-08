@@ -1,0 +1,16 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+*.iml
+*.ipr
+*.iws
+.idea/
+.idea
+.gitignore
+.gradle
+build
+.travis.yml
+Projekt7Protokoll1.pdf
+README.md
+*.bat
+out
+TDDT.zip

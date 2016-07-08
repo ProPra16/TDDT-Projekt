@@ -1,0 +1,46 @@
+----	Starten des Programms	----
+
+
+Zum Starten des Programms in der Kommandozeile: " java -jar TDDT.jar " eingeben
+
+
+----	notwendige Vorbereitungen vor Programmstart	----
+
+
+Vor Programmstart muessen die 'Uebungsdateien in den Ordner "Ubungen" kopiert werden.
+Die Form der 'Uebungsdateien kann in den beigefuegten Beispieldateien ersehen werden.
+
+!!! Achtung: Es darf keine 'Uebungdatei "Test.txt" genannt werden !!!
+ 
+
+----	Programmfunktionen	----
+
+
+Eine kurze Zusammenfassung der Funktionen von den einzelnen Bestandteilen des Programms:
+
+Tracking	->
+ 
+Hilfe		->	Benutzerhandbuch	->	Oeffnet diese Datei
+		->	Info 			->	Zeigt Informationen zum Programm an
+
+Next-Button	->	Iteriert in der Liste der 'Uebungsdateien nach unten
+Previous-Button	->	Iteriert in der Liste der 'Uebungsdateien nach oben
+
+Button mit 'Uebungsdatei-Name	->	Startet das Hauptprogramm
+
+
+Nun eine etwas ausfuehrlichere Erklaerung zum Hauptprogramm:
+
+Der Ablauf des Hauptprogramms ist in mehrere "Phasen" unterteilt.
+
+Die einzelnen Phasen sind:
+-Red
+-Green
+-Refactor
+
+In Red wird der Benutzer aufgefordert Tests zu schreiben, wobei mindestens einer dieser Tests fehlschlagen muss.
+Wenn diese Bedingung erfuellt ist kann zu Green gewechselt werden.
+In Green wird der zu testende Code geschrieben.
+Der Benutzer kann nach Wunsch wieder zurueck zu Red wechseln.
+Wenn alle Tests erfolgreich sind kann der Benutzer zu Refactor wechseln.
+In Refactor kann der Code aus Green verbessert werden.
