@@ -18,6 +18,9 @@ Bauen des Programms:  ```gradle build```
 
 Konfigurieren für Intellij: ```gradle idea```
 
+## Ausführen des Programms
+Die Zip laden und Windows-Run.bat ausführen oder in der Konsole mit ```jar -java TDDT.java```
+
 ## License
 
  [Apache 2.0 license](https://github.com/ProPra16/programmierpraktikum-abschlussprojekt-halt-doch-einfach-mal-dein-maul/blob/master/LICENSE)
