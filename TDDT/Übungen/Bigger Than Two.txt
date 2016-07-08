@@ -1,7 +1,0 @@
-+++description
-Bigger Than Two beschreibung
-dies ist ein Beschreibungsbeispiel
-und soll testen
-ob die Beschreibung mehrzeilig ausgegeben wird
-+++description
-public BiggerThanTwo

@@ -1,5 +1,0 @@
-+++description
-Bigger Than Two beschreibung
-+++description
-public BiggerThanTwo
-halt deine Fresse Asri, dieser Code ist notwendig
