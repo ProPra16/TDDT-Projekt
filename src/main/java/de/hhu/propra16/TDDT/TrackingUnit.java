@@ -58,7 +58,7 @@ public class TrackingUnit {
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                         new PieChart.Data("RED-Time", RedTimeInPreCent),
-                        new PieChart.Data("GREEN-Time", GreenTimeInPreCent),
+                        new PieChart.Data("GreenValidator-Time", GreenTimeInPreCent),
                         new PieChart.Data("REFACTOR-Time", RefactorTimeInPreCent));
         chart.setData(pieChartData);
         chart.setTitle("Phase Duration");
@@ -96,5 +96,4 @@ public class TrackingUnit {
         }
        trackerTime += diff;
     }
-
 }

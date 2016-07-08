@@ -3,11 +3,11 @@ package de.hhu.propra16.TDDT;
 import java.io.*;
 import java.util.ArrayList;
 
-public class Ubung {
+public class Uebung {
 
-    private ArrayList<String> dateien = new ArrayList<String>();
+    private ArrayList<String> dateien = new ArrayList<>();
     private String[] buttons = new String[4];
-    ArrayList<String> inhalt = new ArrayList<String>();
+    ArrayList<String> inhalt = new ArrayList<>();
     private String beschrTeil = "";
     private String testTeil = "";
     private String codeTeil = "";
@@ -30,7 +30,7 @@ public class Ubung {
 
     public void buttonNamerForJar() throws Exception {
         path = (new File(".").getCanonicalPath());
-        file = new File(path + "/Ubungen");
+        file = new File(path + "/\u00DCbungen");
         if(!file.exists()){
             error.folderError();
         }
@@ -38,7 +38,7 @@ public class Ubung {
             File[] listOfFiles = file.listFiles();
             for (File file4 : listOfFiles) {
                 String pfad = file4.toString();
-                int pos = pfad.indexOf("Ubungen");
+                int pos = pfad.indexOf("\u00DCbungen");
                 pfad = pfad.substring(pos + 8, pfad.length());
                 dateien.add(pfad);
             }
@@ -46,7 +46,7 @@ public class Ubung {
     }
 
     public void buttonNamerForJava() throws Exception {
-        path = (new File(".").getCanonicalPath() + "/build/libs/Ubungen");
+        path = (new File(".").getCanonicalPath() + "/build/libs/\u00DCbungen");
         file = new File(path);
         if(!file.exists()){
             error.folderError();
@@ -55,7 +55,7 @@ public class Ubung {
             File[] listOfFiles = file.listFiles();
             for (File file4 : listOfFiles) {
                 String pfad = file4.toString();
-                int pos = pfad.indexOf("Ubungen");
+                int pos = pfad.indexOf("\u00DCbungen");
                 pfad = pfad.substring(pos + 8, pfad.length());
                 dateien.add(pfad);
             }
@@ -78,8 +78,8 @@ public class Ubung {
     }
 
     public void readFile(String filename, boolean istInUbung) {
-        String directory = "Ubungen/";
-        if(istInUbung == false){
+        String directory = "\u00DCbungen/";
+        if(!istInUbung){
             directory = "";
         }
         try {
@@ -103,7 +103,7 @@ public class Ubung {
                 while ((line = br.readLine()) != null) {
                     inhalt.add(line);
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
     }
@@ -112,33 +112,32 @@ public class Ubung {
         boolean imBeschreibungsBereich = false;
         boolean imTestBereich = false;
         boolean imCodeBereich = false;
-        for (int i = 0; i < this.inhalt.size(); i++) {
-            if(this.inhalt.get(i).length()> 3 && this.inhalt.get(i).substring(0,3).equals("+++")) {
-                if (this.inhalt.get(i).contains("+++description")) {
+        for (String anInhalt : this.inhalt) {
+            if (anInhalt.length() > 3 && anInhalt.substring(0, 3).equals("+++")) {
+                if (anInhalt.contains("+++description")) {
                     imBeschreibungsBereich = true;
                     imTestBereich = false;
                     imCodeBereich = false;
                 }
-                if (this.inhalt.get(i).contains("+++code")) {
+                if (anInhalt.contains("+++code")) {
                     imCodeBereich = true;
                     imTestBereich = false;
                     imBeschreibungsBereich = false;
                 }
-                if (this.inhalt.get(i).contains("+++test")) {
+                if (anInhalt.contains("+++test")) {
                     imTestBereich = true;
                     imBeschreibungsBereich = false;
                     imCodeBereich = false;
                 }
-            }
-            else{
-                if(imBeschreibungsBereich == true) {
-                    this.beschrTeil += this.inhalt.get(i) + "\n";
+            } else {
+                if (imBeschreibungsBereich == true) {
+                    this.beschrTeil += anInhalt + "\n";
                 }
-                if(imTestBereich == true) {
-                    this.testTeil += this.inhalt.get(i) + "\n";
+                if (imTestBereich == true) {
+                    this.testTeil += anInhalt + "\n";
                 }
-                if(imCodeBereich == true) {
-                    this.codeTeil += this.inhalt.get(i) + "\n";
+                if (imCodeBereich == true) {
+                    this.codeTeil += anInhalt + "\n";
                 }
             }
         }
@@ -149,7 +148,7 @@ public class Ubung {
             if (!(buttons[3].equals(dateien.get(dateien.size() - 1)))) {
                 int i = 0;
                 boolean richtigeStelle = false;
-                while (i < dateien.size() && richtigeStelle == false) {
+                while (i < dateien.size() && !richtigeStelle) {
                     if (buttons[0].equals(dateien.get(i))) {
                         richtigeStelle = true;
                     } else {
@@ -170,7 +169,7 @@ public class Ubung {
             if (!(buttons[0].equals(dateien.get(0)))) {
                 int i = 0;
                 boolean richtigeStelle = false;
-                while (i < dateien.size() && richtigeStelle == false) {
+                while (i < dateien.size() && !richtigeStelle) {
                     if (buttons[0].equals(dateien.get(i))) {
                         richtigeStelle = true;
                     } else {

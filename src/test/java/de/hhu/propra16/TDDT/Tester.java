@@ -18,8 +18,8 @@ public class Tester {
         ActionUnit newCompile=new ActionUnit(userCode);
         newCompile.checkGREEN();
         compiler=newCompile.getCompiler();
-        GREEN NextPhase=new GREEN(compiler);
-        if (NextPhase.isready()) {
+        GreenValidator NextPhase=new GreenValidator(compiler);
+        if (NextPhase.isValid()) {
             Phase='G';
         }
         assertEquals('R',Phase);
@@ -32,8 +32,8 @@ public class Tester {
         ActionUnit newCompile=new ActionUnit(userCode);
         newCompile.checkGREEN();
         compiler=newCompile.getCompiler();
-        GREEN NextPhase=new GREEN(compiler);
-        if (NextPhase.isready()) {
+        GreenValidator NextPhase=new GreenValidator(compiler);
+        if (NextPhase.isValid()) {
             Phase='G';
         }
         assertEquals('R',Phase);
@@ -47,8 +47,8 @@ public class Tester {
         ActionUnit newCompile=new ActionUnit(userCode);
         newCompile.checkGREEN();
         compiler=newCompile.getCompiler();
-        GREEN NextPhase=new GREEN(compiler);
-        if (NextPhase.isready()) {
+        GreenValidator NextPhase=new GreenValidator(compiler);
+        if (NextPhase.isValid()) {
             Phase='G';
         }
         assertEquals('R',Phase);
@@ -61,8 +61,8 @@ public class Tester {
         ActionUnit newCompile=new ActionUnit(userCode);
         newCompile.checkGREEN();
         compiler=newCompile.getCompiler();
-        GREEN NextPhase=new GREEN(compiler);
-        if (NextPhase.isready()) {
+        GreenValidator NextPhase=new GreenValidator(compiler);
+        if (NextPhase.isValid()) {
             Phase='G';
         }
         assertEquals('G',Phase);
@@ -75,8 +75,8 @@ public class Tester {
         ActionUnit newCompile=new ActionUnit(userCode);
         newCompile.checkGREEN();
         compiler=newCompile.getCompiler();
-        GREEN NextPhase=new GREEN(compiler);
-        if (NextPhase.isready()) {
+        GreenValidator NextPhase=new GreenValidator(compiler);
+        if (NextPhase.isValid()) {
             Phase='G';
         }
         assertEquals('G',Phase);
@@ -89,8 +89,8 @@ public class Tester {
         ActionUnit newCompile=new ActionUnit(userCode);
         newCompile.checkGREEN();
         compiler=newCompile.getCompiler();
-        GREEN NextPhase=new GREEN(compiler);
-        if (NextPhase.isready()) {
+        GreenValidator NextPhase=new GreenValidator(compiler);
+        if (NextPhase.isValid()) {
             Phase='G';
         }
         assertEquals('G',Phase);
@@ -109,7 +109,7 @@ public class Tester {
     }
 
     @Test
-    public void testGREENtoREDDeleting() { //Überprüfe, ob beim Wechsel von GREEN nach RED der Code gelöscht wird
+    public void testGREENtoREDDeleting() { //Überprüfe, ob beim Wechsel von GreenValidator nach RED der Code gelöscht wird
         UserCode userCode=new UserCode("Foo");
         Phase='G';
         userCode.setClass("public static int f(int N) {return 4;}");

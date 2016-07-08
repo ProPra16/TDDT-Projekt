@@ -96,9 +96,9 @@ public class BabyStep extends Thread {
     }
 
     public void restart(int Pos) {
+        visible=true;
         expired=false;
         lastSeconds=false;
-        visible=true;
         ActualTime=Pos;
     }
 

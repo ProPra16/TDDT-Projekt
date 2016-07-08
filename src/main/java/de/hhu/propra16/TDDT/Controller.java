@@ -29,7 +29,7 @@ public class Controller {
     private UserCode UserInput=new UserCode("", Inhalte);
     private ActionUnit Action=new ActionUnit(UserInput);
     private WarningUnit Reporter;
-    private SetStyles PhaseSetter=new SetStyles();
+    private PhaseSetter phasesetter=new PhaseSetter();
     private String ActualGREENCode;
     private char Phase='R';
     private BabyStep babyStep;
@@ -105,7 +105,8 @@ public class Controller {
     }
 
     public void GREEN() {
-        if (Phase=='G') { return;}
+        if (Phase=='G') {return;
+        }
         else if (Phase=='F') {
             Reporter.commonError("Falsche Phase !","In REFACTOR sollst du nur den Code verbessern, die Tests laufen schon !");}
         else{
@@ -115,12 +116,12 @@ public class Controller {
             UserInput.setTest(Input);
             Action = new ActionUnit(UserInput);
             Action.checkGREEN();
-            GREEN green = new GREEN(Action.getCompiler());
-            if (!green.isready() && !green.wroteTests()) {
-                Reporter.commonError("Keine Tests !",green.getError());
+            GreenValidator greenValidator = new GreenValidator(Action.getCompiler());
+            if (!greenValidator.isValid() && !greenValidator.foundTests()) {
+                Reporter.commonError("Keine Tests !", greenValidator.getError());
             }
-            else if (!green.isready() && green.wroteTests()) {
-                Reporter.NotOnlyOneFailing(green.isCompiled(),green.getFailures());
+            else if (!greenValidator.isValid() && greenValidator.foundTests()) {
+                Reporter.NotOnlyOneFailing(greenValidator.isCompiled(), greenValidator.getFailures());
             }
             else {
                 isreadyForGreen();
@@ -146,7 +147,7 @@ public class Controller {
                 UserInput.setTest(Fenster.getText());
                 break;
             case 'G':   if (!Fenster.getText().equals(UserInput.getClassCode())) {
-                Tracker.addEvent("Code bei GREEN ge" + "\u00E4"+ "ndert");}
+                Tracker.addEvent("Code bei GreenValidator ge" + "\u00E4"+ "ndert");}
                 UserInput.setClass(Fenster.getText());
                 break;
             case 'F':   return;
@@ -156,7 +157,7 @@ public class Controller {
         Action.compile();
         if (Action.compileErrors()) {
             String CompilerErrors=TestHelpers.getErrorMessages(Action.getCompiler(), Action.getResult());
-            Reporter.showCompilerErrors(CompilerErrors,"Kompilier Fehler im GREEN-Code");
+            Reporter.showCompilerErrors(CompilerErrors,"Kompilier Fehler im GreenValidator-Code");
         }
         else {
             checkUserTestCases();
@@ -191,30 +192,17 @@ public class Controller {
 
     public void switchPhase() {
         Tracker.addEvent("BabySteps Zeit abgelaufen");
-        char Actual=Phase;
-        switch (Actual) {
-            case 'R':   checkSwitches();
-                break;
-            case 'G':   switchRED();
-                break;
-            case 'F':   babyStep.restart();
-                break;
-        }
-    }
-
-    public void checkSwitches() {
-        if (!(UserInput.getClassCode().equals(""))) {
-            REFACTOR();
-            babyStep.restart(-1);
+        if (Phase!='F') {
+            switchRED();
         }
         else {
-            switchRED();
+            babyStep.restart();
         }
     }
 
     public void setPhase(char Actual, boolean isTest) {
         Phase=Actual;
-        PhaseSetter.setPhase(Phase, RED, GREEN, REFACTOR, Anzeige);
+        phasesetter.setPhase(Phase, RED, GREEN, REFACTOR, Anzeige);
         if (!isTest) {
             Import1.setText("");
             Import2.setText("");

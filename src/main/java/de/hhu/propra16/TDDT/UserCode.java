@@ -36,6 +36,12 @@ public class UserCode {
         }
     }
 
+    public UserCode(String KlassenName) {
+        this.KlassenName=KlassenName;
+        setClass("");
+        setTest("");
+    }
+
     public void setTest(String UserInput) {
         TestCode=UserInput;
         TestContent="import static org.junit.Assert.*;\n"

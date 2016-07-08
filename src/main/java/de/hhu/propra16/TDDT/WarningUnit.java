@@ -85,7 +85,7 @@ public class WarningUnit {
     public String askForBabySteps() {
         List<String> Optionen = new ArrayList<>();
         Optionen.add("Keine BabySteps aktivieren");
-        Optionen.add("0:12 Minuten");
+        Optionen.add("1:00 Minuten");
         Optionen.add("2:00 Minuten");
         Optionen.add("2:30 Minuten");
         Optionen.add("3:00 Minuten");
@@ -104,12 +104,13 @@ public class WarningUnit {
 
     public void folderError(){
         Action.setHeaderText("Ordner \"Ubungen\" fehlt!");
-        Action.setContentText("Bitte erstellen Sie einen Ordner \"Ubungen\" mit entsprechenden \u00DCbungsdateien");
+        Action.setContentText("Bitte erstellen Sie einen Ordner \"\u00DCbungen\" mit entsprechenden \u00DCbungsdateien");
         Action.showAndWait();
     }
     public void fileError(){
         Action.setHeaderText("Bitte anderen Dateinamen ausw\u00E4hlen!");
-        Action.setContentText("Bitte achte darauf, dass die \u00DCbungsdatei nicht \"Test\" hei\u00DFt.");
+        Action.setContentText("Bitte achte darauf, dass die \u00DCbungsdateien keine ung\u00FCltigen Zeichen enthalten.\n"+
+                "Insbesondere sollte deine Klasse/deine Datei nicht Test genannt werden");
         Action.showAndWait();
     }
 

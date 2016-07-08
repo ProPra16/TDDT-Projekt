@@ -7,7 +7,7 @@ import vk.core.api.TestResult;
 
 import java.util.Collection;
 
-public class GREEN {
+public class GreenValidator {
     private JavaStringCompiler compiler;
     private boolean ready;
     private boolean Compiled;
@@ -16,7 +16,7 @@ public class GREEN {
     private TestResult Tests;
     private String Error="";
 
-    public GREEN(JavaStringCompiler compiler) {
+    public GreenValidator(JavaStringCompiler compiler) {
         this.compiler = compiler;
         this.Tests=compiler.getTestResult();
         checkifReady();
@@ -60,9 +60,9 @@ public class GREEN {
 
     public boolean isCompiled() {return Compiled;}
 
-    public boolean isready() {return ready;}
+    public boolean isValid() {return ready;}
 
-    public boolean wroteTests() {
+    public boolean foundTests() {
         return wroteTests;
     }
 }

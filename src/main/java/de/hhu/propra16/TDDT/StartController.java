@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class StartController {
     private TDDT m = new TDDT();
-    private Ubung neueUbungen = new Ubung();
+    private Uebung neueUbungen = new Uebung();
     private String [] buttons;
     private Tooltip buttonTooltip = new Tooltip("Button Tooltip");
     private WarningUnit Reporter=new WarningUnit();
@@ -94,7 +94,7 @@ public class StartController {
         String KlassenInhalt = neueUbungen.gibCode();
         String TestInhalt = neueUbungen.gibTestCode();
         String [] Inhalte = {KlassenInhalt,TestInhalt};
-        if(KlassenName.equals("Test")){
+        if(!validClassName(KlassenName)){
             Reporter.fileError();
         }
         else {
@@ -114,6 +114,15 @@ public class StartController {
                     break;
             }
         }
+    }
+
+    public boolean validClassName(String KlassenName) {
+        ActionUnit Validator=new ActionUnit(new UserCode(KlassenName));
+        Validator.compile();
+        if (Validator.compileErrors() || KlassenName.equals("Test") ) {
+            return false;
+        }
+        return true;
     }
 
     public String getKlassenName(String UserChoice) {

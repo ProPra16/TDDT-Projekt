@@ -3,7 +3,7 @@ package de.hhu.propra16.TDDT;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class SetStyles {
+public class PhaseSetter {
 
     public void setPhase(char Phase, Button RED, Button GREEN, Button REFACTOR, Label Anzeige) {
         switch (Phase) {
