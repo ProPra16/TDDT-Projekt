@@ -5,13 +5,15 @@
 
 by
 
-```asfer100```
+```
+asfer100
 
-```hegro105```
+hegro105
 
-```lozac100```
+lozac100
 
-```mupek100```
+mupek100
+```
 
 ## Gradle
 Bauen des Programms:  ```gradle build```
