@@ -114,6 +114,13 @@ public class WarningUnit {
         Action.showAndWait();
     }
 
+    public void noExercises(){
+        Action.setHeaderText("Bitte Dateien in \u00DCbungsordner einf\u00FCgen!");
+        Action.setContentText("Bitte achte darauf, dass du \u00DCbungsdateien \u00DCbungsordner hast.\n"+
+                "Ansonsten kann das Programm nicht gestartet werden.\nRichte dich an die beigef\u00FCgte Formatvorlage.");
+        Action.showAndWait();
+    }
+
     public void timeUp() {
         Info.setTitle("Zeit ist um !");
         Info.setContentText("Deine Zeit f\u00FCrs Programmieren ist leider abgelaufen.\n"+

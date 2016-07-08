@@ -257,6 +257,7 @@ public class Controller {
 
     public Stage setTrackingScene(TextArea TrackingData) {
         Stage stage =new Stage();
+        stage.setResizable(false);
         Scene scene = new Scene(new GridPane());
         scene.getStylesheets().add("styler.css");
         Button backbutton = new Button();

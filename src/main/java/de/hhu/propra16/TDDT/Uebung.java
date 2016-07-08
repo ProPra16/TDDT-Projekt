@@ -38,6 +38,10 @@ public class Uebung {
         }
         else {
             File[] listOfFiles = file.listFiles();
+            if(listOfFiles.length == 0) {
+                isEmpty = true;
+                error.noExercises();
+            }
             for (File file4 : listOfFiles) {
                 String pfad = file4.toString();
                 int pos = pfad.indexOf("\u00DCbungen");
@@ -56,6 +60,10 @@ public class Uebung {
         }
         else{
             File[] listOfFiles = file.listFiles();
+            if(listOfFiles.length == 0){
+                isEmpty = true;
+                error.noExercises();
+            }
             for (File file4 : listOfFiles) {
                 String pfad = file4.toString();
                 int pos = pfad.indexOf("\u00DCbungen");
