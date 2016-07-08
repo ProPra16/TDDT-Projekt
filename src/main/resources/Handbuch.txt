@@ -20,7 +20,7 @@ Klassenname CodeKlasse: Beispiel
 Klassenname TestKlasse: BeispielTest
 
 
-!!! Achtung: 'Uebungdateien sollen nach gueltige Klassennamen benannt werden!!!
+!!! Achtung: 'Uebungdateien sollen nach gueltigen Klassennamen benannt werden!!!
  
 
 ----Programmfunktionen----
@@ -55,7 +55,7 @@ Die einzelnen Phasen sind:
 -Refactor
 
 In Red wird der Benutzer aufgefordert Tests zu schreiben, 
-wobei mindestens einer dieser Tests fehlschlagen muss.
+wobei genau einer dieser Tests fehlschlagen muss.
 Wenn diese Bedingung erfuellt ist kann zu Green gewechselt werden.
 In Green wird der zu testende Code geschrieben.
 Der Benutzer kann nach Wunsch wieder zurueck zu Red wechseln.
