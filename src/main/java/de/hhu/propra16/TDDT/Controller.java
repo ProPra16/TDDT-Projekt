@@ -233,7 +233,7 @@ public class Controller {
         trackerStart = System.currentTimeMillis();
         int ActualTime=0;
         if (babyStep!=null) {
-            ActualTime = babyStep.getTimePos();
+            ActualTime = babyStep.getTime();
             babyStep.setUnvisible();
         }
         TextArea TrackingData= new TextArea(Tracker.getChartInfos(chart,Phase));
@@ -245,7 +245,7 @@ public class Controller {
         Stage stage=setTrackingScene(TrackingData);
         myStage.hide();
         stage.showAndWait();
-        Tracker.setCorrection(trackerStart);
+        Tracker.setCorrection(trackerStart,currentPhase);
         myStage.show();
         if (babyStep!=null) {
             while (stage.isShowing()) {
@@ -263,7 +263,7 @@ public class Controller {
         backbutton.minWidth(100);
         backbutton.setTranslateX(-40);
         backbutton.setTranslateY(30);
-        backbutton.setText("Zuruck zu TDDT");
+        backbutton.setText("Zur\u00FCck zu TDDT");
         backbutton.minHeight(50);
         backbutton.setOnAction(e -> stage.close());
         ((GridPane) scene.getRoot()).add(chart,0,0);

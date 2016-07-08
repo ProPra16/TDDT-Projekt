@@ -4,6 +4,7 @@ import vk.core.api.CompilerResult;
 import vk.core.api.JavaStringCompiler;
 import vk.core.api.TestFailure;
 import vk.core.api.TestResult;
+
 import java.util.Collection;
 
 public class GreenValidator {

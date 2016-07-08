@@ -2,9 +2,6 @@ package de.hhu.propra16.TDDT;
 
 import org.junit.Test;
 import vk.core.api.JavaStringCompiler;
-
-import java.util.concurrent.TimeUnit;
-
 import static org.junit.Assert.assertEquals;
 
 
@@ -183,4 +180,5 @@ public class Tester {
         newCompile.compileAndTest();
         assertEquals(true,newCompile.hasnoFailedTests());
     }
+
 }

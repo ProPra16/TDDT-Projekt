@@ -7,7 +7,7 @@ public class Uebung {
 
     private ArrayList<String> dateien = new ArrayList<>();
     private String[] buttons = new String[4];
-    private ArrayList<String> inhalt = new ArrayList<>();
+    ArrayList<String> inhalt = new ArrayList<>();
     private String beschrTeil = "";
     private String testTeil = "";
     private String codeTeil = "";
@@ -16,7 +16,7 @@ public class Uebung {
     private BufferedReader br = null;
     private int jarVar = 0;
     private WarningUnit error = new WarningUnit();
-    private boolean isEmpty;
+    private boolean isEmpty = false;
 
     public void buttonNamer() throws Exception {
         if (getClass().getProtectionDomain().getCodeSource().getLocation().getFile().contains("jar")) {
@@ -33,7 +33,7 @@ public class Uebung {
         path = (new File(".").getCanonicalPath());
         file = new File(path + "/\u00DCbungen");
         if(!file.exists()){
-            isEmpty=true;
+            isEmpty = true;
             error.folderError();
         }
         else {
@@ -51,7 +51,7 @@ public class Uebung {
         path = (new File(".").getCanonicalPath() + "/build/libs/\u00DCbungen");
         file = new File(path);
         if(!file.exists()){
-            isEmpty=true;
+            isEmpty = true;
             error.folderError();
         }
         else{
@@ -66,13 +66,9 @@ public class Uebung {
     }
 
     public String[] fillArray() {
-        for (int i = 0; i < buttons.length; i++) {
-            if (dateien.size() > i) {
-                buttons[i] = dateien.get(i);
-            } else {
-                buttons[i] = "";
-            }
-        }
+        for (int i = 0; i < buttons.length; i++)
+            if (dateien.size() > i) buttons[i] = dateien.get(i);
+            else buttons[i] = "";
         return buttons;
     }
 
@@ -83,22 +79,27 @@ public class Uebung {
     public void readFile(String filename, boolean istInUbung) {
         String directory = "\u00DCbungen/";
         if(!istInUbung){
-            directory = "";
+            try {
+                InputStream file = getClass().getResourceAsStream("/" + filename);
+                br = new BufferedReader(new InputStreamReader(file));
+            } catch (Exception ignored) {}
         }
-        try {
-            if (jarVar == 1) {
-                path = (new File(".").getCanonicalPath());
-                file = new File(path + "/" + directory + filename);
-            } else {
-                path = (new File(".").getCanonicalPath() + "/build/libs/" + directory);
-                file = new File(path + filename);
+        else{
+            try {
+                if (jarVar == 1) {
+                    path = (new File(".").getCanonicalPath());
+                    file = new File(path + "/" + directory + filename);
+                } else {
+                    path = (new File(".").getCanonicalPath() + "/build/libs/" + directory);
+                    file = new File(path + filename);
+                }
+                br = new BufferedReader(new FileReader(file));
             }
-            br = new BufferedReader(new FileReader(file));
-        }
-        catch (Exception e){
-            br = null;
-            path = null;
-            file = null;
+            catch (Exception e){
+                br = null;
+                path = null;
+                file = null;
+            }
         }
         if(br != null) {
             try {
@@ -115,7 +116,7 @@ public class Uebung {
         boolean imBeschreibungsBereich = false;
         boolean imTestBereich = false;
         boolean imCodeBereich = false;
-        for (String anInhalt : this.inhalt) {
+        for (String anInhalt : this.inhalt)
             if (anInhalt.length() > 3 && anInhalt.substring(0, 3).equals("+++")) {
                 if (anInhalt.contains("+++description")) {
                     imBeschreibungsBereich = true;
@@ -143,7 +144,6 @@ public class Uebung {
                     this.codeTeil += anInhalt + "\n";
                 }
             }
-        }
     }
 
     public String[] down(String[] buttons) {
@@ -189,7 +189,7 @@ public class Uebung {
     }
 
     public void clearAll(){
-        this.inhalt = new ArrayList<>();
+        this.inhalt = new ArrayList<String>();
         this.beschrTeil = "";
         this.testTeil = "";
         this.codeTeil = "";
@@ -207,7 +207,7 @@ public class Uebung {
     }
 
     public String replacer(String s){
-        return s.replace("ae","\u00E4").replace("ue","\u00FC").replace("'Ue","\u00DC").replace("Oe","\u00D6");
+        return s.replace("ae","\u00E4").replace("ue","\u00FC").replace("oe","\u00F6").replace("'Ue","\u00DC").replace("'Oe","\u00D6");
     }
 
     public String gibBeschr(){return this.beschrTeil;}
@@ -216,7 +216,7 @@ public class Uebung {
 
     public String gibCode(){return this.codeTeil;}
 
-    public boolean folderExists() {
+    public boolean folderExists(){
         return !isEmpty;
     }
 }

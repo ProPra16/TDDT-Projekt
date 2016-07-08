@@ -26,7 +26,9 @@ public class StartController {
         try {
             this.buttonTooltip.setText("");
             neueUbungen.buttonNamer();
-            if (!neueUbungen.folderExists()) {m.stop();}
+            if(neueUbungen.folderExists() == false){
+                m.stop();
+            }
             this.buttons = neueUbungen.fillArray();
             switch (neueUbungen.anzahlUbungen()) {
                 case 0:
@@ -120,7 +122,10 @@ public class StartController {
     public boolean validClassName(String KlassenName) {
         ActionUnit Validator=new ActionUnit(new UserCode(KlassenName));
         Validator.compile();
-        return !Validator.compileErrors() && !KlassenName.equals("Test");
+        if (Validator.compileErrors() || KlassenName.equals("Test") ) {
+            return false;
+        }
+        return true;
     }
 
     public String getKlassenName(String UserChoice) {
@@ -131,6 +136,7 @@ public class StartController {
     }
 
     public void iterateUp(ActionEvent event){
+
         String [] buttonsTemp = neueUbungen.up(buttons);
         if(buttonsTemp != null) {
             buttons = buttonsTemp;
@@ -206,7 +212,11 @@ public class StartController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText("TDDT - Test Driven Development Tester");
-        alert.setContentText("\u00A9" + "ProPra 2016\n" + "Team: Halt-Doch-Einfach-Mal-Dein-Maul");
+        alert.setContentText("\u00A9" + "ProPra 2016\n" + "Team: Halt-Doch-Einfach-Mal-Dein-Maul\n\n" +
+                "Asri Ferati\n" +
+                "Henrik Grosche\n" +
+                "Louisa Zackel\n" +
+                "Mustafa Pektez");
         alert.showAndWait();
     }
 }

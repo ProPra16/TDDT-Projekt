@@ -3,6 +3,7 @@ package de.hhu.propra16.TDDT;
 import java.util.Calendar;
 import java.util.TreeMap;
 
+
 public class TrackingTable {
     private TreeMap<Long,String> TrackingStats=new TreeMap<>();
     private Calendar calendar=Calendar.getInstance();

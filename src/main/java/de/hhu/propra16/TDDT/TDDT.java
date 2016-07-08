@@ -11,6 +11,7 @@ public class TDDT extends Application {
 
     private Parent rooty = new Pane();
     public Stage myStage = new Stage();
+    private Controller controller;
 
     public static void main(String[] args) {
         launch(args);
@@ -27,8 +28,11 @@ public class TDDT extends Application {
     }
 
     public void starter() {
-        try {this.rooty = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));}
-        catch (Exception e) {}
+        try {
+            this.rooty = FXMLLoader.load(getClass().getResource("/MainScreen.fxml"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         myStage.setTitle("TDDT");
         myStage.setScene(new Scene(rooty,700,600));
         myStage.setResizable(false);
@@ -38,8 +42,12 @@ public class TDDT extends Application {
     public void startProg(UserCode UserEinstellungen) {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("/TDDT.fxml"));
         Parent root = null;
-        try {root = loader.load();} catch (IOException e){}
-        Controller controller = loader.getController();
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.controller = loader.getController();
         controller.setStage(myStage);
         controller.init(controller,UserEinstellungen);
         this.myStage.setScene(new Scene(root,850,700));

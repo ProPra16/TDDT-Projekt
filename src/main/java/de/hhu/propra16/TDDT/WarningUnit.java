@@ -104,20 +104,20 @@ public class WarningUnit {
 
     public void folderError(){
         Action.setHeaderText("Ordner \"\u00DCbungen\" fehlt!");
-        Action.setContentText("Bitte erstellen Sie einen Ordner \"\u00DCbungen\" mit entsprechenden \u00DCbungsdateien");
+        Action.setContentText("Bitte erstellen Sie einen Ordner \"\u00DCbungen\" mit entsprechenden \u00DCbungsdateien.");
         Action.showAndWait();
     }
     public void fileError(){
         Action.setHeaderText("Bitte anderen Dateinamen ausw\u00E4hlen!");
         Action.setContentText("Bitte achte darauf, dass die \u00DCbungsdateien keine ung\u00FCltigen Zeichen enthalten.\n"+
-                "Insbesondere sollte deine Klasse/deine Datei nicht Test genannt werden");
+                "Insbesondere sollte deine Klasse/deine Datei nach einem g\u00FCltigen Klassennamen benannt sein.");
         Action.showAndWait();
     }
 
     public void timeUp() {
         Info.setTitle("Zeit ist um !");
-        Info.setContentText("Deine Zeit fürs Programmieren ist leider abgelaufen\n"+
-                "Du bist jetzt wieder in der vorherigen Phase");
+        Info.setContentText("Deine Zeit f\u00FCrs Programmieren ist leider abgelaufen.\n"+
+                "Du bist jetzt wieder in der vorherigen Phase.");
         Info.showAndWait();
     }
 
