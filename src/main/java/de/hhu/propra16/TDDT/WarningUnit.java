@@ -103,7 +103,7 @@ public class WarningUnit {
     }
 
     public void folderError(){
-        Action.setHeaderText("Ordner \"Ubungen\" fehlt!");
+        Action.setHeaderText("Ordner \"\u00DCbungen\" fehlt!");
         Action.setContentText("Bitte erstellen Sie einen Ordner \"\u00DCbungen\" mit entsprechenden \u00DCbungsdateien");
         Action.showAndWait();
     }

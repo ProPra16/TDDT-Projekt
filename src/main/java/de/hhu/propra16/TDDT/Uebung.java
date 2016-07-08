@@ -7,7 +7,7 @@ public class Uebung {
 
     private ArrayList<String> dateien = new ArrayList<>();
     private String[] buttons = new String[4];
-    ArrayList<String> inhalt = new ArrayList<>();
+    private ArrayList<String> inhalt = new ArrayList<>();
     private String beschrTeil = "";
     private String testTeil = "";
     private String codeTeil = "";
@@ -16,6 +16,7 @@ public class Uebung {
     private BufferedReader br = null;
     private int jarVar = 0;
     private WarningUnit error = new WarningUnit();
+    private boolean isEmpty;
 
     public void buttonNamer() throws Exception {
         if (getClass().getProtectionDomain().getCodeSource().getLocation().getFile().contains("jar")) {
@@ -32,6 +33,7 @@ public class Uebung {
         path = (new File(".").getCanonicalPath());
         file = new File(path + "/\u00DCbungen");
         if(!file.exists()){
+            isEmpty=true;
             error.folderError();
         }
         else {
@@ -49,6 +51,7 @@ public class Uebung {
         path = (new File(".").getCanonicalPath() + "/build/libs/\u00DCbungen");
         file = new File(path);
         if(!file.exists()){
+            isEmpty=true;
             error.folderError();
         }
         else{
@@ -130,13 +133,13 @@ public class Uebung {
                     imCodeBereich = false;
                 }
             } else {
-                if (imBeschreibungsBereich == true) {
+                if (imBeschreibungsBereich) {
                     this.beschrTeil += anInhalt + "\n";
                 }
-                if (imTestBereich == true) {
+                if (imTestBereich) {
                     this.testTeil += anInhalt + "\n";
                 }
-                if (imCodeBereich == true) {
+                if (imCodeBereich) {
                     this.codeTeil += anInhalt + "\n";
                 }
             }
@@ -186,7 +189,7 @@ public class Uebung {
     }
 
     public void clearAll(){
-        this.inhalt = new ArrayList<String>();
+        this.inhalt = new ArrayList<>();
         this.beschrTeil = "";
         this.testTeil = "";
         this.codeTeil = "";
@@ -213,4 +216,7 @@ public class Uebung {
 
     public String gibCode(){return this.codeTeil;}
 
+    public boolean folderExists() {
+        return !isEmpty;
+    }
 }

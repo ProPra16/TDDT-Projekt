@@ -233,7 +233,7 @@ public class Controller {
         trackerStart = System.currentTimeMillis();
         int ActualTime=0;
         if (babyStep!=null) {
-            ActualTime = babyStep.getTime();
+            ActualTime = babyStep.getTimePos();
             babyStep.setUnvisible();
         }
         TextArea TrackingData= new TextArea(Tracker.getChartInfos(chart,Phase));
@@ -245,7 +245,7 @@ public class Controller {
         Stage stage=setTrackingScene(TrackingData);
         myStage.hide();
         stage.showAndWait();
-        Tracker.setCorrection(trackerStart,currentPhase);
+        Tracker.setCorrection(trackerStart);
         myStage.show();
         if (babyStep!=null) {
             while (stage.isShowing()) {

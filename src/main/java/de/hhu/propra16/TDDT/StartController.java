@@ -26,6 +26,7 @@ public class StartController {
         try {
             this.buttonTooltip.setText("");
             neueUbungen.buttonNamer();
+            if (!neueUbungen.folderExists()) {m.stop();}
             this.buttons = neueUbungen.fillArray();
             switch (neueUbungen.anzahlUbungen()) {
                 case 0:
@@ -119,10 +120,7 @@ public class StartController {
     public boolean validClassName(String KlassenName) {
         ActionUnit Validator=new ActionUnit(new UserCode(KlassenName));
         Validator.compile();
-        if (Validator.compileErrors() || KlassenName.equals("Test") ) {
-            return false;
-        }
-        return true;
+        return !Validator.compileErrors() && !KlassenName.equals("Test");
     }
 
     public String getKlassenName(String UserChoice) {
@@ -133,7 +131,6 @@ public class StartController {
     }
 
     public void iterateUp(ActionEvent event){
-
         String [] buttonsTemp = neueUbungen.up(buttons);
         if(buttonsTemp != null) {
             buttons = buttonsTemp;

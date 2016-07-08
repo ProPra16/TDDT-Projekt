@@ -12,32 +12,37 @@ public class BabyStep extends Thread {
     private volatile boolean expired;
     private Controller controller;
     private ArrayList<String> CountDowns=new ArrayList<>();
-    private int ActualTime;
+    private int ActualTimePos;
     private boolean visible=true;
     private boolean lastSeconds;
 
     public BabyStep(String Time, Controller controller) {
         this.Time=Time;
         this.controller = controller;
-        fill();
+        fillTime();
+    }
+
+    public BabyStep(String Time) {
+        this.Time=Time;
+        fillTime();
     }
 
     @Override
     public void run() {
         while (!expired) {
             Platform.runLater(()-> {
-                if (ActualTime == -1) {
-                    ActualTime = 0;
+                if (ActualTimePos == -1) {
+                    ActualTimePos = 0;
                 }
                 if (visible) {Clock.setText(""); }
                 if (controller.getPhase()!='F') {
-                    if (visible) {Clock.setText(CountDowns.get(ActualTime));}
+                    if (visible) {Clock.setText(CountDowns.get(ActualTimePos));}
                     if(!Clock.getText().equals("0:00")){
                         Clock.setVisible(true);
                     }
                     setStyle();
                 }});
-            ActualTime+=1;
+            ActualTimePos +=1;
             ticktack();
             isExpired();
         }
@@ -51,16 +56,18 @@ public class BabyStep extends Thread {
 
     public void isExpired() {
         Platform.runLater(()-> {
-            if (ActualTime==CountDowns.size()) {
+            if (ActualTimePos ==CountDowns.size()) {
                 expired = true;
+            if (controller!=null) {
                 showInfo();
                 controller.switchPhase();
+            }
             }
         });
     }
 
     public void setStyle() {
-        if (CountDowns.get(ActualTime).equals("0:10")) {
+        if (CountDowns.get(ActualTimePos).equals("0:10")) {
             Clock.setStyle("-fx-text-fill:red;-fx-font-size:30");
             lastSeconds=true;
         }
@@ -92,17 +99,17 @@ public class BabyStep extends Thread {
         visible=!TimeUpInfo.TimeUpisShowing();
         expired=false;
         lastSeconds=false;
-        ActualTime=-1;
+        ActualTimePos =-1;
     }
 
     public void restart(int Pos) {
         visible=true;
         expired=false;
         lastSeconds=false;
-        ActualTime=Pos;
+        ActualTimePos =Pos;
     }
 
-    public void fill() {
+    public void fillTime() {
         int min=Integer.parseInt(Time.substring(0,1));
         int sec=Integer.parseInt(Time.substring(2));
         while (!(sec==0 && min==0)) {
@@ -125,8 +132,8 @@ public class BabyStep extends Thread {
         expired = true;
     }
 
-    public int getTime() {
-        return ActualTime;
+    public int getTimePos() {
+        return ActualTimePos;
     }
 
     public void setUnvisible() {

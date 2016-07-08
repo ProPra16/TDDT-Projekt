@@ -38,6 +38,5 @@ public class PhaseSetter {
         REFACTOR.setStyle("-fx-text-fill:white; -fx-background-color: #000000;");
         Anzeige.setText("Du kannst nun den Code verbessern");
         Anzeige.setStyle("");
-
     }
 }
