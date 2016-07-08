@@ -5,6 +5,7 @@
 
 by
 
+```
 asfer100
 
 hegro105
@@ -12,11 +13,15 @@ hegro105
 lozac100
 
 mupek100
+```
 
 ## Gradle
 Bauen des Programms:  ```gradle build```
 
 Konfigurieren für Intellij: ```gradle idea```
+
+## Ausführen des Programms
+Die Zip runterladen, entpacken und Windows-Run.bat ausführen oder in der Konsole mit ```jar -java TDDT.java``` starten
 
 ## License
 
