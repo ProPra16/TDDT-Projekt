@@ -116,7 +116,7 @@ public class WarningUnit {
 
     public void noExercises(){
         Action.setHeaderText("Bitte Dateien in \u00DCbungsordner einf\u00FCgen!");
-        Action.setContentText("Bitte achte darauf, dass du \u00DCbungsdateien \u00DCbungsordner hast.\n"+
+        Action.setContentText("Bitte achte darauf, dass du \u00DCbungsdateien im \u00DCbungsordner hast.\n"+
                 "Ansonsten kann das Programm nicht gestartet werden.\nRichte dich an die beigef\u00FCgte Formatvorlage.");
         Action.showAndWait();
     }
