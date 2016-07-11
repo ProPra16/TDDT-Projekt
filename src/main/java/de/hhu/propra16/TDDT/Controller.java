@@ -190,7 +190,7 @@ public class Controller {
     }
 
     public void switchPhase() {
-        Tracker.addEvent("BabySteps Zeit abgelaufen");
+        if (!Tracker.isShowing()){ Tracker.addEvent("BabySteps Zeit abgelaufen");}
         if (Phase!='F') {
             switchRED();
         }
