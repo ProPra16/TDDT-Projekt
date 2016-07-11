@@ -60,7 +60,7 @@ public class BabyStep extends Thread {
     }
 
     public void setStyle() {
-        if (CountDowns.get(ActualTime).equals("0:10")) {
+        if (CountDowns.get(ActualTime).contains("0:0") || CountDowns.get(ActualTime).equals("0:10") ) {
             Clock.setStyle("-fx-text-fill:red;-fx-font-size:30");
             lastSeconds=true;
         }

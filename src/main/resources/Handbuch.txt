@@ -28,6 +28,12 @@ Klassenname TestKlasse: BeispielTest
 
 Eine kurze Zusammenfassung der Funktionen von den einzelnen Bestandteilen des Programms:
 
+BabySteps:
+Ist eine Funktion, die die Zeit des Nutzers fuer die Phasen in Red und Green limiert.
+Es wird vor dem Start des Hauptprogramms abgefragt, ob der Nutzer diese Funktion nutzen moechte.
+Nach Ablauf der Zeit kehrt das Programm zur vorherigen Phase zurueck.
+(Also bei Green -> Red und bei Red -> Red)
+
 Tracking:
 'Oeffnet ein Fenster in dem Statiken zur Programmnutzung angezeigt werden,
 unter anderem wie lange der Nutzer in jeder Phase war und welche Meldungen 

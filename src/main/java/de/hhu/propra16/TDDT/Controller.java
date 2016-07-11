@@ -229,7 +229,7 @@ public class Controller {
         main.starter();
     }
 
-    public void show() throws InterruptedException {
+    public void showTracker() throws InterruptedException {
         trackerStart = System.currentTimeMillis();
         int ActualTime=0;
         if (babyStep!=null) {
@@ -237,7 +237,6 @@ public class Controller {
             babyStep.setUnvisible();
         }
         TextArea TrackingData= new TextArea(Tracker.getChartInfos(chart,Phase));
-        char currentPhase = Tracker.getActualPhase();
         TrackingData.setId("TrackingData");
         TrackingData.setMouseTransparent(true);
         TrackingData.setEditable(false);
@@ -245,7 +244,7 @@ public class Controller {
         Stage stage=setTrackingScene(TrackingData);
         myStage.hide();
         stage.showAndWait();
-        Tracker.setCorrection(trackerStart,currentPhase);
+        Tracker.setCorrection(trackerStart);
         myStage.show();
         if (babyStep!=null) {
             while (stage.isShowing()) {

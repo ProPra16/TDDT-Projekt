@@ -41,7 +41,7 @@ public class TrackingUnit {
         TrackingStats.addEvent(System.currentTimeMillis(),Action);
     }
 
-    public String getTrackingStats(char Phase) {
+    public String getTrackingStats() {
         TrackingStats.addEvent(StartTime,"Anwendung gestartet");
         TrackingStats.fillStats();
         return TrackingStats.getStats()+"\n\n"+ExtraInfo;
@@ -62,7 +62,7 @@ public class TrackingUnit {
                         new PieChart.Data("REFACTOR-Time", RefactorTimeInPreCent));
         chart.setData(pieChartData);
         chart.setTitle("Phase Duration");
-        return getTrackingStats(Phase);
+        return getTrackingStats();
     }
 
     public String setExtraInfo() {
@@ -81,9 +81,7 @@ public class TrackingUnit {
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(Time)));
     }
 
-    public char getActualPhase(){return actualPhase;}
-
-    public void setCorrection(long pretime, char Phase){
+    public void setCorrection(long pretime){
         long currentTime = System.currentTimeMillis();
         long diff = currentTime - pretime;
         switch (actualPhase){

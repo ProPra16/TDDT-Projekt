@@ -25,6 +25,6 @@
     </Button>
     <Button fx:id="RED" text="RED" translateY="-300" translateX="0" minWidth="175" minHeight="40" style="-fx-background-color: #FF0000;" onAction="#RED"/>
     <Button fx:id="GREEN" text="GREEN" translateY="-300"  translateX="200" minWidth="175"  minHeight="40" onAction="#GREEN"/>
-    <Button text="Tracker" translateX="200" translateY="-250" minWidth="175" minHeight="40" onAction="#show"/>
+    <Button text="Tracker" translateX="200" translateY="-250" minWidth="175" minHeight="40" onAction="#showTracker"/>
     <Button fx:id="REFACTOR" text="REFACTOR" translateY="-300"  translateX="400" minWidth="175" minHeight="40" onAction="#REFACTOR"/>
 </GridPane>
