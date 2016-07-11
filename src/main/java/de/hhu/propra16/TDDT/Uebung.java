@@ -197,7 +197,7 @@ public class Uebung {
     }
 
     public void clearAll(){
-        this.inhalt = new ArrayList<String>();
+        this.inhalt = new ArrayList<>();
         this.beschrTeil = "";
         this.testTeil = "";
         this.codeTeil = "";
