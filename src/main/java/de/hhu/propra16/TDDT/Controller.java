@@ -1,6 +1,5 @@
 package de.hhu.propra16.TDDT;
 
-import com.sun.org.apache.regexp.internal.RE;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,7 +8,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -228,7 +226,7 @@ public class Controller {
         main.starter();
     }
 
-    public void show() throws InterruptedException {
+    public void showTracker() throws InterruptedException {
         trackerStart = System.currentTimeMillis();
         int ActualTime=0;
         if (babyStep!=null) {
