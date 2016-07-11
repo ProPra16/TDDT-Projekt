@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class BabyStep extends Thread {
     private String Time;
     private Label Clock = new Label();
-    private WarningUnit TimeUpInfo=new WarningUnit();
+    private WarningUnit TimeUpInfo;
     private volatile boolean expired;
     private Controller controller;
     private ArrayList<String> CountDowns=new ArrayList<>();
@@ -19,6 +19,7 @@ public class BabyStep extends Thread {
     public BabyStep(String Time, Controller controller) {
         this.Time=Time;
         this.controller = controller;
+        this.TimeUpInfo=controller.getWarningUnit();
         fill();
     }
 
@@ -60,7 +61,7 @@ public class BabyStep extends Thread {
     }
 
     public void setStyle() {
-        if (CountDowns.get(ActualTime).equals("0:10")) {
+        if (Clock.getText().contains("0:0") || Clock.getText().equals("0:10")) {
             Clock.setStyle("-fx-text-fill:red;-fx-font-size:30");
             lastSeconds=true;
         }
@@ -71,14 +72,13 @@ public class BabyStep extends Thread {
 
     public void showInfo() {
         if (controller.getPhase()!='F' && !TimeUpInfo.TimeUpisShowing()) {
-            restart(-1);
+            restart();
             setUnvisible();
             Clock.setVisible(false);
             TimeUpInfo.timeUp();
             while (TimeUpInfo.TimeUpisShowing()) {
-                try {
-                    TimeUnit.SECONDS.sleep(1000);
-                } catch (InterruptedException ignored) {}
+                try {TimeUnit.SECONDS.sleep(1000);}
+                catch (InterruptedException ignored) {}
             }
         }
     }
@@ -131,5 +131,9 @@ public class BabyStep extends Thread {
 
     public void setUnvisible() {
         visible=false;
+    }
+
+    public void clear() {
+        Clock.setText("");
     }
 }

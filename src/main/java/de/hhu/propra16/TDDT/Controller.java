@@ -1,5 +1,6 @@
 package de.hhu.propra16.TDDT;
 
+import com.sun.org.apache.regexp.internal.RE;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -8,6 +9,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -16,8 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Controller {
     @FXML private TextArea Fenster;
-    @FXML private Text Import1;
-    @FXML private Text Import2;
+    @FXML private Text Imports;
     @FXML private Text Klassenname;
     @FXML private Button RED;
     @FXML private Button GREEN;
@@ -43,12 +44,12 @@ public class Controller {
 
     public void init(Controller controller,UserCode UserInput) {
         this.UserInput=UserInput;
+        Tracker=new TrackingUnit();
+        Reporter=new WarningUnit(Tracker);
         if (UserInput.hasBabySteps()) {
             Clock.setText(UserInput.getTime());
             babyStep=new BabyStep(UserInput.getTime(),controller);
         }
-        Tracker=new TrackingUnit();
-        Reporter=new WarningUnit(Tracker);
         switchRED();
         Klassenname.setText("public class "+UserInput.getTestName()+" {");
         if (babyStep!=null) {
@@ -204,12 +205,10 @@ public class Controller {
         Phase=Actual;
         phasesetter.setPhase(Phase, RED, GREEN, REFACTOR, Anzeige);
         if (!isTest) {
-            Import1.setText("");
-            Import2.setText("");
+            Imports.setText("");
             Klassenname.setText("public class "+UserInput.getKlassenName()+" {");}
         else {
-            Import1.setText("import static org.junit.Assert.*;");
-            Import2.setText("import org.junit.Test;");
+            Imports.setText("import static org.junit.Assert.*;\n"+"import org.junit.Test;");
             Klassenname.setText("public class "+UserInput.getTestName()+" {");
         }
     }
@@ -237,15 +236,15 @@ public class Controller {
             babyStep.setUnvisible();
         }
         TextArea TrackingData= new TextArea(Tracker.getChartInfos(chart,Phase));
-        char currentPhase = Tracker.getActualPhase();
         TrackingData.setId("TrackingData");
         TrackingData.setMouseTransparent(true);
         TrackingData.setEditable(false);
         TrackingData.setPrefWidth(500);
+        Tracker.setTrackerIsShowing(true);
         Stage stage=setTrackingScene(TrackingData);
         myStage.hide();
         stage.showAndWait();
-        Tracker.setCorrection(trackerStart,currentPhase);
+        Tracker.setCorrection(trackerStart);
         myStage.show();
         if (babyStep!=null) {
             while (stage.isShowing()) {
@@ -266,7 +265,11 @@ public class Controller {
         backbutton.setTranslateY(30);
         backbutton.setText("Zur\u00FCck zu TDDT");
         backbutton.minHeight(50);
-        backbutton.setOnAction(e -> stage.close());
+        backbutton.setOnAction(e -> {
+            babyStep.clear();
+            Tracker.setTrackerIsShowing(false);
+            stage.close();
+        });
         ((GridPane) scene.getRoot()).add(chart,0,0);
         ((GridPane) scene.getRoot()).add(TrackingData,1,0);
         ((GridPane) scene.getRoot()).add(backbutton,1,2);
@@ -275,5 +278,9 @@ public class Controller {
         stage.setHeight(500);
         stage.setScene(scene);
         return stage;
+    }
+
+    public WarningUnit getWarningUnit() {
+        return Reporter;
     }
 }

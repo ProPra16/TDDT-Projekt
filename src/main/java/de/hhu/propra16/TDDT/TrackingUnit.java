@@ -19,6 +19,7 @@ public class TrackingUnit {
     private String ExtraInfo="";
     private char actualPhase;
     private long trackerTime = 0;
+    private boolean trackerIsShowing;
 
     public TrackingUnit() {
         StartTime=System.currentTimeMillis();
@@ -81,8 +82,6 @@ public class TrackingUnit {
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(Time)));
     }
 
-    public char getActualPhase(){return actualPhase;}
-
     public void setCorrection(long pretime){
         long currentTime = System.currentTimeMillis();
         long diff = currentTime - pretime;
@@ -95,5 +94,13 @@ public class TrackingUnit {
                 break;
         }
        trackerTime += diff;
+    }
+
+    public void setTrackerIsShowing(boolean value) {
+        trackerIsShowing=value;
+    }
+
+    public boolean isShowing() {
+        return trackerIsShowing;
     }
 }

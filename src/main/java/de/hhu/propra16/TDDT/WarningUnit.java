@@ -125,7 +125,7 @@ public class WarningUnit {
         Info.setTitle("Zeit ist um !");
         Info.setContentText("Deine Zeit f\u00FCrs Programmieren ist leider abgelaufen.\n"+
                 "Du bist jetzt wieder in der vorherigen Phase.");
-        Info.showAndWait();
+       if (!Tracker.isShowing()){ Info.showAndWait();}
     }
 
     public boolean TimeUpisShowing() {
