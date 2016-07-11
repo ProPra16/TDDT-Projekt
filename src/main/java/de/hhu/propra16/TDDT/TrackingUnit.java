@@ -47,7 +47,7 @@ public class TrackingUnit {
         return TrackingStats.getStats()+"\n\n"+ExtraInfo;
     }
 
-    public String getChartInfos(PieChart chart, char Phase) {
+    public String getChartInfos(PieChart chart,char Phase) {
         actualPhase = Phase;
         stopTime(Phase);
         elapsedTimed=System.currentTimeMillis()-(StartTime+trackerTime);
