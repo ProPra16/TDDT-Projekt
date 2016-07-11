@@ -146,7 +146,7 @@ public class Controller {
                 UserInput.setTest(Fenster.getText());
                 break;
             case 'G':   if (!Fenster.getText().equals(UserInput.getClassCode())) {
-                Tracker.addEvent("Code bei GreenValidator ge" + "\u00E4"+ "ndert");}
+                Tracker.addEvent("Code bei GREEN ge" + "\u00E4"+ "ndert");}
                 UserInput.setClass(Fenster.getText());
                 break;
             case 'F':   return;
@@ -156,7 +156,7 @@ public class Controller {
         Action.compile();
         if (Action.compileErrors()) {
             String CompilerErrors=TestHelpers.getErrorMessages(Action.getCompiler(), Action.getResult());
-            Reporter.showCompilerErrors(CompilerErrors,"Kompilier Fehler im GreenValidator-Code");
+            Reporter.showCompilerErrors(CompilerErrors,"Kompilier Fehler im GREEN-Code");
         }
         else {
             checkUserTestCases();
