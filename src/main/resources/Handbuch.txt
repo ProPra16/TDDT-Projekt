@@ -35,7 +35,7 @@ Nach Ablauf der Zeit kehrt das Programm zur vorherigen Phase zurueck.
 (Also bei Green -> Red und bei Red -> Red)
 
 Tracking:
-'Oeffnet ein Fenster in dem Statiken zur Programmnutzung angezeigt werden,
+'Oeffnet ein Fenster in dem Statistiken zur Programmnutzung angezeigt werden,
 unter anderem wie lange der Nutzer in jeder Phase war und welche Meldungen 
 bisher angezeigt wurden (bspw. Fehler, Meldungen oder Phasenwechsel)
  
