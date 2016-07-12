@@ -21,7 +21,7 @@ Bauen des Programms:  ```gradle build```
 Konfigurieren für Intellij: ```gradle idea```
 
 ## Ausführen des Programms
-Die Zip runterladen, entpacken und Windows-Run.bat ausführen oder in der Konsole mit ```jar -java TDDT.java``` starten
+Die TDDT.zip runterladen, entpacken und Windows-Run.bat ausführen oder in der Konsole mit ```jar -java TDDT.java``` starten
 
 ## License
 
