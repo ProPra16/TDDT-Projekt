@@ -29,7 +29,7 @@ Klassenname TestKlasse: BeispielTest
 Eine kurze Zusammenfassung der Funktionen von den einzelnen Bestandteilen des Programms:
 
 BabySteps:
-Ist eine Funktion, die die Zeit des Nutzers fuer die Phasen in Red und Green limiert.
+Ist eine Funktion, die die Zeit des Nutzers fuer die Phasen in Red und Green limitiert.
 Es wird vor dem Start des Hauptprogramms abgefragt, ob der Nutzer diese Funktion nutzen moechte.
 Nach Ablauf der Zeit kehrt das Programm zur vorherigen Phase zurueck.
 (Also bei Green -> Red und bei Red -> Red)
@@ -48,7 +48,7 @@ Previous-Button: Iteriert in der Liste der 'Uebungsdateien nach oben
 
 Button mit 'Uebungsdatei-Name	
 -> Klick: Startet das Hauptprogramm mit Konfigurationen aus der 'Uebungsdatei
--> Ruebergehen:	Eine Beschreibung der Uebung wird angezeigt
+-> Mit der Maus ruebergehen:	Eine Beschreibung der Uebung wird angezeigt
 
 
 Nun eine etwas ausfuehrlichere Erklaerung zum Hauptprogramm:
@@ -63,12 +63,18 @@ Die einzelnen Phasen sind:
 In Red wird der Benutzer aufgefordert Tests zu schreiben, 
 wobei genau einer dieser Tests fehlschlagen muss.
 Wenn diese Bedingung erfuellt ist kann zu Green gewechselt werden.
+Oder wenn es einen Kompilierfehler im Code in Red oder in Green gibt.
 In Green wird der zu testende Code geschrieben.
 Der Benutzer kann nach Wunsch wieder zurueck zu Red wechseln.
 Wenn alle Tests erfolgreich sind kann der Benutzer zu Refactor wechseln.
 In Refactor kann der Code aus Green verbessert werden.
 Nach erfolgreichem Wechseln von Refactor zu Red wird der bisherige Code gespeichert 
 und die ganze Prozedur startet von neu.
+Zusaetzlich kann die Funktion BabySteps aktiviert werden.
+Die Zeit in Red und Green wird dann limitiert und nach Ablauf der Zeit wird in die vorherige Phase
+gewechselt.
+Bei Ablauf der Zeit von Green wird zu Red gewechselt und bei Ablauf der Zeit von Red wird zu
+Red gewechselt.
 Weitere Informationen koennen auf folgender Seite gefunden werden:
 http://www.frankwestphal.de/TestgetriebeneEntwicklung.html
 

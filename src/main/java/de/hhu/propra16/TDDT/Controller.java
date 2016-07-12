@@ -16,8 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Controller {
     @FXML private TextArea Fenster;
-    @FXML private Text Import1;
-    @FXML private Text Import2;
+    @FXML private Text Imports;
     @FXML private Text Klassenname;
     @FXML private Button RED;
     @FXML private Button GREEN;
@@ -43,12 +42,12 @@ public class Controller {
 
     public void init(Controller controller,UserCode UserInput) {
         this.UserInput=UserInput;
+        Tracker=new TrackingUnit();
+        Reporter=new WarningUnit(Tracker);
         if (UserInput.hasBabySteps()) {
             Clock.setText(UserInput.getTime());
             babyStep=new BabyStep(UserInput.getTime(),controller);
         }
-        Tracker=new TrackingUnit();
-        Reporter=new WarningUnit(Tracker);
         switchRED();
         Klassenname.setText("public class "+UserInput.getTestName()+" {");
         if (babyStep!=null) {
@@ -147,7 +146,7 @@ public class Controller {
                 UserInput.setTest(Fenster.getText());
                 break;
             case 'G':   if (!Fenster.getText().equals(UserInput.getClassCode())) {
-                Tracker.addEvent("Code bei GreenValidator ge" + "\u00E4"+ "ndert");}
+                Tracker.addEvent("Code bei GREEN ge" + "\u00E4"+ "ndert");}
                 UserInput.setClass(Fenster.getText());
                 break;
             case 'F':   return;
@@ -157,7 +156,7 @@ public class Controller {
         Action.compile();
         if (Action.compileErrors()) {
             String CompilerErrors=TestHelpers.getErrorMessages(Action.getCompiler(), Action.getResult());
-            Reporter.showCompilerErrors(CompilerErrors,"Kompilier Fehler im GreenValidator-Code");
+            Reporter.showCompilerErrors(CompilerErrors,"Kompilier Fehler im GREEN-Code");
         }
         else {
             checkUserTestCases();
@@ -191,7 +190,7 @@ public class Controller {
     }
 
     public void switchPhase() {
-        Tracker.addEvent("BabySteps Zeit abgelaufen");
+        if (!Tracker.isShowing()){ Tracker.addEvent("BabySteps Zeit abgelaufen");}
         if (Phase!='F') {
             switchRED();
         }
@@ -204,12 +203,10 @@ public class Controller {
         Phase=Actual;
         phasesetter.setPhase(Phase, RED, GREEN, REFACTOR, Anzeige);
         if (!isTest) {
-            Import1.setText("");
-            Import2.setText("");
+            Imports.setText("");
             Klassenname.setText("public class "+UserInput.getKlassenName()+" {");}
         else {
-            Import1.setText("import static org.junit.Assert.*;");
-            Import2.setText("import org.junit.Test;");
+            Imports.setText("import static org.junit.Assert.*;\n"+"import org.junit.Test;");
             Klassenname.setText("public class "+UserInput.getTestName()+" {");
         }
     }
@@ -241,6 +238,7 @@ public class Controller {
         TrackingData.setMouseTransparent(true);
         TrackingData.setEditable(false);
         TrackingData.setPrefWidth(500);
+        Tracker.setTrackerIsShowing(true);
         Stage stage=setTrackingScene(TrackingData);
         myStage.hide();
         stage.showAndWait();
@@ -265,7 +263,11 @@ public class Controller {
         backbutton.setTranslateY(30);
         backbutton.setText("Zur\u00FCck zu TDDT");
         backbutton.minHeight(50);
-        backbutton.setOnAction(e -> stage.close());
+        backbutton.setOnAction(e -> {
+            if(babyStep != null) babyStep.clear();
+            Tracker.setTrackerIsShowing(false);
+            stage.close();
+        });
         ((GridPane) scene.getRoot()).add(chart,0,0);
         ((GridPane) scene.getRoot()).add(TrackingData,1,0);
         ((GridPane) scene.getRoot()).add(backbutton,1,2);
@@ -274,5 +276,9 @@ public class Controller {
         stage.setHeight(500);
         stage.setScene(scene);
         return stage;
+    }
+
+    public WarningUnit getWarningUnit() {
+        return Reporter;
     }
 }

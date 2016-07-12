@@ -19,6 +19,7 @@ public class TrackingUnit {
     private String ExtraInfo="";
     private char actualPhase;
     private long trackerTime = 0;
+    private boolean trackerIsShowing;
 
     public TrackingUnit() {
         StartTime=System.currentTimeMillis();
@@ -58,7 +59,7 @@ public class TrackingUnit {
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                         new PieChart.Data("RED-Time", RedTimeInPreCent),
-                        new PieChart.Data("GreenValidator-Time", GreenTimeInPreCent),
+                        new PieChart.Data("GREEN-Time", GreenTimeInPreCent),
                         new PieChart.Data("REFACTOR-Time", RefactorTimeInPreCent));
         chart.setData(pieChartData);
         chart.setTitle("Phase Duration");
@@ -93,5 +94,13 @@ public class TrackingUnit {
                 break;
         }
        trackerTime += diff;
+    }
+
+    public void setTrackerIsShowing(boolean value) {
+        trackerIsShowing=value;
+    }
+
+    public boolean isShowing() {
+        return trackerIsShowing;
     }
 }

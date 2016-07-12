@@ -9,8 +9,7 @@
 <GridPane fx:id="Board" fx:controller="de.hhu.propra16.TDDT.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="30" vgap="20">
     <TextArea fx:id="Fenster" prefHeight="400" prefWidth="550" translateX="0" translateY="50" stylesheets="styler.css"/>
-    <Text fx:id="Import1" text="import static org.junit.Assert.*;" style="" translateX="0" translateY="-230"/>
-    <Text fx:id="Import2" text="import org.junit.Test;" translateX="0" translateY="-215"/>
+    <Text fx:id="Imports" translateX="0" translateY="-230"/>
     <Text fx:id="Klassenname" translateX="0" translateY="-175"/>
     <Text text="}" translateX="575" translateY="250"/>
     <Label fx:id="Clock" translateX="500" translateY="-200" style="-fx-text-fill:black; -fx-font-size:30"/>
