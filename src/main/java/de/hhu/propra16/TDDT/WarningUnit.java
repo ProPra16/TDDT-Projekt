@@ -103,8 +103,8 @@ public class WarningUnit {
     }
 
     public void folderError(){
-        Action.setHeaderText("Ordner \"\u00DCbungen\" fehlt!");
-        Action.setContentText("Bitte erstellen Sie einen Ordner \"\u00DCbungen\" mit entsprechenden \u00DCbungsdateien.");
+        Action.setHeaderText("Ordner \"Aufgaben\" fehlt!");
+        Action.setContentText("Bitte erstellen Sie einen Ordner \"Aufgaben\" mit entsprechenden \u00DCbungsdateien.");
         Action.showAndWait();
     }
     public void fileError(){
@@ -115,8 +115,8 @@ public class WarningUnit {
     }
 
     public void noExercises(){
-        Action.setHeaderText("Bitte Dateien in \u00DCbungsordner einf\u00FCgen!");
-        Action.setContentText("Bitte achte darauf, dass du \u00DCbungsdateien im \u00DCbungsordner hast.\n"+
+        Action.setHeaderText("Bitte Dateien in Aufgabenordner einf\u00FCgen!");
+        Action.setContentText("Bitte achte darauf, dass du \u00DCbungsdateien im Aufgabenordner hast.\n"+
                 "Ansonsten kann das Programm nicht gestartet werden.\nRichte dich an die beigef\u00FCgte Formatvorlage.");
         Action.showAndWait();
     }

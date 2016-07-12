@@ -11,6 +11,7 @@ public class Uebung {
     private String beschrTeil = "";
     private String testTeil = "";
     private String codeTeil = "";
+    private String aufgabenString = "Aufgaben";
     private File file = new File("");
     private String path = null;
     private BufferedReader br = null;
@@ -31,7 +32,7 @@ public class Uebung {
 
     public void buttonNamerForJar() throws Exception {
         path = (new File(".").getCanonicalPath());
-        file = new File(path + "/\u00DCbungen");
+        file = new File(path + "/" + aufgabenString);
         if(!file.exists()){
             isEmpty = true;
             error.folderError();
@@ -44,15 +45,15 @@ public class Uebung {
             }
             for (File file4 : listOfFiles) {
                 String pfad = file4.toString();
-                int pos = pfad.indexOf("\u00DCbungen");
-                pfad = pfad.substring(pos + 8, pfad.length());
+                int pos = pfad.indexOf(aufgabenString);
+                pfad = pfad.substring(pos + 9, pfad.length());
                 dateien.add(pfad);
             }
         }
     }
 
     public void buttonNamerForJava() throws Exception {
-        path = (new File(".").getCanonicalPath() + "/build/libs/\u00DCbungen");
+        path = (new File(".").getCanonicalPath() + "/build/libs/" + aufgabenString);
         file = new File(path);
         if(!file.exists()){
             isEmpty = true;
@@ -66,8 +67,8 @@ public class Uebung {
             }
             for (File file4 : listOfFiles) {
                 String pfad = file4.toString();
-                int pos = pfad.indexOf("\u00DCbungen");
-                pfad = pfad.substring(pos + 8, pfad.length());
+                int pos = pfad.indexOf(aufgabenString);
+                pfad = pfad.substring(pos + 9, pfad.length());
                 dateien.add(pfad);
             }
         }
@@ -85,7 +86,7 @@ public class Uebung {
     }
 
     public void readFile(String filename, boolean istInUbung) {
-        String directory = "\u00DCbungen/";
+        String directory = aufgabenString+"/";
         if(!istInUbung){
             try {
                 InputStream file = getClass().getResourceAsStream("/" + filename);

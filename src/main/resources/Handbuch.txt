@@ -9,7 +9,7 @@ eingeben
 ----notwendige Vorbereitungen vor Programmstart----
 
 
-Vor Programmstart muessen die 'Uebungsdateien in den Ordner "'Uebungen" kopiert werden.
+Vor Programmstart muessen die 'Uebungsdateien in den Ordner "Aufgaben" kopiert werden.
 Die Form der 'Uebungsdateien kann in den beigefuegten Beispieldateien ersehen werden.
 Noch eine Information: Der Klassenname fuer die CodeKlasse wird nach der 'Uebungsdatei benannt
 und der Klassenname fuer die TestKlasse wird nach dem Klassennamen fuer die CodeKlasse + Test benannt.
