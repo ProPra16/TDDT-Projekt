@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class StartController {
@@ -20,7 +21,7 @@ public class StartController {
     @FXML private Button button2 = new Button();
     @FXML private Button button3 = new Button();
     @FXML private Button button4 = new Button();
-
+    @FXML private Button button5 = new Button();
     @FXML
     private void initialize(){
         try {
@@ -87,7 +88,9 @@ public class StartController {
                 break;
         }
     }
+    public void buttonbackground(ActionEvent background) {
 
+    }
     public void buttonAction(ActionEvent event) {
         final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
@@ -219,4 +222,6 @@ public class StartController {
                 "Mustafa Pektez");
         alert.showAndWait();
     }
+
+
 }
