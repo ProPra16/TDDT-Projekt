@@ -89,7 +89,6 @@ public class StartController {
         }
     }
     public void buttonbackground(ActionEvent background) {
-        .setFill(Color.BLACK);
     }
     public void buttonAction(ActionEvent event) {
         final Node source = (Node) event.getSource();
