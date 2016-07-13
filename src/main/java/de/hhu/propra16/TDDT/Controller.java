@@ -91,6 +91,7 @@ public class Controller {
         else {
             Action.compileAndTest();
             if (Action.hasnoFailedTests()) {
+                Codesaver.save(UserInput);
                 Phase='R';
                 Fenster.clear();
                 RED();
