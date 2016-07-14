@@ -7,7 +7,5 @@
 build
 *.bat
 README.md
-*.bat
 out
 classes
-TDDT
