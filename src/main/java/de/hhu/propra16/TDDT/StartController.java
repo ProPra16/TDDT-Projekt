@@ -7,7 +7,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class StartController {
@@ -27,7 +26,7 @@ public class StartController {
         try {
             this.buttonTooltip.setText("");
             neueUbungen.buttonNamer();
-            if(neueUbungen.folderExists() == false){
+            if(!neueUbungen.folderExists()){
                 m.stop();
             }
             this.buttons = neueUbungen.fillArray();
