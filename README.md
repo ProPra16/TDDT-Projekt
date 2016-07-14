@@ -23,9 +23,9 @@ Konfigurieren für Intellij: ```gradle idea```
 ## Ausführen des Programms
 Die TDDT.zip runterladen, entpacken und 
 
-für Windows: Windows-Run.bat
+für Windows: ```Windows-Run.bat```
 
-für Linux/Mac: Linux-Mac-Run
+für Linux/Mac: ```Linux-Mac-Run```
 
 ausführen oder in der Konsole mit ```jar -java TDDT.java``` starten
 
