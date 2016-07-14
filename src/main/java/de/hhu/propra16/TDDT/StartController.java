@@ -136,7 +136,7 @@ public class StartController {
         return Klassenname;
     }
 
-    public void iterateUp(ActionEvent event){
+    public void iterateUp(){
 
         String [] buttonsTemp = neueUbungen.up(buttons);
         if(buttonsTemp != null) {
@@ -147,7 +147,7 @@ public class StartController {
             button4.setText(buttons[3].substring(0, buttons[3].length() - 4));
         }
     }
-    public void iterateDown(ActionEvent event){
+    public void iterateDown(){
         String [] buttonsTemp = neueUbungen.down(buttons);
         if(buttonsTemp != null) {
             buttons = buttonsTemp;
@@ -183,7 +183,7 @@ public class StartController {
         m.startProg(UserEinstellung);
     }
 
-    public void zeigHandbuch(ActionEvent event)throws Exception {
+    public void zeigHandbuch()throws Exception {
         neueUbungen.clearAll();
         neueUbungen.readFile("Handbuch.txt", false);
         if (!(neueUbungen.gibInhalt().equals(""))) {

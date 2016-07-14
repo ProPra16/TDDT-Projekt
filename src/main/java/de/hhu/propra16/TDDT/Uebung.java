@@ -55,7 +55,6 @@ public class Uebung {
     public void buttonNamerForJava() throws Exception {
         path = (new File(".").getCanonicalPath() + "/" + aufgabenString);
         file = new File(path);
-        System.out.println(file.getPath());
         if(!file.exists()){
             isEmpty = true;
             error.folderError();
