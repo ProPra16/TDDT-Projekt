@@ -1,0 +1,26 @@
++++description
+Schreibe eine Funktion toBinary(int N), die die Binaerdarstellung einer Natuerlichen Zahl N zurueckgibt.
+Wenn du diese Funktion implementiert hast, dann schreibe die Funktion toDec(String Binary), welche die Dezimaldarstellung einer
+Binaerzahl Binary zurueckgibt.
+Bsp.: toBinary(2)="10", toDec("100")=4
++++code
+public static String toBinary(int N) {
+return "";
+}
+
+/*
+public static int toDec(String Binary) {
+return 0;
+}
+*/
++++test
+@Test
+public void testtoBinary() {
+//assertEquals(FOO,Binary.toBinary(BAR);
+}
+
+/*
+@Test
+public void testtoDec() {
+assertEquals(FOO,Binary.toDec(BAR);
+}*/

@@ -53,8 +53,9 @@ public class Uebung {
     }
 
     public void buttonNamerForJava() throws Exception {
-        path = (new File(".").getCanonicalPath() + "/build/libs/" + aufgabenString);
+        path = (new File(".").getCanonicalPath() + "/" + aufgabenString);
         file = new File(path);
+        System.out.println(file.getPath());
         if(!file.exists()){
             isEmpty = true;
             error.folderError();
@@ -99,7 +100,7 @@ public class Uebung {
                     path = (new File(".").getCanonicalPath());
                     file = new File(path + "/" + directory + filename);
                 } else {
-                    path = (new File(".").getCanonicalPath() + "/build/libs/" + directory);
+                    path = (new File(".").getCanonicalPath() + "/" + directory);
                     file = new File(path + filename);
                 }
                 br = new BufferedReader(new FileReader(file));

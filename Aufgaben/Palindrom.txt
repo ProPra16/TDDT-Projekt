@@ -1,0 +1,12 @@
++++description
+Schreibe eine Methode turn(String Wort), die ein Wort umgedreht wieder zurueckgibt.
+Bsp.: turn("Hallo")="ollaH"
++++code
+public static String turn(String Wort) {
+return "";
+}
++++test
+@Test
+public void testturn1() {
+//assertEquals(FOO,Palindrom.turn(BAR));
+}

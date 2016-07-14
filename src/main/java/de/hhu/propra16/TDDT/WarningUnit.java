@@ -64,7 +64,7 @@ public class WarningUnit {
     public void savedSettings() {
         Tracker.addEvent("Refactoring verlassen, Code verbessert");
         Info.setHeaderText("Alles OK!");
-        Info.setContentText("Deine " + "\u00C4" +  "nderungen wurden gespeichert\n"+
+        Info.setContentText("Deine " + "\u00C4" +  "nderungen wurden im Programm gespeichert\n"+
                 "Alle Tests waren erfolgreich!"
         );
         Info.showAndWait();

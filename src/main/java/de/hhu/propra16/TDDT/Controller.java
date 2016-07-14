@@ -92,7 +92,6 @@ public class Controller {
             Action.compileAndTest();
             if (Action.hasnoFailedTests()) {
                 Saver.codesave(UserInput);
-                Saver.timesaver(Tracker);
                 Phase='R';
                 Fenster.clear();
                 RED();
@@ -243,6 +242,7 @@ public class Controller {
         Tracker.setTrackerIsShowing(true);
         Stage stage=setTrackingScene(TrackingData);
         myStage.hide();
+        Saver.timesaver(Tracker);
         stage.showAndWait();
         Tracker.setCorrection(trackerStart);
         myStage.show();

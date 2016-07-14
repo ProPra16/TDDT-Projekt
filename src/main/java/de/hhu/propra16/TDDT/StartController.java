@@ -88,8 +88,7 @@ public class StartController {
                 break;
         }
     }
-    public void buttonbackground(ActionEvent background) {
-    }
+
     public void buttonAction(ActionEvent event) {
         final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();

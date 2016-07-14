@@ -1,7 +1,0 @@
-Saver: Speichert Codes und Tracking Daten
-Saver: Erzeugt für die geschriebenen Codes Dateien und speichert sie in diese rein. Ebenfalls speichert sie die Tracking Daten.
-
-
-
- 
-

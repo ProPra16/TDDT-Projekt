@@ -1,0 +1,13 @@
++++description
+Schreibe eine Funktion,die die Quersumme einer natuerlichen Zahl N ausrechnet.
+Hinweis: Die Quersumme einer Zahl ergibt sich durch Addition aller Ziffern.
+Bsp: quersum("101")=2
++++code
+public static int quersum(String Zahl) {
+return 0;
+}
++++test
+@Test
+public void testquersum() {
+//assertEquals(Foo,Quersum.quersum(Bar));
+}

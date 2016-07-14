@@ -19,7 +19,6 @@
     <Button fx:id="button2" alignment="CENTER" translateX="150" translateY="250" minWidth="400" minHeight="100" onMouseEntered="#buttonDescription" onAction="#buttonAction"/>
     <Button fx:id="button3" alignment="CENTER" translateX="150" translateY="350" minWidth="400" minHeight="100" onMouseEntered="#buttonDescription" onAction="#buttonAction"/>
     <Button fx:id="button4" alignment="CENTER" translateX="150" translateY="450" minWidth="400" minHeight="100" onMouseEntered="#buttonDescription" onAction="#buttonAction"/>
-    <Button fx:id="Hintergrund" text="Hintergrund" alignment="CENTER" translateX="600" translateY="300" minWidth="100" minHeight="50" onAction="#buttonbackground"/>
     <Button text="Previous" translateY="65" translateX="600" minWidth="100" onAction="#iterateUp">
 
         <graphic>

@@ -1,7 +1,0 @@
-13:59:21 - Anwendung gestartet
-13:59:46 - Tests geändert
-14:00:06 - Code bei GREEN geändert
-14:00:06 - Alle Tests erfolgreich, Refactor erreicht
-
-
-
