@@ -1,7 +1,6 @@
-﻿+++description
-Schreibe eine Funktion isPrime(int N), dass fuer eine uebergebene Zahl N ueberprueft, ob es sich hierbei um eine Primzahl handelt.
++++description
+Schreibe eine Funktion isPrime(int N), welche fuer eine uebergebene Zahl N ueberprueft, ob es sich hierbei um eine Primzahl handelt.
 Die Methode soll true zurueckgeben, wenn es sich um eine Primzahl handelt, andernfalls false.
-Hinweis: Eine Zahl ist eine Primzahl, wenn sie nur durch 1 und sich selbst teilbar ist.
 +++code
 public static boolean isPrime(int N) {
 return false;

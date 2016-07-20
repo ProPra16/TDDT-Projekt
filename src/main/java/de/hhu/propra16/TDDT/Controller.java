@@ -116,6 +116,10 @@ public class Controller {
             UserInput.setTest(Input);
             Action = new ActionUnit(UserInput);
             Action.checkGREEN();
+            if (Action.causedSeriousError()) {
+                isreadyForGreen();
+                return;
+            }
             GreenValidator greenValidator = new GreenValidator(Action.getCompiler());
             if (!greenValidator.isValid() && !greenValidator.foundTests()) {
                 Reporter.commonError("Keine Tests !", greenValidator.getError());
@@ -150,7 +154,7 @@ public class Controller {
                 Tracker.addEvent("Code bei GREEN ge" + "\u00E4"+ "ndert");}
                 UserInput.setClass(Fenster.getText());
                 break;
-            case 'F':   return;
+            case 'F': return;
         }
         if (UserInput.getClassCode().equals("")) {Reporter.noCode(); return;}
         Action=new ActionUnit(UserInput);
@@ -166,6 +170,12 @@ public class Controller {
 
     public void checkUserTestCases() {
         Action.compileAndTest();
+        if (Action.causedSeriousError()) {
+            switchRED();
+            String Error="In den Tests sind unpassende Parameter zu den zu testenden Funktionen !\n";
+            Reporter.showCompilerErrors(Error,"Kompilier Fehler in den Tests");
+            return;
+        }
         if (Action.compileErrors()) {
             switchRED();
             String CompilerErrors=TestHelpers.getErrorMessages(Action.getCompiler(), Action.getResult());

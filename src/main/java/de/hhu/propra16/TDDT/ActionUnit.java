@@ -2,6 +2,9 @@ package de.hhu.propra16.TDDT;
 
 import vk.core.api.*;
 
+import java.time.Duration;
+import java.util.Collection;
+
 public class ActionUnit {
     private UserCode UserInput;
     private CompilationUnit Klasse;
@@ -9,6 +12,7 @@ public class ActionUnit {
     private CompilerResult Result;
     private TestResult FailedTests;
     private JavaStringCompiler Compiler;
+    private boolean SeriousError;
 
     public ActionUnit(UserCode UserInput) {
         this.UserInput=UserInput;
@@ -20,7 +24,10 @@ public class ActionUnit {
         Klasse=new CompilationUnit(UserInput.getKlassenName(), UserInput.getClassContent(),false);
         TestKlasse=new CompilationUnit(UserInput.getTestName(), UserInput.getTestContent(),true);
         Compiler=CompilerFactory.getCompiler(Klasse, TestKlasse);
-        Compiler.compileAndRunTests();
+        try {Compiler.compileAndRunTests();}
+        catch (NullPointerException Failure) {
+            SeriousError=true;
+        }
     }
 
     public void compile() {
@@ -32,8 +39,13 @@ public class ActionUnit {
 
     public void compileAndTest() {
         Klasse=new CompilationUnit(UserInput.getKlassenName(),UserInput.getClassContent(),false);
+        TestKlasse=new CompilationUnit(UserInput.getTestName(),UserInput.getTestContent(),true);
         Compiler=CompilerFactory.getCompiler(Klasse, TestKlasse);
-        Compiler.compileAndRunTests();
+        try {Compiler.compileAndRunTests();}
+        catch (NullPointerException Failure) {
+            SeriousError=true;
+            return;
+        }
         Result=Compiler.getCompilerResult();
         FailedTests=Compiler.getTestResult();
     }
@@ -48,7 +60,13 @@ public class ActionUnit {
         return Compiler;
     }
 
-    public boolean compileErrors() {return Result.hasCompileErrors();}
+    public boolean causedSeriousError() {
+        return SeriousError;
+    }
+
+    public boolean compileErrors() {
+        return Result.hasCompileErrors();
+    }
 
     public boolean hasnoFailedTests() {
         return (FailedTests.getNumberOfFailedTests()==0);
