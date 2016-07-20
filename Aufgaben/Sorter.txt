@@ -8,5 +8,5 @@ return new int []{0};
 +++test
 @Test
 public void testsort() {
-//assertEquals(FOO,Sorter.sort(BAR);
+//assertEquals(FOO,Sorter.sort(BAR));
 }

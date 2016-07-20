@@ -16,11 +16,11 @@ return 0;
 +++test
 @Test
 public void testtoBinary() {
-//assertEquals(FOO,Binary.toBinary(BAR);
+//assertEquals(FOO,Binary.toBinary(BAR));
 }
 
 /*
 @Test
 public void testtoDec() {
-assertEquals(FOO,Binary.toDec(BAR);
+assertEquals(FOO,Binary.toDec(BAR));
 }*/
