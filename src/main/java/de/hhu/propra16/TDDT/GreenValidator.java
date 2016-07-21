@@ -12,6 +12,7 @@ public class GreenValidator {
     private boolean ready;
     private boolean Compiled;
     private boolean wroteTests=true;
+    private boolean SeriousError;
     private int Failures;
     private TestResult Tests;
     private String Error="";
@@ -21,7 +22,10 @@ public class GreenValidator {
         this.Tests=compiler.getTestResult();
         checkifReady();
         if (Compiled) {
-            BadTest();
+            try {BadTest();}
+            catch (Exception e) {
+                SeriousError=true;
+            }
         }
     }
 
@@ -57,6 +61,8 @@ public class GreenValidator {
     public String getError() {return Error;}
 
     public int getFailures() {return Failures;}
+
+    public boolean causedSeriousError() {return SeriousError;}
 
     public boolean isCompiled() {return Compiled;}
 

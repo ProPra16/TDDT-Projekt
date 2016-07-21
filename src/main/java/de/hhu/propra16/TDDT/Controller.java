@@ -121,6 +121,9 @@ public class Controller {
                 return;
             }
             GreenValidator greenValidator = new GreenValidator(Action.getCompiler());
+            if (greenValidator.causedSeriousError()) {
+                Reporter.commonError("Tests sind fehlerhaft !","Bitte nochmal die Tests anpassen !");
+            }
             if (!greenValidator.isValid() && !greenValidator.foundTests()) {
                 Reporter.commonError("Keine Tests !", greenValidator.getError());
             }
