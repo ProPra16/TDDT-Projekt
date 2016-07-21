@@ -22,10 +22,7 @@ public class GreenValidator {
         this.Tests=compiler.getTestResult();
         checkifReady();
         if (Compiled) {
-            try {BadTest();}
-            catch (Exception e) {
-                SeriousError=true;
-            }
+            BadTest();
         }
     }
 
@@ -44,6 +41,7 @@ public class GreenValidator {
     }
     public void BadTest() {
         Collection<TestFailure> failures=Tests.getTestFailures();
+        if (failures==null) {SeriousError=true; return;}
         for (TestFailure F:failures) {
             Error=F.getMessage();
         }
