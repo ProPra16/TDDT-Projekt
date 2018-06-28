@@ -1,7 +1,7 @@
-## ProPra 2016 Halt-doch-einfach-mal-dein-Maul
+## ProPra 2016 TDDT
 
 [![Build Status](https://travis-ci.org/ProPra16/programmierpraktikum-abschlussprojekt-halt-doch-einfach-mal-dein-maul.svg?branch=master)](https://travis-ci.org/ProPra16/programmierpraktikum-abschlussprojekt-halt-doch-einfach-mal-dein-maul)
-## TDDT -(https://github.com/ProPra16/programmierpraktikum-abschlussprojekt-halt-doch-einfach-mal-dein-maul)
+## TDDT - Test Driven Development Teater -(https://github.com/ProPra16/programmierpraktikum-abschlussprojekt-halt-doch-einfach-mal-dein-maul)
 
 by
 
