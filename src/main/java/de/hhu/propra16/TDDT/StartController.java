@@ -212,11 +212,7 @@ public class StartController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText("TDDT - Test Driven Development Tester");
-        alert.setContentText("\u00A9" + "ProPra 2016\n" + "Team: Halt-Doch-Einfach-Mal-Dein-Maul\n\n" +
-                "Asri Ferati\n" +
-                "Henrik Grosche\n" +
-                "Louisa Zackel\n" +
-                "Mustafa Pektez");
+        alert.setContentText("\u00A9" + "ProPra 2016\n" + "Team: Halt-Doch-Einfach-Mal-Dein-Maul\n);
         alert.showAndWait();
     }
 
